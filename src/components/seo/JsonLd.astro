@@ -1,0 +1,10 @@
+---
+interface Props {
+  data: object | object[];
+}
+const items = Array.isArray(Astro.props.data) ? Astro.props.data : [Astro.props.data];
+// Escape "<" so content can never close the script element.
+const json = (o: object) => JSON.stringify(o).replace(/</g, '\\u003c');
+---
+
+{items.map((item) => <script type="application/ld+json" is:inline set:html={json(item)} />)}

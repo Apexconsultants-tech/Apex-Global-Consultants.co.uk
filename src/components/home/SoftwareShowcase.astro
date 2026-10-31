@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import DashboardMock from './DashboardMock.astro';
+import { getSoftware } from '../../lib/content';
+
+/**
+ * ARIA tabs (arrow keys, Home/End). Official logos shown unaltered on white, per each vendor's
+ * guidelines. Partner level appears only when set in the content file (proof supplied).
+ * Mobile: the tab list becomes a horizontal swipe bar above a stacked panel.
+ */
+const software = await getSoftware();
+const logoH = (shape: string) => (shape === 'round' ? 40 : 28);
+---
+
+<section class="section soft" aria-labelledby="soft-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Software</p>
+      <h2 id="soft-title" class="h2">We work with the software you already use</h2>
+      <p class="lead">Set up properly, connected to your bank and kept reconciled, whichever platform you choose.</p>
+    </header>
+
+    <div class="soft-ui" data-tabs>
+      <div class="soft-tabs" role="tablist" aria-label="Accounting software">
+        {
+          software.map((s, i) => (
+            <button
+              type="button"
+              role="tab"
+              class="soft-tab"
+              id={`soft-tab-${s.id}`}
+              aria-controls={`soft-panel-${s.id}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              tabindex={i === 0 ? 0 : -1}
+              data-mock={s.data.mock}
+              data-shape={s.data.logoShape}
+            >
+              <Image
+                src={s.data.logo}
+                alt=""
+                height={logoH(s.data.logoShape)}
+                width={Math.round((logoH(s.data.logoShape) * s.data.logo.width) / s.data.logo.height)}
+                densities={[1, 2]}
+                loading="lazy"
+                class="soft-tab-logo"
+              />
+              <span class="soft-tab-name">{s.data.name}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="soft-stage">
+        <div class="soft-panels">
+          {
+            software.map((s, i) => (
+              <div
+                role="tabpanel"
+                class="soft-panel"
+                id={`soft-panel-${s.id}`}
+                aria-labelledby={`soft-tab-${s.id}`}
+                tabindex="0"
+                hidden={i !== 0}
+              >
+                <div class="soft-logo-card">
+                  <Image
+                    src={s.data.logo}
+                    alt={`${s.data.name} logo`}
+                    height={s.data.logoShape === 'round' ? 72 : 48}
+                    width={Math.round(((s.data.logoShape === 'round' ? 72 : 48) * s.data.logo.width) / s.data.logo.height)}
+                    densities={[1, 2]}
+                    loading="lazy"
+                  />
+                  {s.data.partnerLevel && <span class="soft-partner">{s.data.partnerLevel}</span>}
+                </div>
+                <h3 class="soft-h">How we help with {s.data.name}</h3>
+                <p>{s.data.help}</p>
+                <ul role="list" class="ticks">
+                  {s.data.benefits.map((b) => (
+                    <li>
+                      <Icon name="check" size={20} />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <a href={`/software/${s.id}/`} class="link-arrow">
+                  {s.data.name} support in detail <Icon name="arrow" size={18} />
+                </a>
+              </div>
+            ))
+          }
+        </div>
+        <div class="soft-visual">
+          <DashboardMock />
+        </div>
+      </div>
+    </div>
+    <p class="soft-note">
+      Xero, QuickBooks, Sage and FreeAgent are trademarks of their respective owners. Apex Global is an independent firm.
+    </p>
+  </div>
+</section>

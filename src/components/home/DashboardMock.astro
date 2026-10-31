@@ -1,0 +1,51 @@
+---
+/**
+ * Illustrative "dashboard" drawn in HTML/CSS with brand colours. Not a screenshot and not any
+ * vendor's interface. data-view (bank | invoices | payroll | vat) is switched by the software
+ * tabs; CSS changes the bar heights and the visible list, animating transform/opacity only.
+ */
+const bars = [42, 58, 50, 66, 61, 74, 70, 83, 78, 88, 84, 94];
+---
+
+<div class="dash" data-dash data-view="bank" aria-hidden="true">
+  <div class="dash-top">
+    <span class="dash-dots"><i></i><i></i><i></i></span>
+    <span class="dash-title">Monthly overview</span>
+    <span class="dash-pill">Live</span>
+  </div>
+  <div class="dash-body">
+    <div class="dash-kpis">
+      <div class="dash-kpi"><span>Cash</span><b>£48,210</b><em class="up">+6.2%</em></div>
+      <div class="dash-kpi"><span>Owed to you</span><b>£12,940</b><em>14 invoices</em></div>
+      <div class="dash-kpi"><span>VAT due</span><b>£3,615</b><em>Q3 return</em></div>
+    </div>
+    <div class="dash-chart">
+      {bars.map((h, i) => <span class="dash-bar" style={`--h:${h};--i:${i}`}></span>)}
+      <svg class="dash-line" viewBox="0 0 120 40" preserveAspectRatio="none">
+        <path d="M0 32 L10 28 L20 30 L30 24 L40 25 L50 19 L60 21 L70 14 L80 16 L90 10 L100 12 L110 6 L120 4" />
+      </svg>
+    </div>
+    <div class="dash-lists">
+      <ul class="dash-list" data-list="bank">
+        <li><span class="dash-ico"></span><span class="dash-l">Bank feed · Card payment</span><b>£1,240.00</b><i class="ok">Matched</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">Bank feed · Supplier</span><b>−£386.50</b><i class="ok">Matched</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">Bank feed · Transfer</span><b>£2,000.00</b><i>Review</i></li>
+      </ul>
+      <ul class="dash-list" data-list="invoices">
+        <li><span class="dash-ico"></span><span class="dash-l">Invoice INV-1042</span><b>£2,400.00</b><i class="ok">Paid</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">Invoice INV-1043</span><b>£860.00</b><i>Sent</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">Invoice INV-1044</span><b>£1,150.00</b><i>Draft</i></li>
+      </ul>
+      <ul class="dash-list" data-list="payroll">
+        <li><span class="dash-ico"></span><span class="dash-l">Payroll · October</span><b>12 staff</b><i class="ok">Approved</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">RTI submission</span><b>FPS</b><i class="ok">Sent</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">Pension contributions</span><b>£1,932.40</b><i>Due</i></li>
+      </ul>
+      <ul class="dash-list" data-list="vat">
+        <li><span class="dash-ico"></span><span class="dash-l">VAT on sales</span><b>£6,120.00</b><i class="ok">Ready</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">VAT on purchases</span><b>£2,505.00</b><i class="ok">Ready</i></li>
+        <li><span class="dash-ico"></span><span class="dash-l">Self assessment estimate</span><b>£4,380.00</b><i>Jan</i></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { getAccreditations } from '../../lib/content';
+
+/**
+ * Client-supplied logos only, full colour on white cards. A CSS marquee (transform only) that
+ * pauses on hover, touch and keyboard focus, with a pause button (WCAG 2.2.2). The track scrolls
+ * natively, so it is swipeable. Under reduced motion it becomes a static wrapped grid.
+ * Each badge opens a native <dialog> with the certificate name, number and a Verify link.
+ */
+interface Props {
+  samples?: boolean;
+}
+const { samples = false } = Astro.props;
+const badges = await getAccreditations(samples);
+const loop = [...badges, ...badges, ...badges, ...badges];
+const H = 64;
+---
+
+{
+  badges.length > 0 && (
+    <section class="badges" aria-labelledby="badges-title">
+      <div class="wrap badges-head">
+        <h2 id="badges-title" class="badges-title">Accredited and trusted</h2>
+        <button type="button" class="motion-toggle badges-toggle" aria-pressed="false" data-motion-toggle="badges">
+          <Icon name="pause" size={16} class="i-pause" />
+          <Icon name="play" size={16} class="i-play" />
+          <span class="sr-only">Pause logo carousel</span>
+        </button>
+      </div>
+      <div class="badges-viewport" data-marquee>
+        <ul role="list" class="badges-track">
+          {loop.map((b, i) => {
+            const copy = i >= badges.length;
+            return (
+              <li class:list={['badge', { 'badge-copy': copy }]} aria-hidden={copy ? 'true' : undefined}>
+                <button
+                  type="button"
+                  class="badge-btn"
+                  data-dialog-open={`badge-${b.id}`}
+                  tabindex={copy ? -1 : undefined}
+                >
+                  <Image
+                    src={b.data.logo}
+                    alt={copy ? '' : b.data.name}
+                    height={H}
+                    width={Math.round((H * b.data.logo.width) / b.data.logo.height)}
+                    densities={[1, 2]}
+                    loading="lazy"
+                    class="badge-img"
+                  />
+                  {samples && b.data.draft && <span class="badge-sample">Sample</span>}
+                  <span class="sr-only">: certificate details</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      {badges.map((b) => (
+        <dialog id={`badge-${b.id}`} class="badge-dialog" aria-labelledby={`badge-${b.id}-t`}>
+          <div class="badge-dialog-inner">
+            <Image src={b.data.logo} alt="" height={80} width={Math.round((80 * b.data.logo.width) / b.data.logo.height)} loading="lazy" />
+            <h3 id={`badge-${b.id}-t`}>{b.data.certificate}</h3>
+            <dl>
+              <dt>Issued by</dt>
+              <dd>{b.data.name}</dd>
+              <dt>Certificate number</dt>
+              <dd>{b.data.membershipNumber}</dd>
+            </dl>
+            <div class="badge-dialog-actions">
+              <a href={b.data.verifyUrl} class="btn btn-primary" rel="noopener" target="_blank">
+                Verify <Icon name="external" size={18} />
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+              <form method="dialog">
+                <button class="btn btn-ghost">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      ))}
+    </section>
+  )
+}

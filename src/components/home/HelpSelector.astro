@@ -1,0 +1,32 @@
+---
+import Icon from '../ui/Icon.astro';
+import { getGroups, serviceHref } from '../../lib/content';
+
+// "I need help with [service] → Show me". A native <select> keeps it keyboard and screen-reader
+// friendly. Without JavaScript the form still works: it goes to the services overview.
+const groups = await getGroups();
+---
+
+<section class="help" aria-label="Find the right service">
+  <div class="wrap">
+    <form class="help-form" action="/services/" method="get" data-help>
+      <label for="help-select" class="help-label">I need help with</label>
+      <div class="help-select-wrap">
+        <select id="help-select" name="service" class="help-select" required>
+          <option value="" disabled selected>choose a service…</option>
+          {
+            groups.map((g) => (
+              <optgroup label={g.data.title}>
+                {g.items.map((s) => (
+                  <option value={serviceHref(g.id, s.id)}>{s.data.title.toLowerCase()}</option>
+                ))}
+              </optgroup>
+            ))
+          }
+        </select>
+        <Icon name="chevron" size={22} class="help-chev" />
+      </div>
+      <button type="submit" class="btn btn-primary help-btn">Show me <Icon name="arrow" size={20} /></button>
+    </form>
+  </div>
+</section>

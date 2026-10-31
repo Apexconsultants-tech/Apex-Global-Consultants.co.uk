@@ -1,0 +1,15 @@
+---
+import Icon from '../ui/Icon.astro';
+import { switching } from '../../data/home';
+---
+
+<section class="switch" aria-labelledby="switch-title">
+  <div class="wrap switch-row">
+    <span class="switch-icon" aria-hidden="true"><Icon name="arrow" size={28} /></span>
+    <div class="switch-copy">
+      <h2 id="switch-title" class="switch-h">{switching.title}</h2>
+      <p>{switching.text}</p>
+    </div>
+    <a href={switching.cta.href} class="btn btn-primary">{switching.cta.label} <Icon name="arrow" size={18} /></a>
+  </div>
+</section>

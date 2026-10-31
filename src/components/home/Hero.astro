@@ -1,0 +1,83 @@
+---
+import { getImage } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { site } from '../../data/site';
+import posterDesk from '../../assets/hero-poster.jpg';
+import posterMob from '../../assets/hero-poster-mobile.jpg';
+
+/**
+ * Full-width hero. The poster (first frame of the loop) is the LCP image: eager, high priority,
+ * art-directed for mobile (4:5) and desktop (16:9). The <video> has no src in the HTML;
+ * hero.ts adds the right source after load, unless reduced motion, Data Saver or a slow
+ * connection is detected, and pauses it off-screen or in a hidden tab.
+ * This <picture> is built with getImage() because <Picture> has no art direction.
+ */
+const fmt = async (src: ImageMetadata, widths: number[], format: 'avif' | 'webp' | 'jpeg', quality: number) => {
+  const imgs = await Promise.all(widths.map((w) => getImage({ src, width: w, format, quality })));
+  return imgs.map((im, i) => `${im.src} ${widths[i]}w`).join(', ');
+};
+const deskW = [960, 1280, 1600];
+const mobW = [480, 720];
+const [dAvif, dWebp, mAvif, mWebp] = await Promise.all([
+  fmt(posterDesk, deskW, 'avif', 55),
+  fmt(posterDesk, deskW, 'webp', 70),
+  fmt(posterMob, mobW, 'avif', 55),
+  fmt(posterMob, mobW, 'webp', 70),
+]);
+const fallback = await getImage({ src: posterDesk, width: 1280, format: 'jpeg', quality: 72 });
+const v = site.hero.video;
+---
+
+<section class="hero" aria-labelledby="hero-title" data-hero>
+  <div class="hero-media">
+    <picture>
+      <source media="(max-width: 767px)" type="image/avif" srcset={mAvif} sizes="100vw" />
+      <source media="(max-width: 767px)" type="image/webp" srcset={mWebp} sizes="100vw" />
+      <source type="image/avif" srcset={dAvif} sizes="100vw" />
+      <source type="image/webp" srcset={dWebp} sizes="100vw" />
+      <img
+        src={fallback.src}
+        alt=""
+        width={posterDesk.width}
+        height={posterDesk.height}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="hero-poster"
+      />
+    </picture>
+    <video
+      class="hero-video"
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-hidden="true"
+      tabindex="-1"
+      data-hero-video
+      data-desktop-webm={v.desktop.webm}
+      data-desktop-mp4={v.desktop.mp4}
+      data-mobile-webm={v.mobile.webm}
+      data-mobile-mp4={v.mobile.mp4}></video>
+    <div class="hero-shade"></div>
+  </div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1 id="hero-title" class="hero-title">
+        <span>Beyond numbers.</span>
+        <span class="hero-title-2">Beyond borders.</span>
+      </h1>
+      <p class="hero-line">{site.hero.line}</p>
+      <div class="hero-actions">
+        <a href="/contact/#book" class="btn btn-accent btn-lg" data-track="booking">Book a free consultation</a>
+        <a href="#services" class="hero-link">Explore our services <Icon name="arrow" size={20} /></a>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="hero-toggle motion-toggle" aria-pressed="false" data-hero-toggle hidden>
+    <Icon name="pause" size={18} class="i-pause" /><Icon name="play" size={18} class="i-play" />
+    <span class="sr-only">Pause background video</span>
+  </button>
+</section>

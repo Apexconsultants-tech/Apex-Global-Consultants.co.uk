@@ -1,0 +1,11 @@
+name: QuickBooks
+logo: ../../assets/software/quickbooks.png
+logoShape: round
+caption: Bookkeeping, invoicing and MTD submissions
+help: Whether you are new to QuickBooks or have used it for years, we tidy the chart of accounts, automate invoicing and receipt capture, and keep everything reconciled. You get accurate figures without changing the software you know.
+benefits:
+  - Invoices, reminders and receipt capture automated
+  - Chart of accounts cleaned up and kept consistent
+  - Making Tax Digital submissions handled for you
+mock: invoices
+order: 2

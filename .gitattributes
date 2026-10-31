@@ -1,0 +1,6 @@
+# Keep LF line endings everywhere (files are deployed to a Linux server).
+* text=auto eol=lf
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.ico binary

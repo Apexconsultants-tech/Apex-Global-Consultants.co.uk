@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/apex-logo.png';
+
+/**
+ * The Apex Global logo exactly as supplied: transparent PNG, original colours, never recoloured,
+ * stretched or boxed. Always placed on a white or very light tint background.
+ * `width` is the rendered CSS width; height follows the logo's 1080x148 proportions.
+ */
+interface Props {
+  width?: number;
+  eager?: boolean;
+  class?: string;
+}
+const { width = 280, eager = false, class: cls } = Astro.props;
+const height = Math.round((width * logo.height) / logo.width);
+---
+
+<Image
+  src={logo}
+  alt="Apex Global Consulting Services"
+  width={width}
+  height={height}
+  densities={[1, 2, 3]}
+  format="webp"
+  quality={92}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding="async"
+  class:list={['logo', cls]}
+/>

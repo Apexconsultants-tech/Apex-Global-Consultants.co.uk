@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { getInsights, formatDate, readMinutes } from '../../lib/content';
+
+interface Props {
+  samples?: boolean;
+}
+const { samples = false } = Astro.props;
+const items = (await getInsights(samples)).slice(0, 3);
+---
+
+{
+  items.length > 0 && (
+    <section class="section insights" aria-labelledby="insights-title">
+      <div class="wrap">
+        <header class="section-head insights-head">
+          <div>
+            <p class="eyebrow">Insights</p>
+            <h2 id="insights-title" class="h2">Latest tax and reporting updates</h2>
+          </div>
+          <a href="/insights/" class="link-arrow">
+            All insights <Icon name="arrow" size={18} />
+          </a>
+        </header>
+        <ul role="list" class="ins-grid">
+          {items.map((a) => (
+            <li class="ins-card">
+              <Image
+                src={a.data.image}
+                alt=""
+                widths={[400, 640, 800]}
+                sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                class="ins-img"
+                loading="lazy"
+              />
+              <div class="ins-body">
+                <p class="ins-meta">
+                  <span class="tag">Tax year {a.data.taxYear}</span>
+                  <span>{readMinutes(a.body)} min read</span>
+                </p>
+                <h3 class="ins-title">
+                  <a href={`/insights/${a.id}/`} class="ins-link">{a.data.title}</a>
+                </h3>
+                <p class="ins-date">
+                  <time datetime={a.data.published.toISOString().slice(0, 10)}>{formatDate(a.data.published)}</time>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,12 @@
+name: Xero
+logo: ../../assets/software/xero.png
+logoShape: round
+caption: Cloud accounting, bank feeds and VAT returns
+# partnerLevel: only add when the client supplies proof (e.g. their Xero partner status).
+help: We set up Xero around how your business actually works, connect your bank feeds and move your history across from your old system. Then we train your team and keep the books reconciled every month.
+benefits:
+  - Bank feeds and reconciliation rules set up and maintained
+  - VAT returns filed through Making Tax Digital
+  - Clear monthly reports your team can open any time
+mock: bank
+order: 1

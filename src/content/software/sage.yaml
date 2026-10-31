@@ -1,0 +1,11 @@
+name: Sage
+logo: ../../assets/software/sage.png
+logoShape: wide
+caption: Accounts, payroll and VAT for established businesses
+help: Many established businesses run their accounts and payroll in Sage. We work inside your existing setup, run payroll and RTI submissions, and help you upgrade or migrate to a cloud version when the time is right.
+benefits:
+  - Payroll and RTI submissions run on schedule
+  - Upgrades and migrations planned without disruption
+  - Year-end journals and accounts prepared in your file
+mock: payroll
+order: 3
