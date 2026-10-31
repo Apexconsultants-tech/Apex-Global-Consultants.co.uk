@@ -1,5 +1,5 @@
 // Homepage behaviour: hero video, "I need help with" selector, service explorer, software tabs,
-// count-up stats, steps progress line and (when testimonials exist) the testimonial slider.
+// steps progress line and (when testimonials exist) the testimonial slider.
 import { reducedMotion } from './site';
 
 type NetInfo = { saveData?: boolean; effectiveType?: string };
@@ -153,47 +153,58 @@ function initTabs(signal: AbortSignal) {
   });
 }
 
-function initCounters() {
-  const els = document.querySelectorAll<HTMLElement>('[data-count]');
-  if (!els.length || reducedMotion()) return;
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (!e.isIntersecting) continue;
-      io.unobserve(e.target);
-      const el = e.target as HTMLElement;
-      const end = Number(el.dataset.count);
-      el.textContent = '0';
-      const t0 = performance.now();
-      const dur = 1200;
-      const tick = (t: number) => {
-        const p = Math.min(1, (t - t0) / dur);
-        el.textContent = String(Math.round(end * (1 - Math.pow(1 - p, 3))));
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }
-  }, { threshold: 0.6 });
-  els.forEach((el) => {
-    const r = el.getBoundingClientRect();
-    if (r.top > innerHeight) io.observe(el);
-  });
-}
-
 function initSteps(signal: AbortSignal) {
-  const sec = document.querySelector<HTMLElement>('[data-steps]');
-  if (!sec) return;
-  if (reducedMotion()) return sec.style.setProperty('--progress', '1');
+  const track = document.querySelector<HTMLElement>('[data-steps-track]');
+  const line = track?.querySelector<HTMLElement>('[data-steps-line]');
+  if (!track || !line) return;
+  const items = [...track.querySelectorAll<HTMLElement>('[data-step]')];
+  const nums = items.map((li) => li.querySelector<HTMLElement>('.step-num')!);
+  const wide = matchMedia('(min-width: 1024px)');
+  let len = 0;
+  let stops: number[] = [];
+
+  // Place the line from the centre of circle 1 to the centre of circle 5.
+  const layout = () => {
+    const t = track.getBoundingClientRect();
+    const c = nums.map((n) => { const r = n.getBoundingClientRect(); return { x: r.left + r.width / 2 - t.left, y: r.top + r.height / 2 - t.top }; });
+    const x = wide.matches;
+    track.dataset.dir = x ? 'x' : 'y';
+    const a = c[0], z = c[c.length - 1];
+    len = Math.max(1, x ? z.x - a.x : z.y - a.y);
+    Object.assign(line.style, x
+      ? { left: a.x + 'px', top: a.y - 2 + 'px', width: len + 'px', height: '4px' }
+      : { left: a.x - 2 + 'px', top: a.y + 'px', width: '4px', height: len + 'px' });
+    stops = c.map((p) => ((x ? p.x - a.x : p.y - a.y) / len));
+  };
+
+  const paint = (p: number) => {
+    track.style.setProperty('--progress', p.toFixed(4));
+    track.style.setProperty('--dot', (p * len).toFixed(1) + 'px');
+    items.forEach((li, i) => li.toggleAttribute('data-active', p >= stops[i] - 0.002));
+  };
+
   let raf = 0;
   const update = () => {
     raf = 0;
-    const r = sec.getBoundingClientRect();
-    const p = (innerHeight * 0.85 - r.top) / (r.height * 0.9);
-    sec.style.setProperty('--progress', Math.max(0, Math.min(1, p)).toFixed(3));
+    const t = track.getBoundingClientRect();
+    const first = nums[0].getBoundingClientRect();
+    // Desktop: fills while the row moves from 80% to 35% of the viewport height.
+    // Phones: the line follows a reading point 60% down the screen.
+    const p = wide.matches
+      ? (innerHeight * 0.8 - t.top) / (innerHeight * 0.45)
+      : (innerHeight * 0.6 - (first.top + first.height / 2)) / len;
+    paint(Math.max(0, Math.min(1, p)));
   };
   const onScroll = () => (raf ||= requestAnimationFrame(update));
-  update();
+  const relayout = () => { layout(); update(); };
+
+  relayout();
+  if (reducedMotion()) return paint(1);
   addEventListener('scroll', onScroll, { passive: true, signal });
-  addEventListener('resize', onScroll, { passive: true, signal });
+  const ro = new ResizeObserver(relayout);
+  ro.observe(track);
+  signal.addEventListener('abort', () => ro.disconnect());
+  wide.addEventListener('change', relayout, { signal });
 }
 
 function initSlider(signal: AbortSignal) {
@@ -219,7 +230,6 @@ document.addEventListener('astro:page-load', () => {
   initHelp(signal);
   initExplorer(signal);
   initTabs(signal);
-  initCounters();
   initSteps(signal);
   initSlider(signal);
 });

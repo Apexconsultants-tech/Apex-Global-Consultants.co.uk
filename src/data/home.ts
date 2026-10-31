@@ -1,7 +1,5 @@
 /**
  * Homepage copy that is not a content collection. Edit text here, not in components.
- * Numbers in `stats` must be real, checkable facts. Add client figures (years of experience,
- * clients served) only when the client confirms them.
  */
 export const why = {
   title: 'Why businesses choose Apex',
@@ -13,12 +11,6 @@ export const why = {
     { icon: 'globe', title: 'UK and international', text: 'Support for UK companies and overseas groups running a UK entity.' },
     { icon: 'cloud', title: 'Cloud accounting set up', text: 'We set up, migrate and train you on cloud software, so your numbers stay current.' },
     { icon: 'clock', title: 'Fast, clear responses', text: 'Straight answers in plain English, without waiting weeks for a reply.' },
-  ],
-  stats: [
-    { value: 8, suffix: '', label: 'Accounting, tax and reporting services' },
-    { value: 4, suffix: '', label: 'Cloud accounting platforms supported' },
-    { value: 1, suffix: '', label: 'Dedicated accountant for every client' },
-    { value: 100, suffix: '%', label: 'Fees agreed in writing before work starts' },
   ],
 } as const;
 
