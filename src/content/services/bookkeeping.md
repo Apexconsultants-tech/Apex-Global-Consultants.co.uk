@@ -15,7 +15,7 @@ included:
   - title: Expense tracking
     text: Business expenses captured, categorised and checked for VAT so nothing is missed or claimed twice.
     icon: pound
-  - title: Accounts payable
+  - title: Supplier invoices and accounts payable
     text: Supplier invoices processed, coded and scheduled so you pay on time and keep supplier relationships healthy.
     icon: invoice
   - title: Accounts receivable

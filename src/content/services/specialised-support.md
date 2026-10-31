@@ -18,7 +18,7 @@ included:
   - title: Business advisory
     text: An experienced sounding board for decisions on pricing, structure, growth and funding.
     icon: compass
-  - title: Financial modelling
+  - title: Financial modelling and forecasting
     text: Three-statement and scenario models for budgets, funding rounds and investment decisions.
     icon: model
   - title: Sector-specific accounting

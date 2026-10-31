@@ -46,8 +46,8 @@ h3 { letter-spacing: -0.015em; font-weight: 750; }
 
 /* help selector: full-width tinted band */
 .help { background: var(--color-tint-10); padding-block: clamp(1.75rem, 1.2rem + 2vw, 3rem); }
-.help-label, .help-select { font-weight: 800; letter-spacing: -0.02em; }
-.help-select { border-bottom-width: 3px; }
+.help-label, .help-trigger, .help-native { font-weight: 800; letter-spacing: -0.02em; }
+.help-trigger, .help-native { border-bottom-width: 3px; }
 
 /* explorer: pill rows; active row turns deep blue */
 .explorer-section { background: var(--color-white); }

@@ -66,13 +66,102 @@ function initHero(signal: AbortSignal) {
   else addEventListener('load', later, { once: true, signal });
 }
 
+/** "I need help with" custom combobox: always opens downwards, same font for value and options. */
 function initHelp(signal: AbortSignal) {
   const form = document.querySelector<HTMLFormElement>('[data-help]');
-  form?.addEventListener('submit', (e) => {
-    const sel = form.querySelector('select')!;
+  const combo = form?.querySelector<HTMLElement>('[data-combo]');
+  if (!form || !combo) return;
+  const native = combo.querySelector('select')!;
+  const btn = combo.querySelector<HTMLButtonElement>('[data-combo-btn]')!;
+  const list = combo.querySelector<HTMLElement>('[data-combo-list]')!;
+  const valueEl = btn.querySelector<HTMLElement>('.help-value')!;
+  const opts = [...list.querySelectorAll<HTMLElement>('[role=option]')];
+
+  // Swap the native select for the custom control.
+  native.hidden = true;
+  native.tabIndex = -1;
+  btn.hidden = false;
+  combo.dataset.ready = '';
+
+  let active = -1;
+  let typed = '';
+  let typedTimer = 0;
+  const isOpen = () => btn.getAttribute('aria-expanded') === 'true';
+
+  const setActive = (i: number, scroll = true) => {
+    active = Math.max(0, Math.min(opts.length - 1, i));
+    opts.forEach((o, k) => o.classList.toggle('is-active', k === active));
+    btn.setAttribute('aria-activedescendant', opts[active].id);
+    if (scroll) opts[active].scrollIntoView({ block: 'nearest' });
+  };
+  const selected = () => opts.findIndex((o) => o.getAttribute('aria-selected') === 'true');
+
+  const open = () => {
+    if (isOpen()) return;
+    list.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    requestAnimationFrame(() => list.classList.add('is-open'));
+    setActive(selected() >= 0 ? selected() : 0);
+    // Always opens downwards: if the list would run off the screen, bring it into view.
+    const r = list.getBoundingClientRect();
+    if (r.bottom > innerHeight) scrollBy({ top: r.bottom - innerHeight + 16, behavior: reducedMotion() ? 'auto' : 'smooth' });
+  };
+  const close = () => {
+    if (!isOpen()) return;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.removeAttribute('aria-activedescendant');
+    list.classList.remove('is-open');
+    list.hidden = true;
+  };
+  const choose = (i: number) => {
+    opts.forEach((o, k) => o.setAttribute('aria-selected', String(k === i)));
+    valueEl.textContent = opts[i].querySelector('.help-opt-text')!.textContent;
+    combo.dataset.chosen = '';
+    native.value = opts[i].dataset.value!;
+    close();
+    btn.focus();
+  };
+
+  btn.addEventListener('click', () => (isOpen() ? close() : open()), { signal });
+  btn.addEventListener('keydown', (e) => {
+    const k = e.key;
+    if (!isOpen()) {
+      if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(k)) { e.preventDefault(); open(); }
+      else if (k.length === 1 && /S/.test(k)) { open(); typeahead(k); }
+      return;
+    }
+    if (k === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
+    else if (k === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+    else if (k === 'Home') { e.preventDefault(); setActive(0); }
+    else if (k === 'End') { e.preventDefault(); setActive(opts.length - 1); }
+    else if (k === 'Enter' || k === ' ') { e.preventDefault(); choose(active); }
+    else if (k === 'Escape') { e.preventDefault(); close(); }
+    else if (k === 'Tab') { choose(active); }
+    else if (k.length === 1 && /S/.test(k)) typeahead(k);
+  }, { signal });
+
+  function typeahead(ch: string) {
+    clearTimeout(typedTimer);
+    typed += ch.toLowerCase();
+    typedTimer = window.setTimeout(() => (typed = ''), 600);
+    const start = typed.length === 1 ? active + 1 : active;
+    const order = [...opts.slice(start), ...opts.slice(0, start)];
+    const hit = order.find((o) => o.textContent!.trim().toLowerCase().startsWith(typed));
+    if (hit) setActive(opts.indexOf(hit));
+  }
+
+  opts.forEach((o, i) => {
+    o.addEventListener('click', () => choose(i), { signal });
+    o.addEventListener('pointermove', () => active !== i && setActive(i, false), { signal });
+  });
+  // Keep focus on the button while clicking inside the list.
+  list.addEventListener('mousedown', (e) => e.preventDefault(), { signal });
+  document.addEventListener('click', (e) => !combo.contains(e.target as Node) && close(), { signal });
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (!sel.value) return sel.focus();
-    location.href = sel.value;
+    if (!native.value) { open(); btn.focus(); return; }
+    location.href = native.value;
   }, { signal });
 }
 
