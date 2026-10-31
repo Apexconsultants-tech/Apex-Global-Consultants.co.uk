@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
 import { site, areas, quickLinks, legalLinks, telHref, mailHref, whatsappHref, addressLines } from '../../data/site';
-import { ribbon } from '../../data/home';
 import { getGroups, getAudiences, getSoftware, getAccreditations, groupHref } from '../../lib/content';
 
 interface Props {
@@ -18,19 +17,7 @@ const [groups, audiences, software, badges] = await Promise.all([
 ]);
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLines.join(', '))}`;
-const ribbonItems = [...ribbon, ...ribbon];
 ---
-
-<div class="ribbon" data-ribbon>
-  <div class="ribbon-track" aria-hidden="true">
-    {ribbonItems.map((w) => <span class="ribbon-item">{w}<span class="ribbon-dot">•</span></span>)}
-  </div>
-  <p class="sr-only">{ribbon.join(', ')}</p>
-  <button type="button" class="ribbon-toggle motion-toggle" aria-pressed="false" data-motion-toggle="ribbon">
-    <Icon name="pause" size={16} class="i-pause" /><Icon name="play" size={16} class="i-play" />
-    <span class="sr-only">Pause scrolling text</span>
-  </button>
-</div>
 
 <footer class="site-footer">
   <div class="wrap footer-top">

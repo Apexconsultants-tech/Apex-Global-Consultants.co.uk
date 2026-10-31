@@ -1,5 +1,5 @@
 // Homepage behaviour: hero video, "I need help with" selector, service explorer, software tabs,
-// badge marquee, count-up stats, steps progress line and testimonial slider.
+// count-up stats, steps progress line and (when testimonials exist) the testimonial slider.
 import { reducedMotion } from './site';
 
 type NetInfo = { saveData?: boolean; effectiveType?: string };
@@ -153,15 +153,6 @@ function initTabs(signal: AbortSignal) {
   });
 }
 
-/** Marquee: pause while touched, hovered or focused (CSS handles hover/focus). */
-function initMarquee(signal: AbortSignal) {
-  document.querySelectorAll<HTMLElement>('[data-marquee]').forEach((vp) => {
-    const sec = vp.closest('section')!;
-    vp.addEventListener('touchstart', () => sec.setAttribute('data-touch', ''), { passive: true, signal });
-    vp.addEventListener('touchend', () => setTimeout(() => sec.removeAttribute('data-touch'), 2500), { passive: true, signal });
-  });
-}
-
 function initCounters() {
   const els = document.querySelectorAll<HTMLElement>('[data-count]');
   if (!els.length || reducedMotion()) return;
@@ -228,7 +219,6 @@ document.addEventListener('astro:page-load', () => {
   initHelp(signal);
   initExplorer(signal);
   initTabs(signal);
-  initMarquee(signal);
   initCounters();
   initSteps(signal);
   initSlider(signal);

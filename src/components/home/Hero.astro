@@ -1,22 +1,24 @@
 ---
-import { getImage } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import { site } from '../../data/site';
+import { getSoftware } from '../../lib/content';
 import posterDesk from '../../assets/hero-poster.jpg';
 import posterMob from '../../assets/hero-poster-mobile.jpg';
 
 /**
- * Full-width hero. The poster (first frame of the loop) is the LCP image: eager, high priority,
- * art-directed for mobile (4:5) and desktop (16:9). The <video> has no src in the HTML;
- * hero.ts adds the right source after load, unless reduced motion, Data Saver or a slow
- * connection is detected, and pauses it off-screen or in a hidden tab.
+ * Split hero: copy on the left, a large picture on the right (the silent video loop plays inside
+ * it). The software the firm works with sits in a small logo row under the buttons.
+ * The poster is the LCP image: eager, high priority, art-directed (4:5 on phones, 16:9 above).
  * This <picture> is built with getImage() because <Picture> has no art direction.
+ * hero.ts adds the video source after load, unless reduced motion, Data Saver or a slow
+ * connection is detected, and pauses it off-screen or in a hidden tab.
  */
-const fmt = async (src: ImageMetadata, widths: number[], format: 'avif' | 'webp' | 'jpeg', quality: number) => {
+const fmt = async (src: ImageMetadata, widths: number[], format: 'avif' | 'webp', quality: number) => {
   const imgs = await Promise.all(widths.map((w) => getImage({ src, width: w, format, quality })));
   return imgs.map((im, i) => `${im.src} ${widths[i]}w`).join(', ');
 };
-const deskW = [960, 1280, 1600];
+const deskW = [800, 1200, 1600];
 const mobW = [480, 720];
 const [dAvif, dWebp, mAvif, mWebp] = await Promise.all([
   fmt(posterDesk, deskW, 'avif', 55),
@@ -24,20 +26,69 @@ const [dAvif, dWebp, mAvif, mWebp] = await Promise.all([
   fmt(posterMob, mobW, 'avif', 55),
   fmt(posterMob, mobW, 'webp', 70),
 ]);
-const fallback = await getImage({ src: posterDesk, width: 1280, format: 'jpeg', quality: 72 });
+const fallback = await getImage({ src: posterDesk, width: 1200, format: 'jpeg', quality: 72 });
 const v = site.hero.video;
+const h = site.hero;
+const software = await getSoftware();
+const logoH = (shape: string) => (shape === 'round' ? 30 : 20);
 ---
 
 <section class="hero" aria-labelledby="hero-title" data-hero>
-  <div class="hero-media">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-kicker">{site.tagline}</p>
+      <h1 id="hero-title" class="hero-title">
+        {h.title}
+        <span class="hero-title-2">{h.titleAccent}</span>
+      </h1>
+      <p class="hero-line">{h.line}</p>
+      <ul role="list" class="hero-ticks">
+        {
+          h.points.map((p) => (
+            <li>
+              <Icon name="check" size={18} />
+              {p}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="hero-actions">
+        <a href="/contact/#book" class="btn btn-primary btn-lg" data-track="booking">Book a free consultation</a>
+        <a href="#services" class="hero-link">Explore our services <Icon name="arrow" size={18} /></a>
+      </div>
+      <div class="hero-soft">
+        <p class="hero-soft-label">We work with</p>
+        <ul role="list" class="hero-soft-list">
+          {
+            software.map((s) => (
+              <li>
+                <a href={`/software/${s.id}/`} class="hero-soft-item">
+                  <Image
+                    src={s.data.logo}
+                    alt={s.data.name}
+                    height={logoH(s.data.logoShape)}
+                    width={Math.round((logoH(s.data.logoShape) * s.data.logo.width) / s.data.logo.height)}
+                    densities={[1, 2]}
+                    loading="eager"
+                  />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
     <picture>
       <source media="(max-width: 767px)" type="image/avif" srcset={mAvif} sizes="100vw" />
       <source media="(max-width: 767px)" type="image/webp" srcset={mWebp} sizes="100vw" />
-      <source type="image/avif" srcset={dAvif} sizes="100vw" />
-      <source type="image/webp" srcset={dWebp} sizes="100vw" />
+      <source type="image/avif" srcset={dAvif} sizes="(min-width: 1024px) 55vw, 100vw" />
+      <source type="image/webp" srcset={dWebp} sizes="(min-width: 1024px) 55vw, 100vw" />
       <img
         src={fallback.src}
-        alt=""
+        alt="Colleagues planning work together around a meeting table"
         width={posterDesk.width}
         height={posterDesk.height}
         loading="eager"
@@ -59,25 +110,9 @@ const v = site.hero.video;
       data-desktop-mp4={v.desktop.mp4}
       data-mobile-webm={v.mobile.webm}
       data-mobile-mp4={v.mobile.mp4}></video>
-    <div class="hero-shade"></div>
+    <button type="button" class="hero-toggle motion-toggle" aria-pressed="false" data-hero-toggle hidden>
+      <Icon name="pause" size={18} class="i-pause" /><Icon name="play" size={18} class="i-play" />
+      <span class="sr-only">Pause background video</span>
+    </button>
   </div>
-
-  <div class="wrap hero-inner">
-    <div class="hero-copy">
-      <h1 id="hero-title" class="hero-title">
-        <span>Beyond numbers.</span>
-        <span class="hero-title-2">Beyond borders.</span>
-      </h1>
-      <p class="hero-line">{site.hero.line}</p>
-      <div class="hero-actions">
-        <a href="/contact/#book" class="btn btn-accent btn-lg" data-track="booking">Book a free consultation</a>
-        <a href="#services" class="hero-link">Explore our services <Icon name="arrow" size={20} /></a>
-      </div>
-    </div>
-  </div>
-
-  <button type="button" class="hero-toggle motion-toggle" aria-pressed="false" data-hero-toggle hidden>
-    <Icon name="pause" size={18} class="i-pause" /><Icon name="play" size={18} class="i-play" />
-    <span class="sr-only">Pause background video</span>
-  </button>
 </section>

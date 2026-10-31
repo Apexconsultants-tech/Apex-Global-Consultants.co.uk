@@ -40,4 +40,3 @@ export const switching = {
   cta: { label: 'Talk to us about switching', href: '/contact/' },
 } as const;
 
-export const ribbon = ['Bookkeeping', 'Tax', 'Payroll', 'IFRS Reporting', 'Company Services', 'Beyond numbers. Beyond borders.'];

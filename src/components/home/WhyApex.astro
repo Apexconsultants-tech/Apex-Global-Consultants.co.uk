@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import { why } from '../../data/home';
+import photo from '../../assets/help/help-1.jpg';
 ---
 
 <section class="section why" aria-labelledby="why-title">
@@ -10,19 +12,33 @@ import { why } from '../../data/home';
       <h2 id="why-title" class="h2">{why.title}</h2>
       <p class="lead">{why.intro}</p>
     </header>
-    <ul role="list" class="why-grid">
-      {
-        why.points.map((p, i) => (
-          <li class="why-item" style={`--i:${i}`}>
-            <span class="why-icon">
-              <Icon name={p.icon} size={26} />
-            </span>
-            <h3 class="why-h">{p.title}</h3>
-            <p>{p.text}</p>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="why-layout">
+      <figure class="why-media">
+        <Image
+          src={photo}
+          alt="Two colleagues reviewing a printed report together"
+          widths={[480, 720, 960]}
+          sizes="(min-width: 1024px) 440px, 100vw"
+          class="why-img"
+          loading="lazy"
+        />
+      </figure>
+      <ul role="list" class="why-grid">
+        {
+          why.points.map((p, i) => (
+            <li class="why-item" style={`--i:${i}`}>
+              <span class="why-icon">
+                <Icon name={p.icon} size={22} />
+              </span>
+              <div>
+                <h3 class="why-h">{p.title}</h3>
+                <p>{p.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
     <dl class="stats">
       {
         why.stats.map((s) => (

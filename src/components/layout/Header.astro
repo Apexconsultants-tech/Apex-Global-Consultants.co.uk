@@ -92,6 +92,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
                   href={groupHref(g.id)}
                   class="mega-group"
                   data-mega-group={g.id}
+                  data-tone={['blue-deep', 'blue', 'green-deep', 'green'][i % 4]}
                   aria-current={i === 0 ? 'true' : undefined}
                 >
                   <span class="mega-num">{g.data.number}</span>
