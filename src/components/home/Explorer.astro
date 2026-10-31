@@ -21,6 +21,8 @@ const {
   intro = 'Choose an area to see what it covers and who it is for.',
 } = Astro.props;
 const groups = await getGroups();
+// Each service area takes one logo colour: deep blue, sky blue, deep green, green.
+const tone = ['blue-deep', 'blue', 'green-deep', 'green'];
 ---
 
 <section class="section explorer-section" id="services" aria-labelledby="explorer-title">
@@ -35,7 +37,7 @@ const groups = await getGroups();
       {
         groups.map((g, i) => (
           <>
-            <h3 class="ex-head" style={`--row:${i + 1}`}>
+            <h3 class="ex-head" style={`--row:${i + 1}`} data-tone={tone[i % 4]}>
               <button
                 type="button"
                 class="ex-btn"
@@ -59,6 +61,7 @@ const groups = await getGroups();
               aria-labelledby={`ex-btn-${g.id}`}
               data-ex-panel
               data-open={i === 0 ? 'true' : 'false'}
+              data-tone={tone[i % 4]}
             >
               <div class="ex-card">
                 <Image

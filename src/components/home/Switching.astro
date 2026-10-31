@@ -1,11 +1,20 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import { switching } from '../../data/home';
+import photo from '../../assets/misc/about.jpg';
 ---
 
 <section class="switch" aria-labelledby="switch-title">
   <div class="wrap switch-row">
-    <span class="switch-icon" aria-hidden="true"><Icon name="arrow" size={28} /></span>
+    <Image
+      src={photo}
+      alt="A bright, modern office workspace"
+      widths={[400, 640, 800]}
+      sizes="(min-width: 1024px) 360px, 100vw"
+      class="switch-img"
+      loading="lazy"
+    />
     <div class="switch-copy">
       <h2 id="switch-title" class="switch-h">{switching.title}</h2>
       <p>{switching.text}</p>
