@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { getGroups, groupHref, serviceHref } from '../../lib/content';
+
+/**
+ * One markup, two layouts:
+ * - desktop (>=1024px): numbered list on the left; the active group's panel on the right
+ *   (all panels share one grid cell; hover, focus or click switches them).
+ * - mobile/tablet: stacked expandable cards (each button toggles its own panel).
+ * Buttons use aria-expanded / aria-controls in both layouts.
+ */
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+}
+const {
+  eyebrow = 'What we do',
+  title = 'Eight services, four clear areas',
+  intro = 'Choose an area to see what it covers and who it is for.',
+} = Astro.props;
+const groups = await getGroups();
+---
+
+<section class="section explorer-section" id="services" aria-labelledby="explorer-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id="explorer-title" class="h2">{title}</h2>
+      <p class="lead">{intro}</p>
+    </header>
+
+    <div class="explorer" data-explorer>
+      {
+        groups.map((g, i) => (
+          <>
+            <h3 class="ex-head" style={`--row:${i + 1}`}>
+              <button
+                type="button"
+                class="ex-btn"
+                id={`ex-btn-${g.id}`}
+                aria-expanded={i === 0 ? 'true' : 'false'}
+                aria-controls={`ex-panel-${g.id}`}
+                data-ex-btn
+              >
+                <span class="ex-num">{g.data.number}</span>
+                <span class="ex-name">
+                  <span class="ex-title">{g.data.title}</span>
+                  <span class="ex-one">{g.data.oneLine}</span>
+                </span>
+                <Icon name="chevron" size={22} class="ex-chev" />
+              </button>
+            </h3>
+            <div
+              class="ex-panel"
+              id={`ex-panel-${g.id}`}
+              role="region"
+              aria-labelledby={`ex-btn-${g.id}`}
+              data-ex-panel
+              data-open={i === 0 ? 'true' : 'false'}
+            >
+              <div class="ex-card">
+                <Image
+                  src={g.data.image}
+                  alt={g.data.imageAlt}
+                  widths={[480, 720, 960]}
+                  sizes="(min-width: 1024px) 640px, 100vw"
+                  class="ex-img"
+                  loading="lazy"
+                />
+                <div class="ex-body">
+                  <p class="ex-explain">{g.data.explainer}</p>
+                  <p class="ex-for">
+                    <strong>Who it is for:</strong> {g.data.forWho}
+                  </p>
+                  <ul role="list" class="ex-links">
+                    {g.items.map((s) => (
+                      <li>
+                        <a href={serviceHref(g.id, s.id)}>
+                          <Icon name={s.data.icon} size={20} />
+                          {s.data.title}
+                          <Icon name="arrow" size={16} class="ex-link-arrow" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={groupHref(g.id)} class="btn btn-outline">
+                    View all {g.data.title} <Icon name="arrow" size={18} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>

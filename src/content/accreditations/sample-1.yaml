@@ -1,0 +1,9 @@
+# SAMPLE ONLY (draft: true). Replace with a real accreditation and its logo in src/assets/badges/.
+name: Sample body 1
+certificate: '[TO VERIFY] Certificate or membership name'
+membershipNumber: '[TO VERIFY]'
+verifyUrl: https://example.com/verify
+logo: ../../assets/badges/sample-badge-1.png
+caption: Sample accreditation 1
+order: 1
+draft: true

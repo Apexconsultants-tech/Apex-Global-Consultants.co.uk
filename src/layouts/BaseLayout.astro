@@ -1,0 +1,88 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { Font, getImage } from 'astro:assets';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import Analytics from '../components/seo/Analytics.astro';
+import { site } from '../data/site';
+import { organizationSchema, breadcrumbSchema } from '../lib/schema';
+import ogDefault from '../assets/misc/og-default.jpg';
+import logo from '../assets/brand/apex-logo.png';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  schema?: object[];
+  breadcrumbs?: { name: string; href: string }[];
+  /** Typography set. 'serif' = Source Serif 4 + Inter; 'sans' = Plus Jakarta Sans only. */
+  fonts?: 'serif' | 'sans';
+  /** Design previews show sample (draft) testimonials, badges and insights. */
+  samples?: boolean;
+  bodyClass?: string;
+}
+
+const { title, description, image, type = 'website', noindex = false, schema = [], breadcrumbs, fonts = 'serif', samples = false, bodyClass } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const fullTitle = title.includes('Apex') ? title : `${title} | Apex Global`;
+const og = await getImage({ src: image ?? ogDefault, width: 1200, height: 630, format: 'jpg', fit: 'cover' });
+const ogUrl = new URL(og.src, site.url).href;
+const logoImg = await getImage({ src: logo, width: 600, format: 'png' });
+const ld = [organizationSchema(new URL(logoImg.src, site.url).href), ...(breadcrumbs ? [breadcrumbSchema(breadcrumbs)] : []), ...schema];
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      fonts === 'serif' ? (
+        <>
+          <Font cssVariable="--font-serif4" preload />
+          <Font cssVariable="--font-inter" />
+        </>
+      ) : (
+        <Font cssVariable="--font-jakarta" preload />
+      )
+    }
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={site.legalName} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <slot name="head" />
+    <JsonLd data={ld} />
+    <ClientRouter fallback="swap" />
+  </head>
+  <body class={bodyClass}>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <slot name="top" />
+    <Header samples={samples} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer samples={samples} />
+    <Analytics />
+    <script src="../scripts/site.ts"></script>
+  </body>
+</html>

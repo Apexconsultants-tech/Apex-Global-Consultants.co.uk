@@ -1,0 +1,162 @@
+# Questions shown on /faq/ (topic) and on service pages (services: [slug]).
+- id: fixed-fees
+  topic: fees
+  order: 1
+  question: Do you charge fixed fees?
+  answer: Yes. After a free consultation we send a written proposal with a fixed fee for the work agreed. The fee states whether VAT is added, so there are no surprises.
+- id: what-included-fee
+  topic: fees
+  order: 2
+  question: What happens if I need extra work during the year?
+  answer: If you need something outside the agreed scope, we tell you before we start and confirm the fee in writing. We never add charges without agreeing them first.
+- id: free-consultation
+  topic: getting-started
+  order: 1
+  question: What happens in the free consultation?
+  answer: We talk through your business, what you need and any deadlines coming up. It usually takes 30 minutes by phone or video call and there is no obligation.
+- id: switching
+  topic: getting-started
+  order: 2
+  question: How do I switch from my current accountant?
+  answer: Once you have signed our engagement letter, we contact your previous accountant for the professional clearance and handover information. You do not need to manage that conversation yourself.
+- id: identity-checks
+  topic: getting-started
+  order: 3
+  question: Why do you need to check my identity?
+  answer: UK anti-money-laundering regulations require us to verify the identity of new clients and their beneficial owners before we act. We do this securely through our client portal, never by email.
+- id: where-based
+  topic: general
+  order: 1
+  question: Where are you based and do I need to visit?
+  answer: Our office is at the Atlantic Business Centre in Altrincham, Greater Manchester. Most clients work with us by phone, video and our secure portal, so you do not need to visit, but you are welcome to.
+- id: software
+  topic: general
+  order: 2
+  question: Which accounting software do you work with?
+  answer: We work with the main cloud accounting packages used by UK businesses and can recommend one that suits your size and sector. We also help with migration and training.
+- id: response-time
+  topic: general
+  order: 3
+  question: How quickly will you respond?
+  answer: Your dedicated accountant aims to reply to emails and messages within one working day, and sooner when a deadline is close.
+- id: overseas-uk-entity
+  topic: overseas
+  order: 1
+  question: Can you help us set up a UK company from abroad?
+  answer: Yes. We handle incorporation, the registered office, HMRC registrations for corporation tax, VAT and PAYE, and ongoing accounting and filings, working in your time zone where possible.
+- id: overseas-reporting
+  topic: overseas
+  order: 2
+  question: Can you report to our group under IFRS?
+  answer: Yes. We prepare UK statutory accounts under FRS 102 and can also provide monthly or year-end reporting packs under IFRS for your group.
+# Service-specific questions
+- id: bk-software
+  topic: service
+  services: [bookkeeping]
+  question: Do I need to change my bookkeeping software?
+  answer: Not usually. We work with the main cloud packages. If your current setup is holding you back, we will explain why and help you move.
+- id: bk-frequency
+  topic: service
+  services: [bookkeeping]
+  question: How often will my books be updated?
+  answer: Most clients have their books updated and reconciled monthly. Weekly updates are available for businesses with high transaction volumes.
+- id: bk-documents
+  topic: service
+  services: [bookkeeping]
+  question: How do I send you receipts and invoices?
+  answer: Through receipt-capture apps linked to your accounting software, or by uploading to our secure client portal. Please do not send documents by email.
+- id: aa-frs102
+  topic: service
+  services: [accounting-advisory, compliance]
+  question: When do the FRS 102 periodic review changes apply?
+  answer: The main changes, including bringing most leases onto the balance sheet and a new five-step revenue model, apply to accounting periods beginning on or after 1 January 2026.
+- id: aa-auditor
+  topic: service
+  services: [accounting-advisory]
+  question: Will you work with our auditors?
+  answer: Yes. We prepare papers and models with the audit in mind and can respond to technical queries directly with your auditors if you wish.
+- id: aa-esg
+  topic: service
+  services: [accounting-advisory]
+  question: Can you help with sustainability reporting?
+  answer: We help you identify relevant disclosures, organise the underlying data and draft clear narrative reporting. We do not provide assurance on sustainability information.
+- id: tax-mtd
+  topic: service
+  services: [taxation]
+  question: Does Making Tax Digital for Income Tax apply to me?
+  answer: It applies to sole traders and landlords in stages based on qualifying income, starting with incomes over £50,000 from April 2026. We will confirm your position and the date that applies to you.
+- id: tax-vat-register
+  topic: service
+  services: [taxation]
+  question: When do I need to register for VAT?
+  answer: You must register if your VAT-taxable turnover goes over the registration threshold in any rolling 12-month period, or is expected to within the next 30 days. Voluntary registration can also make sense; we will advise you.
+- id: tax-hmrc-letters
+  topic: service
+  services: [taxation]
+  question: Can you deal with HMRC for me?
+  answer: Yes. Once you authorise us as your agent, we can speak to HMRC on your behalf and respond to letters and enquiries.
+- id: pay-switch
+  topic: service
+  services: [payroll-processing]
+  question: Can you take over payroll part-way through the tax year?
+  answer: Yes. We take the year-to-date figures from your previous payroll so that tax and National Insurance continue correctly.
+- id: pay-pension
+  topic: service
+  services: [payroll-processing]
+  question: Do you handle workplace pension auto-enrolment?
+  answer: We calculate pension contributions through payroll and can help you meet your auto-enrolment duties with your pension provider.
+- id: pay-payslips
+  topic: service
+  services: [payroll-processing]
+  question: How do employees receive payslips?
+  answer: Employees receive secure electronic payslips. Printed payslips can be arranged if required.
+- id: cs-time
+  topic: service
+  services: [corporate-services]
+  question: How long does it take to form a UK company?
+  answer: Online incorporation at Companies House is often completed within 24 hours once all information and identity verification are in place.
+- id: cs-office
+  topic: service
+  services: [corporate-services]
+  question: Can you provide a registered office address?
+  answer: '[TO VERIFY] Confirm whether Apex offers a registered office service and on what terms.'
+- id: cs-idv
+  topic: service
+  services: [corporate-services, compliance]
+  question: Do directors need to verify their identity with Companies House?
+  answer: Yes. Directors and people with significant control must verify their identity with Companies House. We can tell you how and when this applies to you.
+- id: comp-dormant
+  topic: service
+  services: [compliance]
+  question: Do dormant companies still need to file accounts?
+  answer: Yes. A dormant company must still file annual accounts and a confirmation statement with Companies House.
+- id: comp-internal-audit
+  topic: service
+  services: [compliance]
+  question: Is internal audit only for large companies?
+  answer: No. A focused review of key processes, such as payments or payroll, is valuable for any business and can be scaled to your size.
+- id: mr-frequency
+  topic: service
+  services: [management-reporting]
+  question: How soon after month end will I get my report?
+  answer: We agree a timetable with you at the start. It depends on how quickly records are available, but we aim for a consistent date each month.
+- id: mr-kpis
+  topic: service
+  services: [management-reporting]
+  question: Which KPIs should I track?
+  answer: It depends on your business model. We agree a short list with you, usually covering margin, cash, debtor days and one or two measures specific to your sector.
+- id: mr-forecast
+  topic: service
+  services: [management-reporting, specialised-support]
+  question: Can you help prepare forecasts for a bank or investor?
+  answer: Yes. We build forecasts with clearly stated assumptions and can join meetings to explain them.
+- id: ss-migration
+  topic: service
+  services: [specialised-support]
+  question: How long does a move to cloud accounting take?
+  answer: Most small businesses can move within a few weeks, timed for the start of a VAT quarter or financial year to keep things simple.
+- id: ss-forensic
+  topic: service
+  services: [specialised-support]
+  question: When would I need forensic accounting?
+  answer: When records need to be reconstructed or a loss, dispute or irregularity needs to be investigated. We will discuss the scope confidentially before any work begins.

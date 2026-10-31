@@ -1,0 +1,39 @@
+---
+import Icon from '../ui/Icon.astro';
+import CallbackForm from '../forms/CallbackForm.astro';
+import { site, telHref, whatsappHref } from '../../data/site';
+---
+
+<section class="section final" aria-labelledby="final-title" id="callback">
+  <div class="wrap final-grid">
+    <div class="final-copy">
+      <p class="eyebrow">Get in touch</p>
+      <h2 id="final-title" class="h2">Speak to an accountant today</h2>
+      <p class="lead">Free 30-minute consultation, no obligation. Tell us what you need and we will give you a fixed fee.</p>
+      <ul role="list" class="final-ways">
+        <li>
+          <a href={telHref} data-track="call">
+            <span class="final-ico"><Icon name="phone" /></span>
+            <span><small>Call</small>{site.phone.display}</span>
+          </a>
+        </li>
+        <li>
+          <a href={whatsappHref} data-track="whatsapp" rel="noopener">
+            <span class="final-ico"><Icon name="whatsapp" /></span>
+            <span><small>WhatsApp</small>Message us</span>
+          </a>
+        </li>
+        <li>
+          <a href="/contact/#book" data-track="booking">
+            <span class="final-ico"><Icon name="calendar" /></span>
+            <span><small>Book online</small>Choose a time</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="final-form">
+      <h3 class="final-form-h">Request a callback</h3>
+      <CallbackForm idPrefix="home-cb" />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,190 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import Logo from '../ui/Logo.astro';
+import { site, mainNav, telHref, mailHref, whatsappHref } from '../../data/site';
+import { getGroups, getInsights, groupHref, serviceHref, formatDate } from '../../lib/content';
+
+interface Props {
+  samples?: boolean;
+}
+const { samples = false } = Astro.props;
+const groups = await getGroups();
+const insights = await getInsights(samples);
+const featuredFor = (g: (typeof groups)[number]) =>
+  insights.find((i) => i.id === g.data.featuredInsight?.id) ?? insights[0];
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<div class="topbar">
+  <div class="wrap topbar-row">
+    <ul class="topbar-links" role="list">
+      <li>
+        <a href={telHref} data-track="call"><Icon name="phone" size={16} /><span class="topbar-text">{site.phone.display}</span><span class="sr-only topbar-sr">Call {site.phone.display}</span></a>
+      </li>
+      <li class="topbar-email">
+        <a href={mailHref} data-track="email"><Icon name="mail" size={16} /><span>{site.email}</span></a>
+      </li>
+      <li>
+        <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={16} /><span class="topbar-text">WhatsApp</span><span class="sr-only topbar-sr">Message us on WhatsApp</span></a>
+      </li>
+    </ul>
+    <a class="topbar-portal" href={site.clientPortalUrl}><Icon name="lock" size={16} />Client portal login</a>
+  </div>
+</div>
+
+<header class="site-header" data-header>
+  <div class="header-bar">
+    <div class="wrap header-row">
+      <a href="/" class="brand" aria-label="Apex Global Consulting Services, home">
+        <Logo width={250} eager class="brand-logo" />
+      </a>
+
+      <nav class="main-nav" aria-label="Main">
+        <ul role="list">
+          {
+            mainNav.map((item) =>
+              item.mega ? (
+                <li class="has-mega">
+                  <button
+                    type="button"
+                    class="nav-link"
+                    aria-expanded="false"
+                    aria-controls="mega-services"
+                    data-mega-toggle
+                    aria-current={isCurrent(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                    <Icon name="chevron" size={16} class="nav-chev" />
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <a href={item.href} class="nav-link" aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ),
+            )
+          }
+        </ul>
+      </nav>
+
+      <a href="/contact/#book" class="btn btn-primary header-cta" data-track="booking">Book a free consultation</a>
+
+      <button type="button" class="menu-btn" aria-controls="mobile-menu" aria-expanded="false" data-menu-open>
+        <Icon name="menu" />
+        <span>Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mega-services" class="mega" data-mega hidden>
+    <div class="wrap mega-grid">
+      <div class="mega-groups">
+        <p class="mega-kicker">Our services</p>
+        <ul role="list">
+          {
+            groups.map((g, i) => (
+              <li>
+                <a
+                  href={groupHref(g.id)}
+                  class="mega-group"
+                  data-mega-group={g.id}
+                  aria-current={i === 0 ? 'true' : undefined}
+                >
+                  <span class="mega-num">{g.data.number}</span>
+                  <span>{g.data.title}</span>
+                  <Icon name="arrow" size={18} class="mega-arrow" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href="/services/" class="link-arrow mega-all">All services <Icon name="arrow" size={18} /></a>
+      </div>
+      {
+        groups.map((g, i) => {
+          const ins = featuredFor(g);
+          return (
+            <div class="mega-panel" data-mega-panel={g.id} hidden={i !== 0}>
+              <div class="mega-detail">
+                <p class="mega-line">{g.data.oneLine}</p>
+                <ul role="list" class="mega-services">
+                  {g.items.map((s) => (
+                    <li>
+                      <a href={serviceHref(g.id, s.id)}>
+                        <Icon name={s.data.icon} size={22} />
+                        <span>
+                          <strong>{s.data.title}</strong>
+                          <small>{s.data.menuBlurb}</small>
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {ins && (
+                <a href={`/insights/${ins.id}/`} class="mega-insight">
+                  <Image src={ins.data.image} alt="" width={320} height={180} loading="lazy" class="mega-insight-img" />
+                  <span class="mega-insight-meta">Insight · Tax year {ins.data.taxYear}</span>
+                  <strong>{ins.data.title}</strong>
+                  <span class="mega-insight-date">{formatDate(ins.data.published)}</span>
+                </a>
+              )}
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</header>
+
+<dialog id="mobile-menu" class="mmenu" aria-label="Menu" data-menu>
+  <div class="mmenu-head">
+    <a href="/" aria-label="Apex Global Consulting Services, home"><Logo width={200} /></a>
+    <button type="button" class="mmenu-close" data-menu-close><Icon name="close" label="Close menu" /></button>
+  </div>
+  <nav class="mmenu-body" aria-label="Mobile">
+    <details class="mmenu-acc">
+      <summary>Services <Icon name="chevron" size={20} /></summary>
+      <div class="mmenu-groups">
+        {
+          groups.map((g) => (
+            <details class="mmenu-sub">
+              <summary>
+                <span class="mega-num">{g.data.number}</span> {g.data.title} <Icon name="chevron" size={18} />
+              </summary>
+              <ul role="list">
+                <li><a href={groupHref(g.id)}>Overview of {g.data.title}</a></li>
+                {g.items.map((s) => (
+                  <li><a href={serviceHref(g.id, s.id)}>{s.data.title}</a></li>
+                ))}
+              </ul>
+            </details>
+          ))
+        }
+        <a href="/services/" class="mmenu-all">All services <Icon name="arrow" size={18} /></a>
+      </div>
+    </details>
+    {
+      mainNav
+        .filter((n) => !n.mega)
+        .map((n) => (
+          <a href={n.href} class="mmenu-link">
+            {n.label}
+            <Icon name="arrow" size={20} />
+          </a>
+        ))
+    }
+  </nav>
+  <div class="mmenu-foot">
+    <a href="/contact/#book" class="btn btn-primary btn-block" data-track="booking">Book a free consultation</a>
+    <div class="mmenu-contact">
+      <a href={telHref} data-track="call"><Icon name="phone" size={20} />Call us</a>
+      <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={20} />WhatsApp</a>
+      <a href={site.clientPortalUrl}><Icon name="lock" size={20} />Client portal</a>
+    </div>
+  </div>
+</dialog>

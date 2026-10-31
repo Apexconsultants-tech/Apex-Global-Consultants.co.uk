@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { getAudiences } from '../../lib/content';
+
+const audiences = await getAudiences();
+---
+
+<section class="section who" aria-labelledby="who-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Who we help</p>
+      <h2 id="who-title" class="h2">Built around three kinds of client</h2>
+    </header>
+    <ul role="list" class="who-grid">
+      {
+        audiences.map((a) => (
+          <li class="who-card">
+            <Image
+              src={a.data.image}
+              alt={a.data.imageAlt}
+              widths={[400, 640, 800]}
+              sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+              class="who-img"
+              loading="lazy"
+            />
+            <div class="who-body">
+              <h3 class="who-title">
+                <a href={`/who-we-help/${a.id}/`} class="who-link">{a.data.shortTitle}</a>
+              </h3>
+              <p class="who-promise">{a.data.promise}</p>
+              <ul role="list" class="ticks">
+                {a.data.benefits.map((b) => (
+                  <li>
+                    <Icon name="check" size={20} />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <span class="who-more" aria-hidden="true">
+                How we help <Icon name="arrow" size={18} />
+              </span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+---
+import { env } from '../../data/site';
+// Cloudflare Web Analytics: cookieless, so no cookie banner is needed.
+// Rendered only when PUBLIC_CF_BEACON_TOKEN is set at build time.
+const beacon = JSON.stringify({ token: env.cfBeaconToken, spa: true });
+---
+
+{
+  env.cfBeaconToken && (
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={beacon} data-astro-transition-persist="cf-beacon" />
+  )
+}

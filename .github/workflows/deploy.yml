@@ -1,0 +1,110 @@
+name: Build, check and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and check
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
+      PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type and content check
+        run: npx astro check
+
+      - name: Build
+        run: npm run build
+
+      - name: Internal link check
+        run: npm run check:links
+
+      - name: Performance budget (JS < 30 KB, CSS < 50 KB, hero < 150 KB, first load < 1 MB)
+        run: npm run check:budget
+
+      - name: Lighthouse CI (/, /services/bookkeeping/, /contact/)
+        run: npx --yes @lhci/cli@0.15.1 autorun
+        env:
+          LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ github.ref_name }}
+
+      - name: Keep dist as a build artifact (used for rollbacks)
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-${{ github.sha }}
+          path: dist/
+          include-hidden-files: true
+          retention-days: 90
+
+  deploy:
+    name: Deploy to HostGator
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Configure this environment in GitHub with "Required reviewers" so every
+    # production deploy waits for a person to approve it.
+    environment:
+      name: production
+      url: https://apexglobalconsultants.co.uk/
+    env:
+      PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
+      PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist-${{ github.sha }}
+          path: dist/
+
+      - name: Block deploy while placeholder content remains
+        run: npm run check:placeholders
+
+      - name: Upload changed files over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          # The document root of apexglobalconsultants.co.uk ONLY, e.g. /public_html/
+          # Set as a secret so it cannot be changed by accident in a commit.
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Only files this action uploaded before are ever deleted; it never
+          # touches other folders on the account.
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+
+      - name: Purge Cloudflare cache
+        run: |
+          curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'

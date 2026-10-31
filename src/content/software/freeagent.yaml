@@ -1,0 +1,11 @@
+name: FreeAgent
+logo: ../../assets/software/freeagent.png
+logoShape: wide
+caption: Accounting for sole traders and small companies
+help: FreeAgent suits freelancers, contractors and small limited companies. We set it up, explain the tax estimates it shows, and file your returns, so you can see what you owe throughout the year.
+benefits:
+  - Simple setup for sole traders and small companies
+  - Tax estimates explained in plain English
+  - Self assessment and company returns filed on time
+mock: vat
+order: 4

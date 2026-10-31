@@ -1,0 +1,31 @@
+---
+import { steps } from '../../data/home';
+// A progress line draws as the section scrolls into view (horizontal on desktop, vertical stepper
+// on mobile). home.ts sets --progress (0..1); CSS applies it with transform: scale.
+---
+
+<section class="section steps" aria-labelledby="steps-title" data-steps>
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">How we work</p>
+      <h2 id="steps-title" class="h2">{steps.intro}</h2>
+    </header>
+    <div class="steps-track">
+      <div class="steps-line" aria-hidden="true"><span class="steps-fill"></span></div>
+      <ol class="steps-list" role="list">
+        {
+          steps.items.map((s, i) => (
+            <li class="step" style={`--i:${i}`}>
+              <span class="step-num" aria-hidden="true">{i + 1}</span>
+              <h3 class="step-h">
+                <span class="sr-only">Step {i + 1}: </span>
+                {s.title}
+              </h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

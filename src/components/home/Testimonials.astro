@@ -1,0 +1,65 @@
+---
+import Icon from '../ui/Icon.astro';
+import { getTestimonials } from '../../lib/content';
+
+/**
+ * Real name, job title and company only. A scroll-snap slider (swipe, trackpad, arrow buttons);
+ * nothing auto-advances, so no pause control is needed. Shows a placeholder until real,
+ * permissioned testimonials are added.
+ */
+interface Props {
+  samples?: boolean;
+}
+const { samples = false } = Astro.props;
+const items = await getTestimonials(samples);
+---
+
+<section class="section quotes" aria-labelledby="quotes-title" data-slider>
+  <div class="wrap">
+    <header class="section-head quotes-head">
+      <div>
+        <p class="eyebrow">Client feedback</p>
+        <h2 id="quotes-title" class="h2">In our clients' words</h2>
+      </div>
+      {
+        items.length > 1 && (
+          <div class="slider-btns">
+            <button type="button" class="round-btn" data-slide="-1">
+              <Icon name="arrow-left" label="Previous testimonial" />
+            </button>
+            <button type="button" class="round-btn" data-slide="1">
+              <Icon name="arrow" label="Next testimonial" />
+            </button>
+          </div>
+        )
+      }
+    </header>
+    {
+      items.length ? (
+        <ul role="list" class="quotes-track" data-slider-track tabindex="0" aria-label="Testimonials">
+          {items.map((t) => (
+            <li class="quote">
+              <figure>
+                <svg class="quote-mark" viewBox="0 0 64 48" aria-hidden="true">
+                  <path d="M0 48V28C0 12 8 3 24 0l3 6C17 9 13 15 13 22h11v26zm37 0V28c0-16 8-25 24-28l3 6c-10 3-14 9-14 16h11v26z" />
+                </svg>
+                <blockquote>
+                  <p>{t.data.quote}</p>
+                </blockquote>
+                <figcaption>
+                  <strong>{t.data.name}</strong>
+                  <span>
+                    {t.data.jobTitle}, {t.data.company}
+                  </span>
+                </figcaption>
+                {samples && t.data.draft && <span class="badge-sample">Sample</span>}
+              </figure>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="quotes-empty">Client testimonials will appear here soon.</p>
+      )
+    }
+  </div>
+</section>

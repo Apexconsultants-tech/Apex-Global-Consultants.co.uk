@@ -1,0 +1,40 @@
+---
+import Icon from '../ui/Icon.astro';
+import { why } from '../../data/home';
+---
+
+<section class="section why" aria-labelledby="why-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Why Apex</p>
+      <h2 id="why-title" class="h2">{why.title}</h2>
+      <p class="lead">{why.intro}</p>
+    </header>
+    <ul role="list" class="why-grid">
+      {
+        why.points.map((p, i) => (
+          <li class="why-item" style={`--i:${i}`}>
+            <span class="why-icon">
+              <Icon name={p.icon} size={26} />
+            </span>
+            <h3 class="why-h">{p.title}</h3>
+            <p>{p.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <dl class="stats">
+      {
+        why.stats.map((s) => (
+          <div class="stat">
+            <dt class="stat-label">{s.label}</dt>
+            <dd class="stat-value">
+              <span data-count={s.value}>{s.value}</span>
+              {s.suffix}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
