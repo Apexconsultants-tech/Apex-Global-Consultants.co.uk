@@ -1,21 +1,18 @@
 ---
-import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
-import { site, areas, quickLinks, legalLinks, telHref, mailHref, whatsappHref, addressLines } from '../../data/site';
-import { getGroups, getAudiences, getSoftware, getAccreditations, groupHref } from '../../lib/content';
+import { site, legalLinks, telHref, mailHref, addressLines } from '../../data/site';
+import { getGroups, groupHref } from '../../lib/content';
 
-interface Props {
-  samples?: boolean;
-}
-const { samples = false } = Astro.props;
-const [groups, audiences, software, badges] = await Promise.all([
-  getGroups(),
-  getAudiences(),
-  getSoftware(),
-  getAccreditations(samples),
-]);
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+// Deliberately minimal: brand, services, company links, contact details, legal line.
+const groups = await getGroups();
+const company = [
+  { label: 'About us', href: '/about/' },
+  { label: 'Who we help', href: '/who-we-help/' },
+  { label: 'Pricing', href: '/pricing/' },
+  { label: 'Insights', href: '/insights/' },
+  { label: 'Contact', href: '/contact/' },
+];
 const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLines.join(', '))}`;
 ---
 
@@ -23,27 +20,7 @@ const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
   <div class="wrap footer-top">
     <div class="footer-brand">
       <a href="/" aria-label="Apex Global Consulting Services, home"><Logo width={260} /></a>
-      <p class="footer-tag">{site.tagline}</p>
       <p class="footer-desc">Accounting, tax and financial reporting for UK and international businesses, from Altrincham.</p>
-      <a href="/contact/#book" class="btn btn-primary" data-track="booking">Book a free consultation</a>
-      <div class="footer-social">
-        <p>Follow us for tax updates</p>
-        {
-          site.social.length ? (
-            <ul role="list">
-              {site.social.map((s) => (
-                <li>
-                  <a href={s.url} rel="noopener" class="social-link">
-                    <Icon name={s.name.toLowerCase()} label={s.name} />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p class="footer-note">Social links coming soon.</p>
-          )
-        }
-      </div>
     </div>
 
     <nav class="footer-cols" aria-label="Footer">
@@ -51,88 +28,32 @@ const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
         <h2 class="footer-h">Services</h2>
         <ul role="list">
           {groups.map((g) => <li><a href={groupHref(g.id)}>{g.data.title}</a></li>)}
-          <li><a href="/services/">All services</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2 class="footer-h">Who we help</h2>
-        <ul role="list">
-          {audiences.map((a) => <li><a href={`/who-we-help/${a.id}/`}>{a.data.shortTitle}</a></li>)}
-        </ul>
-        <h2 class="footer-h footer-h-gap">Software</h2>
-        <ul role="list">
-          {software.map((s) => <li><a href={`/software/${s.id}/`}>{s.data.name}</a></li>)}
         </ul>
       </div>
       <div>
         <h2 class="footer-h">Company</h2>
         <ul role="list">
-          {quickLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          {company.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
         </ul>
       </div>
-      <div>
-        <h2 class="footer-h">Areas we serve</h2>
-        <ul role="list">
-          {areas.map((a) => <li><a href={`/areas/${slug(a)}/`}>{a}</a></li>)}
-        </ul>
-      </div>
+      <address class="footer-contact">
+        <h2 class="footer-h">Contact</h2>
+        <a href={mapHref} rel="noopener"><Icon name="pin" size={18} /><span>{addressLines.slice(0, 5).join(', ')}</span></a>
+        <a href={telHref} data-track="call"><Icon name="phone" size={18} />{site.phone.display}</a>
+        <a href={mailHref} data-track="email"><Icon name="mail" size={18} />{site.email}</a>
+        <p><Icon name="clock" size={18} />{site.hours}</p>
+      </address>
     </nav>
-  </div>
-
-  <div class="wrap footer-mid">
-    <address class="footer-contact">
-      <h2 class="footer-h">Visit or contact us</h2>
-      <a href={mapHref} rel="noopener" class="footer-addr">
-        <Icon name="pin" size={20} />
-        <span>{addressLines.slice(0, 5).join(', ')}</span>
-      </a>
-      <a href={telHref} data-track="call"><Icon name="phone" size={20} />{site.phone.display}</a>
-      <a href={mailHref} data-track="email"><Icon name="mail" size={20} />{site.email}</a>
-      <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={20} />WhatsApp us</a>
-      <p><Icon name="clock" size={20} />{site.hours}</p>
-    </address>
-
-    <form class="footer-news" action="/contact.php" method="post" data-form="newsletter" novalidate>
-      <h2 class="footer-h">Tax updates by email</h2>
-      <p>Deadlines and rule changes, once a month. Unsubscribe at any time.</p>
-      <input type="hidden" name="form_type" value="newsletter" />
-      <div class="news-row">
-        <label for="news-email" class="sr-only">Email address</label>
-        <input id="news-email" name="email" type="email" required autocomplete="email" placeholder="you@company.co.uk" class="field" />
-        <button type="submit" class="btn btn-accent">Subscribe</button>
-      </div>
-      <div class="hp-field" aria-hidden="true">
-        <label for="news-website">Leave this field empty</label>
-        <input id="news-website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
-      </div>
-      <p class="footer-note">See our <a href="/privacy/">privacy notice</a>.</p>
-    </form>
-
-    {
-      badges.length > 0 && (
-        <div class="footer-badges">
-          <h2 class="footer-h">Accredited and trusted</h2>
-          <ul role="list">
-            {badges.map((b) => (
-              <li>
-                <Image src={b.data.logo} alt={b.data.name} height={48} width={Math.round((48 * b.data.logo.width) / b.data.logo.height)} loading="lazy" />
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
   </div>
 
   <div class="footer-legal">
     <div class="wrap footer-legal-row">
       <p>
-        © <span data-year>{new Date().getFullYear()}</span> {site.legalName}. {site.registration}, Company No. {site.companyNumber}.
-        Registered office: {addressLines.slice(0, 5).join(', ')}.
+        © <span data-year>{new Date().getFullYear()}</span> {site.legalName}. Registered in England and Wales, Company No. {site.companyNumber}.
+        Registered office as above.
       </p>
-      <p class="footer-compliance">{site.compliance.amlSupervisor}. {site.compliance.professionalBody}.</p>
       <ul role="list" class="footer-legal-links">
-        {legalLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        {legalLinks.filter((l) => l.label !== 'Sitemap').map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
     </div>
   </div>

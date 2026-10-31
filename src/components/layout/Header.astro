@@ -30,7 +30,6 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
         <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={16} /><span class="topbar-text">WhatsApp</span><span class="sr-only topbar-sr">Message us on WhatsApp</span></a>
       </li>
     </ul>
-    <a class="topbar-portal" href={site.clientPortalUrl}><Icon name="lock" size={16} />Client portal login</a>
   </div>
 </div>
 
@@ -185,7 +184,6 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     <div class="mmenu-contact">
       <a href={telHref} data-track="call"><Icon name="phone" size={20} />Call us</a>
       <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={20} />WhatsApp</a>
-      <a href={site.clientPortalUrl}><Icon name="lock" size={20} />Client portal</a>
     </div>
   </div>
 </dialog>
