@@ -2,29 +2,69 @@
 import Icon from '../ui/Icon.astro';
 import { getGroups, serviceHref } from '../../lib/content';
 
-// "I need help with [service] → Show me". A native <select> keeps it keyboard and screen-reader
-// friendly. Without JavaScript the form still works: it goes to the services overview.
+/**
+ * "I need help with [service] → Show me".
+ * A custom select-only combobox (WAI-ARIA APG pattern) that always opens downwards and uses the
+ * same font and size for the value and every option. Keyboard: Enter/Space/Arrow keys open,
+ * Arrow keys/Home/End move, Enter selects, Esc closes, typing jumps to a service.
+ * The native <select> stays in the markup as the no-JavaScript fallback; home.ts swaps it out.
+ */
 const groups = await getGroups();
+const tone = ['blue-deep', 'blue', 'green-deep', 'green'];
 ---
 
 <section class="help" aria-label="Find the right service">
   <div class="wrap">
     <form class="help-form" action="/services/" method="get" data-help>
-      <label for="help-select" class="help-label">I need help with</label>
-      <div class="help-select-wrap">
-        <select id="help-select" name="service" class="help-select" required>
+      <span class="help-label" id="help-label">I need help with</span>
+      <div class="help-combo" data-combo>
+        <select id="help-select" name="service" class="help-native" aria-labelledby="help-label" required>
           <option value="" disabled selected>choose a service…</option>
           {
             groups.map((g) => (
               <optgroup label={g.data.title}>
                 {g.items.map((s) => (
-                  <option value={serviceHref(g.id, s.id)}>{s.data.title.toLowerCase()}</option>
+                  <option value={serviceHref(g.id, s.id)}>{s.data.title}</option>
                 ))}
               </optgroup>
             ))
           }
         </select>
-        <Icon name="chevron" size={22} class="help-chev" />
+
+        <button
+          type="button"
+          class="help-trigger"
+          role="combobox"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-controls="help-list"
+          aria-labelledby="help-label help-value"
+          data-combo-btn
+          hidden
+        >
+          <span id="help-value" class="help-value" data-placeholder="choose a service…">choose a service…</span>
+          <Icon name="chevron" size={22} class="help-chev" />
+        </button>
+
+        <div id="help-list" class="help-list" role="listbox" aria-labelledby="help-label" data-combo-list hidden>
+          {
+            groups.map((g, gi) => (
+              <div role="group" class="help-group" aria-labelledby={`help-g-${g.id}`} data-tone={tone[gi % 4]}>
+                <div id={`help-g-${g.id}`} class="help-group-label" role="presentation">
+                  <span class="help-group-num">{g.data.number}</span>
+                  {g.data.title}
+                </div>
+                {g.items.map((s) => (
+                  <div role="option" id={`help-o-${s.id}`} class="help-opt" aria-selected="false" data-value={serviceHref(g.id, s.id)}>
+                    <Icon name={s.data.icon} size={20} class="help-opt-icon" />
+                    <span class="help-opt-text">{s.data.title}</span>
+                    <Icon name="check" size={18} class="help-opt-check" />
+                  </div>
+                ))}
+              </div>
+            ))
+          }
+        </div>
       </div>
       <button type="submit" class="btn btn-primary help-btn">Show me <Icon name="arrow" size={20} /></button>
     </form>
