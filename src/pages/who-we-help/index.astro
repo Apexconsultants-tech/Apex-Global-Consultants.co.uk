@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import WhoWeHelp from '../../components/home/WhoWeHelp.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import heroImg from '../../assets/audiences/uk-small-and-medium-businesses.jpg';
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Who we help', href: '/who-we-help/' },
+];
+---
+
+<BaseLayout
+  title="Who we help | Apex Global"
+  description="Accounting and tax support for UK small and medium businesses, overseas companies with a UK entity, and finance teams that need technical reporting help."
+  breadcrumbs={crumbs}
+>
+  <PageHero
+    title="Who we help"
+    summary="UK businesses, overseas companies with a UK presence and in-house finance teams."
+    crumbs={crumbs}
+    image={heroImg}
+    imageAlt="Small business owner reviewing figures in their premises"
+  />
+  <WhoWeHelp />
+  <FinalCta idPrefix="who" />
+</BaseLayout>

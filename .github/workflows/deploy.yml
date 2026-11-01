@@ -43,7 +43,7 @@ jobs:
       - name: Performance budget (JS < 30 KB, CSS < 50 KB, hero < 150 KB, first load < 1 MB)
         run: npm run check:budget
 
-      - name: Lighthouse CI (/, /services/bookkeeping/, /contact/)
+      - name: Lighthouse CI (/, a service page, /contact/)
         run: npx --yes @lhci/cli@0.15.1 autorun
         env:
           LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ github.ref_name }}

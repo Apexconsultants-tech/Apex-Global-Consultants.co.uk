@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/page/PageHero.astro';
+import CallbackForm from '../components/forms/CallbackForm.astro';
+import Icon from '../components/ui/Icon.astro';
+import { getLocations } from '../lib/content';
+import { site, telHref, mailHref, whatsappHref, addressLines } from '../data/site';
+
+const locations = await getLocations();
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Contact', href: '/contact/' },
+];
+const mapQuery = encodeURIComponent(addressLines.slice(0, 5).join(', '));
+---
+
+<BaseLayout
+  title="Contact us and book a free consultation | Apex Global"
+  description="Contact Apex Global in Altrincham: call +44 (0) 204 553 8806, email info@apexglobalconsultants.co.uk, message us on WhatsApp or book a free consultation."
+  breadcrumbs={crumbs}
+>
+  <PageHero title="Contact us" summary="Book a free consultation, request a callback or just ask a question." crumbs={crumbs} />
+
+  <section class="section" aria-label="Contact options">
+    <div class="wrap contact-grid">
+      <div id="book" class="contact-form">
+        <h2 class="h3-lg">Book a free consultation</h2>
+        <p class="contact-lead">Tell us a little about your business and we will arrange a 30-minute call at a time that suits you.</p>
+        <CallbackForm variant="enquiry" idPrefix="contact" />
+      </div>
+
+      <div class="contact-side">
+        <ul role="list" class="final-ways contact-ways">
+          <li>
+            <a href={telHref} data-track="call">
+              <span class="final-ico"><Icon name="phone" /></span>
+              <span><small>Phone</small>{site.phone.display}</span>
+            </a>
+          </li>
+          <li>
+            <a href={mailHref} data-track="email">
+              <span class="final-ico"><Icon name="mail" /></span>
+              <span class="wrap-any"><small>Email</small>{site.email}</span>
+            </a>
+          </li>
+          <li>
+            <a href={whatsappHref} data-track="whatsapp" rel="noopener">
+              <span class="final-ico"><Icon name="whatsapp" /></span>
+              <span><small>WhatsApp</small>Message us</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="office">
+          <h2 class="h3-lg">Our office</h2>
+          <address>{addressLines.map((l) => <>{l}<br /></>)}</address>
+          <p class="office-hours">{site.hours}. Visits by appointment.</p>
+          <div class="map" data-map-wrap>
+            <button type="button" class="map-btn" data-map-load data-query={mapQuery}>
+              <Icon name="pin" size={32} />
+              <span class="map-btn-t">Show map</span>
+              <span class="map-btn-n">Loads Google Maps, which may set cookies.</span>
+            </button>
+          </div>
+          <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} rel="noopener" class="link-arrow">
+            Open in Google Maps <Icon name="external" size={16} />
+          </a>
+        </div>
+
+        <div class="office office--plain">
+          <h2 class="h3-lg">Existing clients</h2>
+          <p>
+            Please send documents, tax references, National Insurance numbers and bank details only through our secure client portal, never by email or this
+            form. Ask your accountant for your portal link.
+          </p>
+        </div>
+
+        <div class="office office--plain">
+          <h2 class="h3-lg">Areas we serve</h2>
+          <ul role="list" class="area-tags">
+            {locations.map((l) => <li><a href={`/areas/${l.id}/`}>{l.data.town}</a></li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // The map loads only when asked for (no third-party request or cookies until then).
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.querySelector<HTMLButtonElement>('[data-map-load]');
+    btn?.addEventListener(
+      'click',
+      () => {
+        const f = document.createElement('iframe');
+        f.src = `https://www.google.com/maps?q=${btn.dataset.query}&output=embed`;
+        f.title = 'Map showing the Apex Global office in Altrincham';
+        f.loading = 'lazy';
+        f.referrerPolicy = 'no-referrer-when-downgrade';
+        f.className = 'map-frame';
+        btn.replaceWith(f);
+      },
+      { once: true },
+    );
+  });
+</script>

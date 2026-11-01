@@ -1,0 +1,49 @@
+---
+// Sticky in-page navigation (swipeable on mobile). pages.ts highlights the section in view.
+interface Props {
+  items: { id: string; label: string }[];
+}
+const { items } = Astro.props;
+---
+
+<nav class="inpage" aria-label="On this page" data-inpage>
+  <div class="wrap">
+    <ul role="list" class="inpage-list">
+      {
+        items.map((it) => (
+          <li>
+            <a href={`#${it.id}`} class="inpage-link" data-inpage-link>
+              {it.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<script>
+  // Highlight the section currently in view and keep its link visible in the swipe bar.
+  document.addEventListener('astro:page-load', () => {
+    const nav = document.querySelector<HTMLElement>('[data-inpage]');
+    if (!nav) return;
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>('[data-inpage-link]')];
+    const sections = links.map((l) => document.getElementById(l.hash.slice(1))).filter(Boolean) as HTMLElement[];
+    const set = (id: string) =>
+      links.forEach((l) => {
+        const on = l.hash === '#' + id;
+        if (on) { l.setAttribute('aria-current', 'true'); l.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+        else l.removeAttribute('aria-current');
+      });
+    const io = new IntersectionObserver(
+      (entries) => {
+        const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (vis[0]) set(vis[0].target.id);
+        else if (sections[0] && sections[0].getBoundingClientRect().top > innerHeight * 0.35) set('');
+      },
+      { rootMargin: '-35% 0px -55% 0px' },
+    );
+    sections.forEach((s) => io.observe(s));
+    document.addEventListener('astro:before-swap', () => io.disconnect(), { once: true });
+  });
+</script>

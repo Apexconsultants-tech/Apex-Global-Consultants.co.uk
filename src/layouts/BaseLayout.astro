@@ -1,8 +1,10 @@
 ---
+import '../styles/theme.css';
 import { ClientRouter } from 'astro:transitions';
 import { Font, getImage } from 'astro:assets';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import ActionBar from '../components/page/ActionBar.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Analytics from '../components/seo/Analytics.astro';
 import { site } from '../data/site';
@@ -18,14 +20,14 @@ interface Props {
   noindex?: boolean;
   schema?: object[];
   breadcrumbs?: { name: string; href: string }[];
-  /** Typography set. 'serif' = Source Serif 4 + Inter; 'sans' = Plus Jakarta Sans only. */
-  fonts?: 'serif' | 'sans';
-  /** Design previews show sample (draft) testimonials, badges and insights. */
+  /** Show sample (draft) content. Only for design previews; never on live pages. */
   samples?: boolean;
+  /** Mobile Call / WhatsApp / Get a quote bar and the desktop floating quote button. */
+  actionBar?: boolean;
   bodyClass?: string;
 }
 
-const { title, description, image, type = 'website', noindex = false, schema = [], breadcrumbs, fonts = 'serif', samples = false, bodyClass } = Astro.props;
+const { title, description, image, type = 'website', noindex = false, schema = [], breadcrumbs, samples = false, actionBar = false, bodyClass } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const fullTitle = title.includes('Apex') ? title : `${title} | Apex Global`;
 const og = await getImage({ src: image ?? ogDefault, width: 1200, height: 630, format: 'jpg', fit: 'cover' });
@@ -48,16 +50,7 @@ const ld = [organizationSchema(new URL(logoImg.src, site.url).href), ...(breadcr
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {
-      fonts === 'serif' ? (
-        <>
-          <Font cssVariable="--font-serif4" preload />
-          <Font cssVariable="--font-inter" />
-        </>
-      ) : (
-        <Font cssVariable="--font-jakarta" preload />
-      )
-    }
+    <Font cssVariable="--font-jakarta" preload />
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={site.legalName} />
@@ -74,7 +67,7 @@ const ld = [organizationSchema(new URL(logoImg.src, site.url).href), ...(breadcr
     <JsonLd data={ld} />
     <ClientRouter fallback="swap" />
   </head>
-  <body class={bodyClass}>
+  <body class:list={[bodyClass, { 'has-actionbar': actionBar }]}>
     <a href="#main" class="skip-link">Skip to content</a>
     <slot name="top" />
     <Header samples={samples} />
@@ -82,6 +75,7 @@ const ld = [organizationSchema(new URL(logoImg.src, site.url).href), ...(breadcr
       <slot />
     </main>
     <Footer />
+    {actionBar && <ActionBar />}
     <Analytics />
     <script src="../scripts/site.ts"></script>
   </body>

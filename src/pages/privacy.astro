@@ -1,0 +1,53 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site, mailHref, addressLines } from '../data/site';
+---
+
+<LegalLayout
+  title="Privacy notice"
+  path="/privacy/"
+  updated="30 October 2026"
+  description="How Apex Global Consulting Services Limited collects, uses and protects personal information from website visitors, enquirers and clients."
+>
+  <p class="todo">[TO VERIFY] This notice is a starting draft. Have it reviewed against your actual processing, retention periods and ICO registration before publishing.</p>
+  <h2>Who we are</h2>
+  <p>
+    {site.legalName} ("we", "us") is the controller of personal information collected through this website. {site.registration}, Company No.
+    {site.companyNumber}. Address: {addressLines.join(', ')}. ICO registration number: <span class="todo">[TO VERIFY]</span>.
+  </p>
+  <h2>What we collect through this website</h2>
+  <ul>
+    <li>Contact and callback forms: your name, email address, phone number, company (optional), the service you are interested in and your message.</li>
+    <li>Technical data needed to protect our forms from spam, processed by Cloudflare Turnstile, and your IP address for rate limiting.</li>
+  </ul>
+  <p>
+    Please do not send tax references, National Insurance numbers, bank details or documents through the website. Clients share these through our secure
+    client portal.
+  </p>
+  <h2>Why we use it and our lawful basis</h2>
+  <ul>
+    <li>To respond to your enquiry and take steps at your request before entering into a contract (contract).</li>
+    <li>To keep our website and forms secure (legitimate interests).</li>
+    <li>To meet anti-money-laundering and other legal obligations once you become a client (legal obligation).</li>
+  </ul>
+  <h2>Analytics and cookies</h2>
+  <p>
+    We use Cloudflare Web Analytics, which does not use cookies or collect personal information to track you across sites. This website does not set
+    advertising or tracking cookies. If you choose to load the map on our contact page, Google may set cookies under its own policy.
+  </p>
+  <h2>Who we share it with</h2>
+  <p>
+    Our website host and email provider, Cloudflare (security and analytics) and professional advisers where necessary. We do not sell personal
+    information. Where providers process data outside the UK, appropriate safeguards are in place.
+  </p>
+  <h2>How long we keep it</h2>
+  <p>
+    Enquiries that do not lead to an engagement are kept for up to <span class="todo">[TO VERIFY] 12 months</span>. Client records are kept as required
+    by law, usually for at least five years after the end of the business relationship for anti-money-laundering purposes.
+  </p>
+  <h2>Your rights</h2>
+  <p>
+    You can ask for access to, correction or deletion of your personal information, object to or restrict processing, and withdraw consent. Contact us at
+    <a href={mailHref}>{site.email}</a>. You can also complain to the Information Commissioner's Office at ico.org.uk.
+  </p>
+</LegalLayout>

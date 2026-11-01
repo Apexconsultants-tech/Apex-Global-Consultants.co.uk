@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/page/PageHero.astro';
+import FaqList from '../components/page/FaqList.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+import Icon from '../components/ui/Icon.astro';
+import { getServiceIndex, getFaqs } from '../lib/content';
+import { faqSchema } from '../lib/schema';
+
+const index = await getServiceIndex();
+const faqs = (await getFaqs({ topic: 'fees' })).map((f) => f.data);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Pricing', href: '/pricing/' },
+];
+---
+
+<BaseLayout
+  title="Pricing and fixed fees | Apex Global"
+  description="How Apex Global prices accounting, tax and payroll work: fixed fees agreed in writing before we start, with VAT clearly stated and no surprise charges."
+  breadcrumbs={crumbs}
+  schema={faqs.length ? [faqSchema(faqs)] : []}
+>
+  <PageHero title="Pricing" summary="Fixed fees, agreed in writing before any work starts, with VAT clearly stated." crumbs={crumbs} />
+
+  <section class="section" aria-label="Starting prices">
+    <div class="wrap">
+      <ul role="list" class="price-grid">
+        {
+          index.map(({ service: s, group: g, href, tone }) => (
+            <li class="price-tile" data-tone={tone}>
+              <p class="svc-area"><span class="svc-num">{g.data.number}</span>{g.data.title}</p>
+              <h2 class="price-tile-h"><Icon name={s.data.icon} size={22} />{s.data.title}</h2>
+              <p class="price-from">From <strong>{s.data.priceFrom}</strong> per month + VAT</p>
+              <p class="price-note">{s.data.priceNote}</p>
+              <a href={href} class="link-arrow">About {s.data.title.toLowerCase()} <Icon name="arrow" size={18} /></a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="fine-print">
+        Prices shown are starting points. Your fixed fee depends on the size and complexity of your business and is confirmed in a written proposal before
+        you commit.
+      </p>
+    </div>
+  </section>
+
+  {
+    faqs.length > 0 && (
+      <section class="section tinted" aria-labelledby="fees-faq">
+        <div class="wrap narrow">
+          <h2 id="fees-faq" class="h2 center">Questions about fees</h2>
+          <FaqList items={faqs} />
+        </div>
+      </section>
+    )
+  }
+
+  <FinalCta idPrefix="pricing" title="Get a fixed-fee proposal" />
+</BaseLayout>

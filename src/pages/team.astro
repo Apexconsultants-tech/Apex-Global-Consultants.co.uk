@@ -1,0 +1,72 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/page/PageHero.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+import Icon from '../components/ui/Icon.astro';
+import { getTeam } from '../lib/content';
+import { personSchema } from '../lib/schema';
+import { site, telHref } from '../data/site';
+
+const team = await getTeam();
+const people = await Promise.all(team.map(async (t) => ({ entry: t, Content: (await render(t)).Content })));
+const pageUrl = new URL('/team/', site.url).href;
+const schema = await Promise.all(
+  team.map(async (t) =>
+    personSchema({
+      name: t.data.name,
+      role: t.data.role,
+      url: `${pageUrl}#${t.id}`,
+      image: t.data.photo ? new URL((await getImage({ src: t.data.photo, width: 600 })).src, site.url).href : undefined,
+      sameAs: t.data.linkedin,
+    }),
+  ),
+);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Our team', href: '/team/' },
+];
+---
+
+<BaseLayout
+  title="Our team | Apex Global"
+  description="Meet the Apex Global team: accountants and advisers in Altrincham supporting UK and international businesses with accounting, tax and reporting."
+  breadcrumbs={crumbs}
+  schema={schema}
+>
+  <PageHero title="Our team" summary="You will always know who is looking after your account." crumbs={crumbs} />
+  <section class="section" aria-label="Team members">
+    <div class="wrap">
+      {
+        people.length ? (
+          <ul role="list" class="team-grid">
+            {people.map(({ entry, Content }) => (
+              <li id={entry.id} class="person">
+                {entry.data.photo ? (
+                  <Image src={entry.data.photo} alt={entry.data.photoAlt ?? entry.data.name} widths={[400, 600]} sizes="(min-width: 1024px) 380px, 100vw" class="person-img" />
+                ) : (
+                  <div class="person-img person-ph" aria-hidden="true"><Icon name="user" size={56} /></div>
+                )}
+                <div class="person-body">
+                  <h2 class="person-name">{entry.data.name}</h2>
+                  <p class="person-role">{entry.data.role}</p>
+                  {entry.data.qualifications && <p class="person-q">{entry.data.qualifications}</p>}
+                  <div class="prose person-bio"><Content /></div>
+                  {entry.data.linkedin && (
+                    <a href={entry.data.linkedin} rel="noopener" class="link-arrow">LinkedIn profile <Icon name="external" size={16} /></a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty-note">
+            Team profiles are being added. In the meantime, call <a href={telHref}>{site.phone.display}</a> to speak to an adviser.
+          </p>
+        )
+      }
+    </div>
+  </section>
+  <FinalCta idPrefix="team" />
+</BaseLayout>

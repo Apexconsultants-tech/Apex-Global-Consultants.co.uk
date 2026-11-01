@@ -1,21 +1,24 @@
 ---
 import { env } from '../../data/site';
+import { getServices } from '../../lib/content';
 
 /**
- * Short callback form. Field names match public/contact.php. Never asks for UTR, NI numbers,
- * bank details or documents (those go through the client portal).
+ * Callback form (short) or enquiry form (contact page). Field names match public/contact.php.
+ * Never asks for UTR, NI numbers, bank details or documents (those go through the client portal).
  * Turnstile loads only when the visitor first interacts with the form (forms.ts).
  */
 interface Props {
+  variant?: 'callback' | 'enquiry';
   idPrefix?: string;
   source?: string;
 }
-const { idPrefix = 'cb', source = Astro.url.pathname } = Astro.props;
+const { variant = 'callback', idPrefix = 'cb', source = Astro.url.pathname } = Astro.props;
 const id = (n: string) => `${idPrefix}-${n}`;
+const services = variant === 'enquiry' ? await getServices() : [];
 ---
 
-<form action="/contact.php" method="post" class="form" data-form="callback" novalidate>
-  <input type="hidden" name="form_type" value="callback" />
+<form action="/contact.php" method="post" class="form" data-form={variant} novalidate>
+  <input type="hidden" name="form_type" value={variant} />
   <input type="hidden" name="source" value={source} />
   <div class="form-row">
     <div class="form-field">
@@ -23,8 +26,8 @@ const id = (n: string) => `${idPrefix}-${n}`;
       <input class="field" id={id('name')} name="name" type="text" required autocomplete="name" maxlength="100" />
     </div>
     <div class="form-field">
-      <label class="label" for={id('phone')}>Phone <span aria-hidden="true">*</span></label>
-      <input class="field" id={id('phone')} name="phone" type="tel" required autocomplete="tel" maxlength="30" />
+      <label class="label" for={id('phone')}>Phone {variant === 'callback' && <span aria-hidden="true">*</span>}</label>
+      <input class="field" id={id('phone')} name="phone" type="tel" required={variant === 'callback'} autocomplete="tel" maxlength="30" />
     </div>
   </div>
   <div class="form-row">
@@ -32,15 +35,44 @@ const id = (n: string) => `${idPrefix}-${n}`;
       <label class="label" for={id('email')}>Email <span aria-hidden="true">*</span></label>
       <input class="field" id={id('email')} name="email" type="email" required autocomplete="email" maxlength="150" />
     </div>
-    <div class="form-field">
-      <label class="label" for={id('time')}>Best time to call</label>
-      <select class="field" id={id('time')} name="best_time">
-        <option>Any time</option>
-        <option>Morning</option>
-        <option>Afternoon</option>
-      </select>
-    </div>
+    {
+      variant === 'callback' ? (
+        <div class="form-field">
+          <label class="label" for={id('time')}>Best time to call</label>
+          <select class="field" id={id('time')} name="best_time">
+            <option>Any time</option>
+            <option>Morning</option>
+            <option>Afternoon</option>
+          </select>
+        </div>
+      ) : (
+        <div class="form-field">
+          <label class="label" for={id('service')}>What do you need help with?</label>
+          <select class="field" id={id('service')} name="service">
+            <option value="">Not sure yet</option>
+            {services.map((s) => <option value={s.data.title}>{s.data.title}</option>)}
+          </select>
+        </div>
+      )
+    }
   </div>
+  {
+    variant === 'enquiry' && (
+      <>
+        <div class="form-field">
+          <label class="label" for={id('company')}>Company (optional)</label>
+          <input class="field" id={id('company')} name="company" type="text" autocomplete="organization" maxlength="120" />
+        </div>
+        <div class="form-field">
+          <label class="label" for={id('message')}>How can we help? <span aria-hidden="true">*</span></label>
+          <textarea class="field field-area" id={id('message')} name="message" required maxlength="3000" aria-describedby={id('msg-hint')} />
+          <p id={id('msg-hint')} class="form-note">
+            Please do not include tax references, National Insurance numbers, bank details or documents. We will share a secure client portal link for those.
+          </p>
+        </div>
+      </>
+    )
+  }
   <div class="hp-field" aria-hidden="true">
     <label for={id('website')}>Leave this field empty</label>
     <input id={id('website')} name="company_website" type="text" tabindex="-1" autocomplete="off" />
@@ -48,7 +80,7 @@ const id = (n: string) => `${idPrefix}-${n}`;
   <div class="turnstile-slot" data-sitekey={env.turnstileSiteKey}></div>
   <noscript><p class="form-note">Please enable JavaScript to send this form, or call or email us instead.</p></noscript>
   <p class="form-error" role="alert" data-form-error hidden></p>
-  <button type="submit" class="btn btn-primary btn-block">Request a callback</button>
+  <button type="submit" class="btn btn-primary btn-block">{variant === 'callback' ? 'Request a callback' : 'Send enquiry'}</button>
   <p class="form-note">
     By sending this form you agree we may contact you about your enquiry. See our <a href="/privacy/">privacy notice</a>.
   </p>

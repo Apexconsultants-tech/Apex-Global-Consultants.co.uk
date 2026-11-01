@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+import { getServiceIndex } from '../lib/content';
+
+const index = await getServiceIndex();
+---
+
+<BaseLayout title="Page not found | Apex Global" description="Sorry, we could not find that page. Try one of our services or contact Apex Global Consulting Services for help." noindex>
+  <section class="section center-panel">
+    <div class="wrap narrow center">
+      <p class="big-404">404</p>
+      <h1 class="page-hero-title">We could not find that page</h1>
+      <p class="lead">It may have moved when we updated our website. These links may help:</p>
+      <ul role="list" class="area-tags center-tags">
+        {index.map((r) => <li data-tone={r.tone}><a href={r.href}>{r.service.data.title}</a></li>)}
+      </ul>
+      <div class="center-actions">
+        <a href="/" class="btn btn-primary">Go to the homepage</a>
+        <a href="/contact/" class="link-arrow">Contact us <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

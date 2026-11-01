@@ -1,7 +1,5 @@
 ---
-import '../styles/concept-b.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PreviewStrip from '../components/preview/PreviewStrip.astro';
 import Hero from '../components/home/Hero.astro';
 import HelpSelector from '../components/home/HelpSelector.astro';
 import Explorer from '../components/home/Explorer.astro';
@@ -12,17 +10,12 @@ import Steps from '../components/home/Steps.astro';
 import Switching from '../components/home/Switching.astro';
 import LatestInsights from '../components/home/LatestInsights.astro';
 import FinalCta from '../components/home/FinalCta.astro';
-// Homepage design preview 2 ("Summit"). noindex and excluded from the sitemap.
 ---
 
 <BaseLayout
-  title="Homepage preview 2: Summit | Apex Global"
-  description="Design preview 2 of the new Apex Global Consulting Services homepage, for review only. Not part of the live site."
-  noindex
-  samples
-  fonts="sans"
+  title="Apex Global | Accountants in Altrincham for UK and international businesses"
+  description="Accounting, tax, payroll and IFRS reporting from Altrincham, Greater Manchester. One dedicated accountant and fixed fees agreed before we start."
 >
-  <PreviewStrip slot="top" n={2} name="Summit" />
   <Hero />
   <HelpSelector />
   <Explorer />
@@ -31,8 +24,8 @@ import FinalCta from '../components/home/FinalCta.astro';
   <SoftwareShowcase />
   <Steps />
   <Switching />
-  <LatestInsights samples />
-  <FinalCta />
+  <LatestInsights />
+  <FinalCta idPrefix="home" />
 </BaseLayout>
 
 <script src="../scripts/home.ts"></script>

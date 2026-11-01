@@ -67,3 +67,25 @@ export const groupHref = (groupId: string) => `/services/${groupId}/`;
 
 /** Approximate reading time from the article body (200 words per minute, minimum 1). */
 export const readMinutes = (body = '') => Math.max(1, Math.round(body.split(/\s+/).filter(Boolean).length / 200));
+
+/** Brand tone for a service area by position: deep blue, sky blue, deep green, green. */
+export const groupTones = ['blue-deep', 'blue', 'green-deep', 'green'] as const;
+
+/** Every service with the area it belongs to, its URL and its area's tone. */
+export async function getServiceIndex() {
+  const groups = await getGroups();
+  return groups.flatMap((g, gi) =>
+    g.items.map((s) => ({ service: s, group: g, href: serviceHref(g.id, s.id), tone: groupTones[gi % 4] })),
+  );
+}
+export type ServiceRef = Awaited<ReturnType<typeof getServiceIndex>>[number];
+
+export async function getLocations() {
+  return (await getCollection('locations')).sort((a, b) => a.data.order - b.data.order);
+}
+
+/** FAQs linked to any of the given services, without duplicates, in order. */
+export async function getFaqsForServices(ids: string[]) {
+  const all = await getCollection('faqs');
+  return all.filter((f) => f.data.services.some((s) => ids.includes(s))).sort((a, b) => a.data.order - b.data.order);
+}

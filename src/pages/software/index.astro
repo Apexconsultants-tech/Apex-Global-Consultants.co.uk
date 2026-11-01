@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import SoftwareShowcase from '../../components/home/SoftwareShowcase.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import heroImg from '../../assets/help/help-3.jpg';
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Software', href: '/software/' },
+];
+---
+
+<BaseLayout
+  title="Xero, QuickBooks, Sage and FreeAgent support | Apex Global"
+  description="We set up, migrate, train and run your books in Xero, QuickBooks, Sage or FreeAgent, with bank feeds, Making Tax Digital and clear monthly reports."
+  breadcrumbs={crumbs}
+>
+  <PageHero
+    title="Accounting software"
+    summary="We work in Xero, QuickBooks, Sage and FreeAgent, and help you choose, set up and get the most from them."
+    crumbs={crumbs}
+    image={heroImg}
+    imageAlt="Laptop showing a cloud accounting dashboard next to a notebook"
+  />
+  <SoftwareShowcase />
+  <FinalCta idPrefix="software" title="Not sure which software suits you?" lead="We will recommend the right package for your size and sector, set it up and train your team." />
+</BaseLayout>
+
+<script src="../../scripts/home.ts"></script>

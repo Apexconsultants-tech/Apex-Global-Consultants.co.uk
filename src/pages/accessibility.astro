@@ -1,0 +1,31 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site, mailHref, telHref } from '../data/site';
+---
+
+<LegalLayout
+  title="Accessibility statement"
+  path="/accessibility/"
+  updated="30 October 2026"
+  description="Our commitment to making the Apex Global website accessible, the standard we aim for (WCAG 2.2 AA), known limitations and how to contact us for help."
+>
+  <p>We want everyone to be able to use this website. We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
+  <h2>What we have done</h2>
+  <ul>
+    <li>Text and interactive elements meet at least 4.5:1 colour contrast.</li>
+    <li>Every page can be used with a keyboard, with a visible focus indicator and a "Skip to content" link.</li>
+    <li>The homepage background video plays without sound, can be paused, and is replaced by a still image if your device is set to reduce motion.</li>
+    <li>All form fields have labels and clear error messages.</li>
+    <li>The site works when zoomed to 400% and on screens from 320px wide.</li>
+  </ul>
+  <h2>Known limitations</h2>
+  <p>
+    The optional Google map and the Cloudflare Turnstile spam check are provided by third parties and may not fully meet WCAG 2.2 AA. You can always
+    call or email us instead.
+  </p>
+  <h2>Feedback and help</h2>
+  <p>
+    If you have difficulty using any part of the site, or need information in another format, call <a href={telHref}>{site.phone.display}</a> or email
+    <a href={mailHref}>{site.email}</a>. We aim to respond within five working days.
+  </p>
+</LegalLayout>

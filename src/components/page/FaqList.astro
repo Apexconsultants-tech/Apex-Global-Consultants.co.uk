@@ -1,0 +1,22 @@
+---
+import Icon from '../ui/Icon.astro';
+// Native <details> accordion: keyboard accessible with no JavaScript. Pair with faqSchema() in the page.
+interface Props {
+  items: { question: string; answer: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((f) => (
+      <details class="faq-item">
+        <summary>
+          <span>{f.question}</span>
+          <Icon name="chevron" size={22} class="faq-chev" />
+        </summary>
+        <p class="faq-a">{f.answer}</p>
+      </details>
+    ))
+  }
+</div>

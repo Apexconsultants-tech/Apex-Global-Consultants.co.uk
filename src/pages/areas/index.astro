@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getLocations } from '../../lib/content';
+
+const locations = await getLocations();
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Areas we serve', href: '/areas/' },
+];
+---
+
+<BaseLayout
+  title="Areas we serve | Apex Global"
+  description="Accountants based in Altrincham serving businesses in Manchester, Sale, Stockport, Trafford and Cheshire, and clients across the UK online."
+  breadcrumbs={crumbs}
+>
+  <PageHero title="Areas we serve" summary="Based in Altrincham, working with businesses across Greater Manchester, Cheshire and the rest of the UK." crumbs={crumbs} />
+  <section class="section" aria-label="Towns">
+    <div class="wrap">
+      <ul role="list" class="town-grid">
+        {
+          locations.map((l) => (
+            <li>
+              <a href={`/areas/${l.id}/`} class="town">
+                <Icon name="pin" size={22} />
+                <span>
+                  <strong>{l.data.town}</strong>
+                  <small>{l.data.summary}</small>
+                </span>
+                <Icon name="arrow" size={18} class="town-arrow" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+  <FinalCta idPrefix="areas" />
+</BaseLayout>

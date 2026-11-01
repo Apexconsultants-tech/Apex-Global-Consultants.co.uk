@@ -1,0 +1,50 @@
+---
+import { Picture } from 'astro:assets';
+import Breadcrumbs from './Breadcrumbs.astro';
+
+/**
+ * Inner-page banner in the same split style as the homepage hero: breadcrumb, title and one-line
+ * summary on the left, a photo on the right (about 45% of the screen height on desktop).
+ * The image is the LCP element: eager, high priority. Without an image it becomes a text banner.
+ */
+interface Props {
+  title: string;
+  summary?: string;
+  eyebrow?: string;
+  crumbs: { name: string; href: string }[];
+  image?: ImageMetadata;
+  imageAlt?: string;
+  tone?: string;
+}
+const { title, summary, eyebrow, crumbs, image, imageAlt = '', tone } = Astro.props;
+---
+
+<section class:list={['page-hero', { 'page-hero--text': !image }]} data-tone={tone}>
+  <div class="wrap page-hero-grid">
+    <div class="page-hero-copy">
+      <Breadcrumbs items={crumbs} />
+      {eyebrow && <p class="hero-kicker page-hero-kicker">{eyebrow}</p>}
+      <h1 class="page-hero-title">{title}</h1>
+      {summary && <p class="page-hero-summary">{summary}</p>}
+      <slot />
+    </div>
+  </div>
+  {
+    image && (
+      <div class="page-hero-visual">
+        <Picture
+          src={image}
+          alt={imageAlt}
+          formats={['avif']}
+          fallbackFormat="webp"
+          quality={55}
+          widths={[480, 800, 1100]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="page-hero-img"
+        />
+      </div>
+    )
+  }
+</section>

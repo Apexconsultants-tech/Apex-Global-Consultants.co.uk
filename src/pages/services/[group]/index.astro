@@ -1,0 +1,81 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/page/PageHero.astro';
+import FaqList from '../../../components/page/FaqList.astro';
+import ServiceCards from '../../../components/page/ServiceCards.astro';
+import FinalCta from '../../../components/home/FinalCta.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import { getGroups, getServiceIndex, getFaqsForServices, groupHref, groupTones } from '../../../lib/content';
+import { faqSchema } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  const groups = await getGroups();
+  return groups.map((g, i) => ({ params: { group: g.id }, props: { g, tone: groupTones[i % 4] } }));
+}
+const { g, tone } = Astro.props;
+const d = g.data;
+const { Content } = await render(g);
+const items = (await getServiceIndex()).filter((r) => r.group.id === g.id);
+const faqs = (await getFaqsForServices(items.map((i) => i.service.id))).map((f) => f.data).slice(0, 6);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: d.title, href: groupHref(g.id) },
+];
+---
+
+<BaseLayout
+  title={`${d.title} services | Apex Global`}
+  description={d.seoDescription}
+  image={d.image}
+  breadcrumbs={crumbs}
+  schema={faqs.length ? [faqSchema(faqs)] : []}
+>
+  <PageHero title={d.title} summary={d.oneLine} eyebrow={`Service area ${d.number}`} crumbs={crumbs} image={d.image} imageAlt={d.imageAlt} tone={tone} />
+
+  <section class="section-sm intro" aria-label="Introduction">
+    <div class="wrap">
+      <div class="prose intro-text">
+        <p class="intro-lead">{d.explainer}</p>
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-labelledby="svc-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">Services in this area</p>
+        <h2 id="svc-title" class="h2">What we do in {d.title.toLowerCase()}</h2>
+      </header>
+      <ServiceCards items={items} images />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="for-title">
+    <div class="wrap">
+      <div class="for-card" data-tone={tone}>
+        <span class="for-icon"><Icon name="users" size={28} /></span>
+        <div>
+          <h2 id="for-title" class="for-h">Who it is for</h2>
+          <p>{d.forWho}</p>
+        </div>
+        <a href="/who-we-help/" class="link-arrow">Who we help <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  {
+    faqs.length > 0 && (
+      <section class="section tinted" aria-labelledby="faq-title">
+        <div class="wrap narrow">
+          <h2 id="faq-title" class="h2 center">Common questions</h2>
+          <FaqList items={faqs} />
+        </div>
+      </section>
+    )
+  }
+
+  <FinalCta idPrefix={`grp-${g.id}`} title={`Talk to us about ${d.title.toLowerCase()}`} />
+</BaseLayout>

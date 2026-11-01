@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/page/PageHero.astro';
+import FaqList from '../components/page/FaqList.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+import { getFaqs } from '../lib/content';
+import { faqSchema } from '../lib/schema';
+
+const topics = [
+  { id: 'getting-started', title: 'Getting started' },
+  { id: 'fees', title: 'Fees' },
+  { id: 'general', title: 'Working with us' },
+  { id: 'overseas', title: 'Overseas companies' },
+] as const;
+const sets = await Promise.all(topics.map(async (t) => ({ ...t, items: (await getFaqs({ topic: t.id })).map((f) => f.data) })));
+const all = sets.flatMap((s) => s.items);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'FAQs', href: '/faq/' },
+];
+---
+
+<BaseLayout
+  title="Frequently asked questions | Apex Global"
+  description="Answers to common questions about working with Apex Global: fees, switching accountant, identity checks, software and support for overseas companies."
+  breadcrumbs={crumbs}
+  schema={[faqSchema(all)]}
+>
+  <PageHero title="Frequently asked questions" summary="Straight answers about fees, getting started and how we work." crumbs={crumbs} />
+  {
+    sets
+      .filter((s) => s.items.length)
+      .map((s, i) => (
+        <section class:list={['section-sm', { tinted: i % 2 === 1 }]} aria-labelledby={`faq-${s.id}`}>
+          <div class="wrap narrow">
+            <h2 id={`faq-${s.id}`} class="h3-lg">{s.title}</h2>
+            <FaqList items={s.items} />
+          </div>
+        </section>
+      ))
+  }
+  <FinalCta idPrefix="faq" title="Still have a question?" lead="Call, message or request a callback and a member of the team will help." />
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../data/site';
+---
+
+<LegalLayout
+  title="Website terms of use"
+  path="/terms/"
+  updated="30 October 2026"
+  description="Terms of use for the Apex Global Consulting Services website, including the general-information disclaimer for articles and website content."
+>
+  <p class="todo">[TO VERIFY] Starting draft. Have these terms reviewed before publishing.</p>
+  <h2>About these terms</h2>
+  <p>
+    This website is operated by {site.legalName}, {site.registration}, Company No. {site.companyNumber}. By using the site you accept these terms.
+  </p>
+  <h2>Information, not advice</h2>
+  <p>
+    Content on this website, including insights and FAQs, is general information only. It is not tax, accounting, financial or legal advice and does not
+    create a client relationship. We provide advice only under a signed engagement letter, based on your circumstances.
+  </p>
+  <h2>Accuracy</h2>
+  <p>
+    We review content regularly and show the tax year and review date on each article, but rules change. We do not accept liability for loss arising
+    from reliance on website content, to the extent permitted by law.
+  </p>
+  <h2>Intellectual property</h2>
+  <p>Content and design are owned by us or our licensors. You may print or share pages for personal, non-commercial use with attribution.</p>
+  <h2>Links</h2>
+  <p>Links to other websites are provided for convenience. We are not responsible for their content.</p>
+  <h2>Law</h2>
+  <p>These terms are governed by the law of England and Wales, and the courts of England and Wales have jurisdiction.</p>
+</LegalLayout>

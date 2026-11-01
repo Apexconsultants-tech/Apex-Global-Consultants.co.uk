@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import { getInsights, formatDate, readMinutes } from '../../lib/content';
+
+const items = await getInsights();
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Insights', href: '/insights/' },
+];
+---
+
+<BaseLayout
+  title="Insights: tax and reporting updates | Apex Global"
+  description="Practical articles on UK tax, Making Tax Digital, FRS 102 and IFRS reporting from Apex Global, each showing the tax year, review date and reviewer."
+  breadcrumbs={crumbs}
+>
+  <PageHero title="Insights" summary="Tax and reporting updates in plain English, reviewed and dated." crumbs={crumbs} />
+  <section class="section" aria-label="Articles">
+    <div class="wrap">
+      {
+        items.length ? (
+          <ul role="list" class="ins-grid">
+            {items.map((a, i) => (
+              <li class="ins-card">
+                <Image src={a.data.image} alt="" widths={[400, 640, 800]} sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw" class="ins-img" loading={i < 3 ? 'eager' : 'lazy'} />
+                <div class="ins-body">
+                  <p class="ins-meta">
+                    <span class="tag">Tax year {a.data.taxYear}</span>
+                    <span>{readMinutes(a.body)} min read</span>
+                  </p>
+                  <h2 class="ins-title">
+                    <a href={`/insights/${a.id}/`} class="ins-link">{a.data.title}</a>
+                  </h2>
+                  <p class="ins-date"><time datetime={a.data.published.toISOString().slice(0, 10)}>{formatDate(a.data.published)}</time></p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty-note">Our first articles are being written and technically reviewed. Please check back soon.</p>
+        )
+      }
+    </div>
+  </section>
+  <FinalCta idPrefix="insights" />
+</BaseLayout>
