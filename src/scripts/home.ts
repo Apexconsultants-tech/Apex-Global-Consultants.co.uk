@@ -1,5 +1,5 @@
 // Homepage behaviour: hero video, "I need help with" selector, service explorer, software tabs,
-// steps progress line and (when testimonials exist) the testimonial slider.
+// and the How We Work progress line.
 import { reducedMotion } from './site';
 
 type NetInfo = { saveData?: boolean; effectiveType?: string };
@@ -296,20 +296,6 @@ function initSteps(signal: AbortSignal) {
   wide.addEventListener('change', relayout, { signal });
 }
 
-function initSlider(signal: AbortSignal) {
-  document.querySelectorAll<HTMLElement>('[data-slider]').forEach((root) => {
-    const track = root.querySelector<HTMLElement>('[data-slider-track]');
-    if (!track) return;
-    root.querySelectorAll<HTMLButtonElement>('[data-slide]').forEach((b) => {
-      b.addEventListener('click', () => {
-        const card = track.querySelector<HTMLElement>('li');
-        const step = (card?.offsetWidth ?? track.clientWidth) + 24;
-        track.scrollBy({ left: Number(b.dataset.slide) * step, behavior: reducedMotion() ? 'auto' : 'smooth' });
-      }, { signal });
-    });
-  });
-}
-
 let ctrl: AbortController | undefined;
 document.addEventListener('astro:page-load', () => {
   ctrl?.abort();
@@ -320,5 +306,4 @@ document.addEventListener('astro:page-load', () => {
   initExplorer(signal);
   initTabs(signal);
   initSteps(signal);
-  initSlider(signal);
 });

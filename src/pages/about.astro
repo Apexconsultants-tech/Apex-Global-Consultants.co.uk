@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/page/PageHero.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+import Steps from '../components/home/Steps.astro';
+import Icon from '../components/ui/Icon.astro';
+import { site, addressLines } from '../data/site';
+import aboutImg from '../assets/misc/about.jpg';
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about/' },
+];
+const values = [
+  { icon: 'scales', title: 'Technical depth', text: 'IFRS, UK GAAP and tax knowledge usually found in large firms, applied to owner-managed businesses.' },
+  { icon: 'users', title: 'One point of contact', text: 'A dedicated accountant who knows your business and answers your calls.' },
+  { icon: 'pound', title: 'Fixed, clear fees', text: 'A written fixed fee before we start, with VAT shown. Extra work is always agreed first.' },
+  { icon: 'globe', title: 'UK and beyond', text: 'Support for UK companies and for overseas groups running a UK entity.' },
+];
+---
+
+<BaseLayout
+  title="About Apex Global Consulting Services"
+  description="Apex Global Consulting Services Limited is an accounting, tax and financial reporting firm in Altrincham, Greater Manchester, supporting UK and international businesses."
+  breadcrumbs={crumbs}
+>
+  <PageHero
+    title="About Apex Global"
+    summary="An accounting, tax and financial reporting firm based in Altrincham, working with UK and international businesses."
+    eyebrow={site.tagline}
+    crumbs={crumbs}
+    image={aboutImg}
+    imageAlt="A bright, modern office workspace"
+  />
+
+  <section class="section-sm intro" aria-label="Our story">
+    <div class="wrap">
+      <div class="prose intro-text">
+        <p class="intro-lead">
+          Apex Global was founded to give growing businesses access to the technical accounting expertise usually found in large firms, with the personal
+          service of a smaller practice.
+        </p>
+        <p>
+          We support owner-managed businesses, UK subsidiaries of overseas groups and in-house finance teams with bookkeeping, tax, payroll, compliance and
+          IFRS and FRS 102 reporting.
+        </p>
+        <p class="todo">[TO VERIFY] Add the firm's story: founding year, founders' background and key qualifications.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-labelledby="val-title">
+    <div class="wrap">
+      <h2 id="val-title" class="h2 section-head">What we stand for</h2>
+      <ul role="list" class="inc-grid inc-grid--4">
+        {
+          values.map((v) => (
+            <li class="inc-card">
+              <span class="inc-icon"><Icon name={v.icon} size={24} /></span>
+              <h3 class="inc-h">{v.title}</h3>
+              <p>{v.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <Steps />
+
+  <section class="section tinted" aria-labelledby="co-title">
+    <div class="wrap details-grid">
+      <div>
+        <h2 id="co-title" class="h3-lg">Company details</h2>
+        <dl class="details">
+          <div><dt>Legal name</dt><dd>{site.legalName}</dd></div>
+          <div><dt>Registration</dt><dd>{site.registration}, Company No. {site.companyNumber}</dd></div>
+          <div><dt>Registered office</dt><dd>{addressLines.join(', ')}</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2 class="h3-lg">Regulation and insurance</h2>
+        <dl class="details">
+          <div><dt>Anti-money-laundering supervision</dt><dd class="todo">{site.compliance.amlSupervisor}</dd></div>
+          <div><dt>Professional body</dt><dd class="todo">{site.compliance.professionalBody}</dd></div>
+          <div><dt>Professional indemnity insurance</dt><dd class="todo">{site.compliance.piInsurer}; {site.compliance.piTerritory}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <FinalCta idPrefix="about" />
+</BaseLayout>
+
+<script src="../scripts/home.ts"></script>

@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import type { ServiceRef } from '../../lib/content';
+
+// Grid of service cards, each coloured with its service area's logo shade. 3/2/1 columns.
+interface Props {
+  items: ServiceRef[];
+  images?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+const { items, images = false, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+
+<ul role="list" class="svc-grid">
+  {
+    items.map(({ service: s, group: g, href, tone }) => (
+      <li class="svc-card" data-tone={tone}>
+        {images && (
+          <Image src={s.data.image} alt="" widths={[400, 640]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" class="svc-img" loading="lazy" />
+        )}
+        <div class="svc-body">
+          <p class="svc-area">
+            <span class="svc-num">{g.data.number}</span>
+            {g.data.title}
+          </p>
+          <H class="svc-title">
+            <a href={href} class="svc-link">
+              <Icon name={s.data.icon} size={22} class="svc-icon" />
+              {s.data.title}
+            </a>
+          </H>
+          <p class="svc-summary">{s.data.summary}</p>
+          <span class="svc-more" aria-hidden="true">
+            Learn more <Icon name="arrow" size={18} />
+          </span>
+        </div>
+      </li>
+    ))
+  }
+</ul>

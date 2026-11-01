@@ -2,14 +2,25 @@
 import Icon from '../ui/Icon.astro';
 import CallbackForm from '../forms/CallbackForm.astro';
 import { site, telHref, whatsappHref } from '../../data/site';
+
+interface Props {
+  title?: string;
+  lead?: string;
+  idPrefix?: string;
+}
+const {
+  title = 'Speak to an accountant today',
+  lead = 'Free 30-minute consultation, no obligation. Tell us what you need and we will give you a fixed fee.',
+  idPrefix = 'cta',
+} = Astro.props;
 ---
 
-<section class="section final" aria-labelledby="final-title" id="callback">
+<section class="section final" aria-labelledby={`${idPrefix}-title`} id="callback">
   <div class="wrap final-grid">
     <div class="final-copy">
       <p class="eyebrow">Get in touch</p>
-      <h2 id="final-title" class="h2">Speak to an accountant today</h2>
-      <p class="lead">Free 30-minute consultation, no obligation. Tell us what you need and we will give you a fixed fee.</p>
+      <h2 id={`${idPrefix}-title`} class="h2">{title}</h2>
+      <p class="lead">{lead}</p>
       <ul role="list" class="final-ways">
         <li>
           <a href={telHref} data-track="call">
@@ -33,7 +44,7 @@ import { site, telHref, whatsappHref } from '../../data/site';
     </div>
     <div class="final-form">
       <h3 class="final-form-h">Request a callback</h3>
-      <CallbackForm idPrefix="home-cb" />
+      <CallbackForm idPrefix={`${idPrefix}-cb`} />
     </div>
   </div>
 </section>

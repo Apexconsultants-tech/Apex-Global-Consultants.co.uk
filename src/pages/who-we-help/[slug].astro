@@ -1,0 +1,77 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import ServiceCards from '../../components/page/ServiceCards.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getAudiences, getServiceIndex } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const audiences = await getAudiences();
+  return audiences.map((a) => ({ params: { slug: a.id }, props: { a } }));
+}
+const { a } = Astro.props;
+const d = a.data;
+const { Content } = await render(a);
+const index = await getServiceIndex();
+const services = d.services.map((r) => index.find((i) => i.service.id === r.id)).filter((x): x is (typeof index)[number] => Boolean(x));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Who we help', href: '/who-we-help/' },
+  { name: d.shortTitle, href: `/who-we-help/${a.id}/` },
+];
+---
+
+<BaseLayout title={d.seoTitle ?? d.title} description={d.seoDescription} image={d.image} breadcrumbs={crumbs}>
+  <PageHero title={d.title} summary={d.summary} eyebrow={d.shortTitle} crumbs={crumbs} image={d.image} imageAlt={d.imageAlt} />
+
+  <section class="section-sm intro" aria-label="Introduction">
+    <div class="wrap">
+      <div class="prose intro-text">
+        <p class="intro-lead">{d.promise}</p>
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-labelledby="ch-title">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Sound familiar?</p>
+        <h2 id="ch-title" class="h2">Challenges we solve</h2>
+      </div>
+      <ul role="list" class="check-list">
+        {d.challenges.map((c) => <li><Icon name="check" size={20} />{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ben-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">What you get</p>
+        <h2 id="ben-title" class="h2">How we make it easier</h2>
+      </header>
+      <ul role="list" class="ben-grid">
+        {
+          d.benefits.map((b, i) => (
+            <li class="ben" data-tone={['blue-deep', 'blue', 'green-deep'][i % 3]}>
+              <span class="ben-num">{String(i + 1).padStart(2, '0')}</span>
+              <p>{b}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-labelledby="svc-title">
+    <div class="wrap">
+      <h2 id="svc-title" class="h2 section-head">Services that help</h2>
+      <ServiceCards items={services} />
+    </div>
+  </section>
+
+  <FinalCta idPrefix={`aud-${a.id}`} />
+</BaseLayout>

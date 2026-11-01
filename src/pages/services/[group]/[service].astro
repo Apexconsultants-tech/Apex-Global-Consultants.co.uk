@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/page/PageHero.astro';
+import InPageNav from '../../../components/page/InPageNav.astro';
+import FaqList from '../../../components/page/FaqList.astro';
+import ServiceCards from '../../../components/page/ServiceCards.astro';
+import FinalCta from '../../../components/home/FinalCta.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import { getServiceIndex, getFaqs, groupHref } from '../../../lib/content';
+import { serviceSchema, faqSchema } from '../../../lib/schema';
+import { site } from '../../../data/site';
+
+export async function getStaticPaths() {
+  const index = await getServiceIndex();
+  return index.map((ref) => ({ params: { group: ref.group.id, service: ref.service.id }, props: { ref, index } }));
+}
+const { ref, index } = Astro.props;
+const { service: s, group: g, href, tone } = ref;
+const d = s.data;
+const { Content } = await render(s);
+const faqs = (await getFaqs({ service: s.id })).map((f) => f.data);
+const related = d.related.map((r) => index.find((i) => i.service.id === r.id)).filter((x): x is (typeof index)[number] => Boolean(x));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: g.data.title, href: groupHref(g.id) },
+  { name: d.title, href },
+];
+const nav = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'included', label: "What's included" },
+  { id: 'how', label: 'How we help' },
+  { id: 'pricing', label: 'Pricing' },
+  ...(faqs.length ? [{ id: 'faqs', label: 'FAQs' }] : []),
+];
+const schema = [
+  serviceSchema({ name: d.title, description: d.summary, url: new URL(href, site.url).href }),
+  ...(faqs.length ? [faqSchema(faqs)] : []),
+];
+---
+
+<BaseLayout title={d.seoTitle ?? `${d.title} | Apex Global`} description={d.seoDescription} image={d.image} breadcrumbs={crumbs} schema={schema} actionBar>
+  <PageHero title={d.title} summary={d.summary} eyebrow={g.data.title} crumbs={crumbs} image={d.image} imageAlt={d.imageAlt} tone={tone} />
+  <InPageNav items={nav} />
+
+  <section class="section-sm intro" id="overview" aria-label="Overview">
+    <div class="wrap">
+      <div class="prose intro-text">
+        <Content />
+      </div>
+    </div>
+    <span data-intro-end></span>
+  </section>
+
+  <section class="section tinted" id="included" aria-labelledby="inc-title" data-tone={tone}>
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">What's included</p>
+        <h2 id="inc-title" class="h2">Everything covered in our {d.title.toLowerCase()} service</h2>
+      </header>
+      <ul role="list" class="inc-grid">
+        {
+          d.included.map((it) => (
+            <li class="inc-card">
+              <span class="inc-icon"><Icon name={it.icon} size={24} /></span>
+              <h3 class="inc-h">{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">How we help</p>
+        <h2 id="how-title" class="h2">What working with us looks like</h2>
+      </header>
+      <div class="rows">
+        {
+          d.howWeHelp.map((row) => (
+            <div class="row">
+              <Image src={row.image} alt={row.imageAlt} widths={[480, 720, 960]} sizes="(min-width: 1024px) 560px, 100vw" class="row-img" loading="lazy" />
+              <div class="row-copy">
+                <h3 class="row-h">{row.title}</h3>
+                <p>{row.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="facts" aria-label="Key facts" data-tone={tone}>
+    <div class="wrap">
+      <dl class="facts-row">
+        {
+          d.keyFacts.map((f) => (
+            <div class="fact">
+              <dt class="fact-label">{f.label}</dt>
+              <dd class="fact-value">{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="pricing" aria-labelledby="price-title">
+    <div class="wrap">
+      <div class="price-card" data-tone={tone}>
+        <div>
+          <p class="eyebrow">Pricing</p>
+          <h2 id="price-title" class="price-h">{d.title}</h2>
+          <p class="price-note">{d.priceNote}</p>
+        </div>
+        <div class="price-side">
+          <p class="price-from">From <strong>{d.priceFrom}</strong> per month + VAT</p>
+          <a href="/contact/#book" class="btn btn-primary" data-track="booking">Get a fixed-fee quote <Icon name="arrow" size={18} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    faqs.length > 0 && (
+      <section class="section tinted" id="faqs" aria-labelledby="faq-title">
+        <div class="wrap narrow">
+          <h2 id="faq-title" class="h2 center">{d.title} questions</h2>
+          <FaqList items={faqs} />
+        </div>
+      </section>
+    )
+  }
+
+  {
+    related.length > 0 && (
+      <section class="section" aria-labelledby="rel-title">
+        <div class="wrap">
+          <h2 id="rel-title" class="h2 section-head">Related services</h2>
+          <ServiceCards items={related} />
+        </div>
+      </section>
+    )
+  }
+
+  <FinalCta idPrefix={`svc-${s.id}`} title={`Talk to us about ${d.title.toLowerCase()}`} />
+</BaseLayout>

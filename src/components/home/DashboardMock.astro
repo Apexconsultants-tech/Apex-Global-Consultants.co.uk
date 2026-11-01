@@ -4,10 +4,12 @@
  * vendor's interface. data-view (bank | invoices | payroll | vat) is switched by the software
  * tabs; CSS changes the bar heights and the visible list, animating transform/opacity only.
  */
+interface Props { view?: 'bank' | 'invoices' | 'payroll' | 'vat' }
+const { view = 'bank' } = Astro.props;
 const bars = [42, 58, 50, 66, 61, 74, 70, 83, 78, 88, 84, 94];
 ---
 
-<div class="dash" data-dash data-view="bank" aria-hidden="true">
+<div class="dash" data-dash data-view={view} aria-hidden="true">
   <div class="dash-top">
     <span class="dash-dots"><i></i><i></i><i></i></span>
     <span class="dash-title">Monthly overview</span>

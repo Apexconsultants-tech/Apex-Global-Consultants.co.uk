@@ -1,0 +1,29 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site, mailHref, addressLines } from '../data/site';
+---
+
+<LegalLayout
+  title="Complaints procedure"
+  path="/complaints/"
+  updated="30 October 2026"
+  description="How to raise a complaint with Apex Global Consulting Services, how we handle it, the timescales we work to and where to escalate if you are not satisfied."
+>
+  <p>We aim to provide an excellent service. If something has gone wrong, please tell us so we can put it right.</p>
+  <h2>How to complain</h2>
+  <p>
+    Email <a href={mailHref}>{site.email}</a> or write to {site.legalName}, {addressLines.join(', ')}, with "Complaint" in the subject line. Please
+    tell us what happened and what you would like us to do.
+  </p>
+  <h2>What happens next</h2>
+  <ol>
+    <li>We acknowledge your complaint within <span class="todo">[TO VERIFY] 5 working days</span>.</li>
+    <li>A director not involved in the matter investigates it.</li>
+    <li>We send a full written response within <span class="todo">[TO VERIFY] 8 weeks</span>, or explain why we need longer.</li>
+  </ol>
+  <h2>If you are not satisfied</h2>
+  <p>
+    You can refer the matter to our supervisory body: <span class="todo">{site.compliance.amlSupervisor}</span>. Details of their complaints process
+    are available on request.
+  </p>
+</LegalLayout>

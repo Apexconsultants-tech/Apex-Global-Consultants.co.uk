@@ -1,0 +1,60 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/page/Breadcrumbs.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import { getInsights, formatDate, readMinutes } from '../../lib/content';
+import { articleSchema } from '../../lib/schema';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const insights = await getInsights();
+  return insights.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const url = new URL(`/insights/${entry.id}/`, site.url).href;
+const img = await getImage({ src: d.image, width: 1200, format: 'jpg' });
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Insights', href: '/insights/' },
+  { name: d.title, href: `/insights/${entry.id}/` },
+];
+const schema = [
+  articleSchema({ title: d.title, description: d.description, url, image: new URL(img.src, site.url).href, published: d.published, reviewed: d.reviewed, author: d.author }),
+];
+---
+
+<BaseLayout title={`${d.title} | Apex Global`} description={d.description} image={d.image} type="article" breadcrumbs={crumbs} schema={schema} noindex={d.draft}>
+  <article>
+    <header class="page-hero page-hero--text">
+      <div class="wrap article-head">
+        <Breadcrumbs items={crumbs} />
+        <p class="hero-kicker page-hero-kicker">{d.topics.join(' · ')}</p>
+        <h1 class="page-hero-title">{d.title}</h1>
+        <p class="page-hero-summary">{d.description}</p>
+        <dl class="article-meta">
+          <div><dt>Tax year</dt><dd>{d.taxYear}</dd></div>
+          <div><dt>Published</dt><dd><time datetime={d.published.toISOString().slice(0, 10)}>{formatDate(d.published)}</time></dd></div>
+          <div><dt>Last reviewed</dt><dd><time datetime={d.reviewed.toISOString().slice(0, 10)}>{formatDate(d.reviewed)}</time></dd></div>
+          <div><dt>Reviewed by</dt><dd>{d.reviewer}</dd></div>
+          <div><dt>Reading time</dt><dd>{readMinutes(entry.body)} min</dd></div>
+        </dl>
+      </div>
+    </header>
+    <div class="wrap article-body">
+      <Image src={d.image} alt={d.imageAlt} widths={[640, 960, 1280]} sizes="(min-width: 960px) 900px, 100vw" loading="eager" fetchpriority="high" class="article-img" />
+      <div class="prose article-prose">
+        <Content />
+      </div>
+      <aside class="disclaimer" aria-label="Disclaimer">
+        <strong>General information, not advice.</strong> This article summarises the position for the {d.taxYear} tax year as at {formatDate(d.reviewed)}. It is
+        not tax, accounting or legal advice and should not be relied on for any decision. Rules change and individual circumstances differ; please
+        <a href="/contact/">speak to us</a> before acting. Written by {d.author}.
+      </aside>
+    </div>
+  </article>
+  <FinalCta idPrefix="article" />
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getGroups, groupHref, serviceHref, groupTones } from '../../lib/content';
+import heroImg from '../../assets/hero/scene-laptop.jpg';
+
+const groups = await getGroups();
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+];
+---
+
+<BaseLayout
+  title="Accounting, tax and reporting services | Apex Global"
+  description="Bookkeeping, payroll, management reporting, tax, IFRS and FRS 102 advisory, corporate services and compliance, grouped into four clear areas."
+  breadcrumbs={crumbs}
+>
+  <PageHero
+    title="Our services"
+    summary="Eight services in four clear areas, from monthly bookkeeping to technical IFRS reporting."
+    crumbs={crumbs}
+    image={heroImg}
+    imageAlt="Colleagues working together at laptops in a shared office"
+  />
+
+  <section class="section" aria-label="Service areas">
+    <div class="wrap">
+      <ul role="list" class="area-list">
+        {
+          groups.map((g, i) => (
+            <li class="area" data-tone={groupTones[i % 4]}>
+              <Image src={g.data.image} alt={g.data.imageAlt} widths={[480, 720, 960]} sizes="(min-width: 1024px) 520px, 100vw" class="area-img" loading={i < 1 ? 'eager' : 'lazy'} />
+              <div class="area-body">
+                <p class="svc-area"><span class="svc-num">{g.data.number}</span>Service area</p>
+                <h2 class="area-h"><a href={groupHref(g.id)}>{g.data.title}</a></h2>
+                <p class="area-text">{g.data.explainer}</p>
+                <ul role="list" class="area-links">
+                  {g.items.map((s) => (
+                    <li>
+                      <a href={serviceHref(g.id, s.id)}>
+                        <Icon name={s.data.icon} size={20} />
+                        <span>
+                          <strong>{s.data.title}</strong>
+                          <small>{s.data.menuBlurb}</small>
+                        </span>
+                        <Icon name="arrow" size={18} class="area-arrow" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a href={groupHref(g.id)} class="btn btn-outline">View all {g.data.title} <Icon name="arrow" size={18} /></a>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <FinalCta idPrefix="services" title="Not sure which service you need?" lead="Tell us about your business and we will recommend the right mix, with a fixed fee agreed upfront." />
+</BaseLayout>

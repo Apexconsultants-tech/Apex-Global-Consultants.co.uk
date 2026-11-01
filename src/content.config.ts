@@ -121,6 +121,8 @@ const software = defineCollection({
       benefits: z.array(z.string()).length(3),
       // Which dashboard view the illustrated mock-up shows for this tab.
       mock: z.enum(['bank', 'invoices', 'payroll', 'vat']),
+      forWho: z.string().max(200),
+      seoDescription: z.string().min(70).max(165),
       order: z.number().default(100),
     }),
 });
@@ -163,4 +165,21 @@ const insights = defineCollection({
     }),
 });
 
-export const collections = { 'service-groups': serviceGroups, services, audiences, faqs, team, testimonials, accreditations, software, insights };
+// Local pages (/areas/[town]/). Every town needs its own wording: never copy text between towns.
+const locations = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/locations' }),
+  schema: ({ image }) =>
+    z.object({
+      town: z.string(),
+      order: z.number(),
+      headline: z.string().max(90),
+      summary: z.string().max(200),
+      image: image(),
+      imageAlt: z.string(),
+      focus: z.array(z.object({ title: z.string(), text: z.string() })).length(3),
+      services: z.array(reference('services')).min(3).max(4),
+      seoDescription: z.string().min(70).max(165),
+    }),
+});
+
+export const collections = { locations, 'service-groups': serviceGroups, services, audiences, faqs, team, testimonials, accreditations, software, insights };

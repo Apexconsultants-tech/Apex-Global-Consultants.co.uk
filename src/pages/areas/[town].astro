@@ -1,0 +1,78 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import ServiceCards from '../../components/page/ServiceCards.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getLocations, getServiceIndex } from '../../lib/content';
+import { site, addressLines, telHref } from '../../data/site';
+
+export async function getStaticPaths() {
+  const locations = await getLocations();
+  return locations.map((l) => ({ params: { town: l.id }, props: { l, all: locations } }));
+}
+const { l, all } = Astro.props;
+const d = l.data;
+const { Content } = await render(l);
+const index = await getServiceIndex();
+const services = d.services.map((r) => index.find((i) => i.service.id === r.id)).filter((x): x is (typeof index)[number] => Boolean(x));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Areas we serve', href: '/areas/' },
+  { name: d.town, href: `/areas/${l.id}/` },
+];
+---
+
+<BaseLayout title={`Accountants in ${d.town} | Apex Global`} description={d.seoDescription} image={d.image} breadcrumbs={crumbs}>
+  <PageHero title={d.headline} summary={d.summary} eyebrow={`Accountants for ${d.town}`} crumbs={crumbs} image={d.image} imageAlt={d.imageAlt} />
+
+  <section class="section-sm intro" aria-label="Introduction">
+    <div class="wrap">
+      <div class="prose intro-text"><Content /></div>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-labelledby="focus-title">
+    <div class="wrap">
+      <h2 id="focus-title" class="h2 section-head">How we help businesses in {d.town}</h2>
+      <ul role="list" class="ben-grid">
+        {
+          d.focus.map((f, i) => (
+            <li class="ben ben--text" data-tone={['blue-deep', 'blue', 'green-deep'][i % 3]}>
+              <span class="ben-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="inc-h">{f.title}</h3>
+              <p>{f.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="svc-title">
+    <div class="wrap">
+      <h2 id="svc-title" class="h2 section-head">Popular services in {d.town}</h2>
+      <ServiceCards items={services} />
+    </div>
+  </section>
+
+  <section class="section-sm tinted" aria-label="Our office">
+    <div class="wrap office-strip">
+      <Icon name="pin" size={28} />
+      <p><strong>Our office:</strong> {addressLines.slice(0, 5).join(', ')}. {site.hours}.</p>
+      <a href={telHref} class="btn btn-primary" data-track="call">Call {site.phone.display}</a>
+    </div>
+  </section>
+
+  <section class="section-sm" aria-label="Other areas">
+    <div class="wrap other-areas">
+      <p>We also work with businesses in</p>
+      <ul role="list">
+        {all.filter((o) => o.id !== l.id).map((o) => <li><a href={`/areas/${o.id}/`}>{o.data.town}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <FinalCta idPrefix={`area-${l.id}`} title={`Speak to an accountant serving ${d.town}`} />
+</BaseLayout>

@@ -8,23 +8,9 @@ export default defineConfig({
   trailingSlash: 'always',
   output: 'static',
   build: { format: 'directory', inlineStylesheets: 'always' },
-  // Self-hosted variable fonts (latin subset) with metric-matched fallbacks: no layout shift on swap.
-  // Each page loads at most two of these. Preview 1: Source Serif 4 + Inter. Preview 2: Plus Jakarta Sans.
+  // One self-hosted variable font (Plus Jakarta Sans, latin subset, SIL OFL) with a metric-matched
+  // fallback, so swapping in causes no layout shift. Preloaded once in BaseLayout.
   fonts: [
-    {
-      provider: fontProviders.local(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      fallbacks: ['Arial', 'sans-serif'],
-      options: { variants: [{ src: ['./src/assets/fonts/inter-var.woff2'], weight: '100 900', style: 'normal', display: 'swap' }] },
-    },
-    {
-      provider: fontProviders.local(),
-      name: 'Source Serif 4',
-      cssVariable: '--font-serif4',
-      fallbacks: ['Georgia', 'serif'],
-      options: { variants: [{ src: ['./src/assets/fonts/source-serif-4-var.woff2'], weight: '200 900', style: 'normal', display: 'swap' }] },
-    },
     {
       provider: fontProviders.local(),
       name: 'Plus Jakarta Sans',

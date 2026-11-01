@@ -14,7 +14,6 @@
     "check:links": "node scripts/check-links.mjs",
     "check:placeholders": "node scripts/check-placeholders.mjs",
     "check:budget": "node scripts/check-budget.mjs",
-    "images": "node scripts/make-placeholders.mjs",
     "verify": "astro check && astro build && node scripts/check-links.mjs && node scripts/check-budget.mjs"
   },
   "dependencies": {
@@ -25,10 +24,5 @@
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
-  },
-  "devDependencies": {
-    "@fontsource-variable/inter": "^5.3.0",
-    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
-    "@fontsource-variable/source-serif-4": "^5.3.1"
   }
 }

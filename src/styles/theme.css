@@ -1,9 +1,10 @@
 /* ==========================================================================
-   CONCEPT B: "Summit". Bold and geometric: one modern sans (Plus Jakarta Sans),
+   THEME "Summit" (chosen 2026-10-31). Bold and geometric: one modern sans (Plus Jakarta Sans),
    large 20px corners, pill buttons, deep-blue feature sections, lime accents and the
    logo's roof chevron as a recurring motif.
    ========================================================================== */
 @import './base.css';
+@import './pages.css';
 
 :root {
   --radius: 20px;

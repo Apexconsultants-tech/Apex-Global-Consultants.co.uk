@@ -4,7 +4,7 @@
       "staticDistDir": "./dist",
       "url": [
         "http://localhost/",
-        "http://localhost/services/bookkeeping/",
+        "http://localhost/services/accounts-and-bookkeeping/bookkeeping/",
         "http://localhost/contact/"
       ],
       "numberOfRuns": 3,

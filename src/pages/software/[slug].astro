@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/page/Breadcrumbs.astro';
+import ServiceCards from '../../components/page/ServiceCards.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import DashboardMock from '../../components/home/DashboardMock.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getSoftware, getServiceIndex } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const software = await getSoftware();
+  return software.map((s) => ({ params: { slug: s.id }, props: { s, all: software } }));
+}
+const { s, all } = Astro.props;
+const d = s.data;
+const index = await getServiceIndex();
+const services = ['bookkeeping', 'taxation', 'specialised-support']
+  .map((id) => index.find((i) => i.service.id === id))
+  .filter((x): x is (typeof index)[number] => Boolean(x));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Software', href: '/software/' },
+  { name: d.name, href: `/software/${s.id}/` },
+];
+const steps = [
+  { icon: 'cloud', title: 'Setup', text: `We configure ${d.name} around your business: chart of accounts, VAT settings, tracking and bank feeds.` },
+  { icon: 'file', title: 'Migration', text: 'We move your opening balances and history across from your old system and check that everything reconciles.' },
+  { icon: 'users', title: 'Training', text: 'Short, practical sessions so your team knows what to do each day, each month and at year-end.' },
+  { icon: 'trend', title: 'Automation', text: 'Bank rules, receipt capture and recurring invoices set up to cut manual entry and errors.' },
+];
+const H = d.logoShape === 'round' ? 96 : 60;
+---
+
+<BaseLayout title={`${d.name} accountants and support | Apex Global`} description={d.seoDescription} breadcrumbs={crumbs}>
+  <section class="page-hero page-hero--text soft-hero">
+    <div class="wrap soft-hero-grid">
+      <div class="page-hero-copy">
+        <Breadcrumbs items={crumbs} />
+        <div class="soft-hero-logo">
+          <Image src={d.logo} alt={`${d.name} logo`} height={H} width={Math.round((H * d.logo.width) / d.logo.height)} densities={[1, 2]} loading="eager" />
+          {d.partnerLevel && <span class="soft-partner">{d.partnerLevel}</span>}
+        </div>
+        <h1 class="page-hero-title">{d.name} support from Apex Global</h1>
+        <p class="page-hero-summary">{d.help}</p>
+        <a href="/contact/#book" class="btn btn-primary btn-lg" data-track="booking">Book a free consultation</a>
+      </div>
+      <div class="soft-hero-visual"><DashboardMock view={d.mock} /></div>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-labelledby="ben-title">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Benefits</p>
+        <h2 id="ben-title" class="h2">Why businesses use us for {d.name}</h2>
+        <p class="lead">{d.forWho}</p>
+      </div>
+      <ul role="list" class="check-list">
+        {d.benefits.map((b) => <li><Icon name="check" size={20} />{b}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">How we help</p>
+        <h2 id="how-title" class="h2">Setup, migration, training and automation</h2>
+      </header>
+      <ul role="list" class="inc-grid inc-grid--4">
+        {
+          steps.map((st) => (
+            <li class="inc-card">
+              <span class="inc-icon"><Icon name={st.icon} size={24} /></span>
+              <h3 class="inc-h">{st.title}</h3>
+              <p>{st.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-labelledby="svc-title">
+    <div class="wrap">
+      <h2 id="svc-title" class="h2 section-head">Services we run in {d.name}</h2>
+      <ServiceCards items={services} />
+      <p class="other-soft">
+        Also supported:{' '}
+        {all.filter((o) => o.id !== s.id).map((o, i, arr) => <><a href={`/software/${o.id}/`}>{o.data.name}</a>{i < arr.length - 1 ? ', ' : ''}</>)}
+      </p>
+    </div>
+  </section>
+
+  <p class="wrap trademark">{d.name} is a trademark of its owner. Apex Global is an independent firm.</p>
+  <FinalCta idPrefix={`sw-${s.id}`} title={`Get help with ${d.name}`} />
+</BaseLayout>
