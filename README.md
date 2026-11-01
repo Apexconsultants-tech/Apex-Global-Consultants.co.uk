@@ -115,7 +115,9 @@ homepage sections were removed at the client's request (2026-10-31); re-add them
 On every push to `main`, `.github/workflows/deploy.yml` runs: `npm ci` → `astro check` → build →
 link check → performance budget → Lighthouse CI (/, a service page, /contact/) → saves `dist/` as an
 artifact → **placeholder check** → FTPS upload of changed files → Cloudflare cache purge. Any
-failure stops the deploy. Work in progress lives on the `redesign` branch, which never deploys.
+failure stops the deploy.
+
+Repository: https://github.com/Apexconsultants-tech/Apex-Global-Consultants.co.uk (the only one; do not push elsewhere).
 
 One-off setup in GitHub (Settings):
 - **Secrets:** `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER_DIR` (the document root, e.g. `/public_html/`), `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN` (permission: Zone → Cache Purge).

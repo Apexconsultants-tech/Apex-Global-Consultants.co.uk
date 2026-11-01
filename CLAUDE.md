@@ -56,4 +56,6 @@ UTR, NI numbers, bank details or documents through forms.
 
 ## Workflow
 Run `npm run verify` before saying a task is done. Commit after each working change with a clear
-message. Work happens on the `redesign` branch until the client approves go-live; a push to `main` deploys.
+message. The ONLY repository is https://github.com/Apexconsultants-tech/Apex-Global-Consultants.co.uk
+(remote `origin`). Never push to any other repository (the old Apex-Global-Consultants.co.pk repo is retired).
+A push to `main` runs the deploy pipeline to apexglobalconsultants.co.uk.
