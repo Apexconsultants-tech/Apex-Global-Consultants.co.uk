@@ -25,8 +25,8 @@ export const site = {
   email: 'info@apexglobalconsultants.co.uk',
   whatsapp: {
     // Digits only, international format without + (e.g. 447700900000).
-    number: 'TO-VERIFY',
-    display: 'WhatsApp [TO VERIFY]',
+    number: '447777622790',
+    display: '+44 7777 622790',
   },
   clientPortalUrl: '/contact/#client-portal-TO-VERIFY',
   social: [
