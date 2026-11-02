@@ -52,6 +52,8 @@ AddDefaultCharset utf-8
   RewriteRule ^careers\.php$                      /about/                              [R=301,L,QSD]
   RewriteRule ^privacy-policy\.php$               /privacy/                            [R=301,L,QSD]
   RewriteRule ^terms-condition\.php$              /terms/                              [R=301,L,QSD]
+  # The old site's sitemap address (likely registered in Search Console).
+  RewriteRule ^sitemap\.xml$                      /sitemap-index.xml                   [R=301,L,QSD]
 
   # /contact.php is the live form handler: only GET/HEAD visits are redirected.
   RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$

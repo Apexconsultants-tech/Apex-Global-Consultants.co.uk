@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /thank-you/
-Disallow: /_lib/
-
-Sitemap: https://apexglobalconsultants.co.uk/sitemap-index.xml
