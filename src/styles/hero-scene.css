@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Homepage hero scene (src/components/home/HeroScene.astro).
+   Base styles are the FINISHED state; keyframes animate towards it. Reduced motion therefore
+   shows a complete still picture. One 10 s cycle keeps every card in step.
+   ========================================================================== */
+.hs {
+  --cyc: 10s;
+  --card-shadow: 0 1px 2px rgb(5 30 60 / .12), 0 28px 56px -24px rgb(3 20 45 / .55);
+  position: absolute; inset: 0; overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 85% 0%, rgb(19 181 234 / .28), transparent 60%),
+    radial-gradient(90% 70% at 0% 100%, rgb(57 179 4 / .22), transparent 60%),
+    linear-gradient(155deg, var(--color-primary-deep), color-mix(in oklab, var(--color-primary-deep) 62%, var(--color-ink)));
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* ---- background: dot grid, summit chevrons, arcs from the UK ---- */
+.hs-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hs-dotgrid { fill: rgb(255 255 255 / .08); }
+#hs-dots circle { fill: rgb(255 255 255 / .1); }
+.hs-summit { fill: none; stroke: var(--color-primary); stroke-opacity: .35; stroke-width: 2; stroke-linejoin: round; }
+.hs-summit-2 { stroke: var(--color-accent); stroke-opacity: .18; }
+.hs-arcs path { fill: none; stroke: rgb(255 255 255 / .22); stroke-width: 1.5; stroke-dasharray: .6 1.6; stroke-linecap: round; }
+.hs-comets path { fill: none; stroke: var(--color-accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 7 200; stroke-dashoffset: -93; animation: hs-comet 5s linear infinite; }
+.hs-comets path:nth-child(2) { animation-delay: -1.7s; stroke: var(--color-primary); }
+.hs-comets path:nth-child(3) { animation-delay: -3.4s; }
+.hs-nodes circle { fill: var(--color-white); fill-opacity: .7; }
+.hs-nodes .hs-home { fill: var(--color-accent); fill-opacity: 1; }
+.hs-nodes .hs-ping { fill: none; stroke: var(--color-accent); stroke-width: 2; transform-box: fill-box; transform-origin: center; opacity: 0; animation: hs-ping 2.4s var(--ease-out) infinite; }
+
+/* ---- stage and shared card pieces ---- */
+.hs-stage { position: absolute; inset: 0; margin: auto; width: min(100%, 46rem); height: min(100%, 42rem); }
+.hs-card, .hs-chip { position: absolute; background: var(--color-white); box-shadow: var(--card-shadow); }
+.hs-card { border-radius: 18px; padding: .875rem 1rem 1rem; font-size: .8125rem; animation: hs-float 7s ease-in-out infinite alternate; }
+.hs-head { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.hs-label { font-weight: 700; color: var(--color-muted); font-size: .75rem; letter-spacing: .02em; }
+.hs-card ul { list-style: none; margin: .625rem 0 0; padding: 0; display: grid; gap: .375rem; }
+.hs-card small { display: block; font-size: .6875rem; color: var(--color-muted); font-weight: 500; }
+
+/* chips */
+.hs-chip { display: flex; align-items: center; gap: .625rem; padding: .5rem .875rem .5rem .625rem; border-radius: 999px; font-size: .75rem; line-height: 1.25; z-index: 3; animation: hs-float 6s ease-in-out infinite alternate-reverse; }
+.hs-chip b { display: block; font-weight: 750; color: var(--color-ink); }
+.hs-dot { position: relative; flex: none; width: .75rem; height: .75rem; margin-left: .25rem; border-radius: 50%; background: var(--color-secondary); }
+.hs-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--color-secondary); animation: hs-pulse 2s ease-out infinite; }
+.hs-pay-ico { display: grid; place-items: center; flex: none; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-tint-10); color: var(--color-primary-deep); }
+.hs-pay-ico svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+/* ---- cash chart ---- */
+.hs-chart { z-index: 1; }
+.hs-live { display: inline-flex; align-items: center; gap: .375rem; padding: .1875rem .5rem; border-radius: 999px; background: color-mix(in oklab, var(--color-secondary) 14%, white); color: var(--color-secondary-deep); font-size: .6875rem; font-weight: 750; }
+.hs-live i { width: .4375rem; height: .4375rem; border-radius: 50%; background: var(--color-secondary); animation: hs-blink 1.6s ease-in-out infinite; }
+.hs-value { display: flex; align-items: baseline; gap: .5rem; margin-top: .25rem; }
+.hs-value b { font-size: 1.625rem; font-weight: 800; letter-spacing: -.03em; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.hs-value em { font-style: normal; font-size: .75rem; font-weight: 750; color: var(--color-secondary-deep); background: color-mix(in oklab, var(--color-secondary) 14%, white); padding: .125rem .4375rem; border-radius: 999px; transform-origin: left center; animation: hs-pop var(--cyc) var(--ease-out) infinite; }
+.hs-graph { display: block; width: 100%; height: auto; margin-top: .5rem; overflow: visible; }
+.hs-gridlines line { stroke: var(--color-tint-20); stroke-width: 1; stroke-dasharray: 3 4; }
+.hs-line { fill: none; stroke: var(--color-primary); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 0; animation: hs-draw var(--cyc) var(--ease-out) infinite; }
+.hs-area { animation: hs-area var(--cyc) ease-out infinite; }
+.hs-end { fill: var(--color-white); stroke: var(--color-primary-deep); stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: hs-dot var(--cyc) var(--ease-out) infinite; }
+.hs-end-ring { fill: var(--color-primary); opacity: 0; transform-box: fill-box; transform-origin: center; animation: hs-ping 2s ease-out infinite; }
+.hs-months { display: flex; justify-content: space-between; margin-top: .375rem; font-size: .625rem; font-weight: 600; color: var(--color-muted); }
+
+/* ---- bank reconciliation ---- */
+.hs-recon { z-index: 2; animation-duration: 8s; animation-delay: -2s; }
+.hs-count { font-size: .6875rem; font-weight: 750; color: var(--color-primary-deep); }
+.hs-recon li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: .5rem; padding: .3125rem .375rem; margin-inline: -.375rem; border-radius: 10px; animation: hs-row var(--cyc) ease-out infinite backwards; animation-delay: calc(var(--i) * .8s); }
+.hs-tx-ico { display: grid; place-items: center; width: 1.625rem; height: 1.625rem; border-radius: 50%; background: var(--color-tint-10); color: var(--color-primary-deep); }
+.hs-tx-ico.out { background: var(--color-offwhite); color: var(--color-muted); }
+.hs-tx-ico svg { width: .875rem; height: .875rem; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.hs-tx { min-width: 0; line-height: 1.2; }
+.hs-tx b { display: block; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hs-amt { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hs-state { display: grid; justify-items: end; }
+.hs-state > span { grid-area: 1 / 1; padding: .125rem .4375rem; border-radius: 999px; font-size: .6875rem; font-weight: 750; white-space: nowrap; }
+.hs-review { background: var(--color-tint-10); color: var(--color-primary-deep); opacity: 0; animation: hs-review var(--cyc) ease-out infinite backwards; animation-delay: calc(var(--i) * .8s); }
+.hs-ok { background: color-mix(in oklab, var(--color-secondary) 16%, white); color: var(--color-secondary-deep); animation: hs-ok var(--cyc) var(--ease-out) infinite backwards; animation-delay: calc(var(--i) * .8s); }
+.hs-bar { height: .375rem; margin-top: .75rem; border-radius: 999px; background: var(--color-tint-10); overflow: hidden; }
+.hs-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); transform-origin: left; animation: hs-fill var(--cyc) var(--ease-out) infinite; }
+
+/* ---- deadlines ---- */
+.hs-dead { z-index: 2; animation-duration: 9s; animation-delay: -4s; }
+.hs-ring { width: 1.75rem; height: 1.75rem; transform: rotate(-90deg); }
+.hs-ring circle { fill: none; stroke: var(--color-tint-20); stroke-width: 4; }
+.hs-ring .hs-ring-fill { stroke: var(--color-secondary); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 0; animation: hs-ring var(--cyc) var(--ease-out) infinite; }
+.hs-dead li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .5rem; }
+.hs-tick { width: 1.25rem; height: 1.25rem; }
+.hs-tick circle { fill: color-mix(in oklab, var(--color-secondary) 16%, white); animation: hs-tickbg var(--cyc) ease-out infinite backwards; animation-delay: calc(var(--i) * .8s); }
+.hs-tick path { fill: none; stroke: var(--color-secondary-deep); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 0; animation: hs-tick var(--cyc) var(--ease-out) infinite backwards; animation-delay: calc(var(--i) * .8s); }
+.hs-dname { font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hs-dname small { display: inline; margin-left: .125rem; }
+.hs-dead em { font-style: normal; font-size: .6875rem; font-weight: 750; color: var(--color-secondary-deep); }
+
+.hs-note { position: absolute; left: 1.25rem; bottom: 1rem; margin: 0; font-size: .6875rem; font-weight: 600; letter-spacing: .02em; color: rgb(255 255 255 / .78); }
+
+/* ---- layout: phones (portrait panel, two cards stacked) ---- */
+.hero-visual:has(.hs) { aspect-ratio: 3 / 4; max-height: none; }
+.hs-mtd { display: none; }
+.hs-chart { left: 5%; top: 7%; width: 78%; }
+.hs-recon { right: 4%; bottom: 13.5%; width: 74%; }
+.hs-recon li:nth-child(3) { display: none; }
+.hs-dead, .hs-pay { display: none; }
+
+@media (max-width: 399px) {
+  .hs-card { font-size: .75rem; padding: .75rem .875rem .875rem; }
+  .hs-value b { font-size: 1.375rem; }
+  .hs-chart { width: 82%; }
+  .hs-recon { width: 84%; }
+  .hs-tx small { display: none; }
+}
+
+/* ---- tablets: wide panel, four cards ---- */
+@media (min-width: 640px) {
+  .hero-visual:has(.hs) { aspect-ratio: 16 / 11; }
+  .hs-mtd { display: flex; left: 5%; top: 5%; }
+  .hs-chart { left: 5%; top: 18%; width: 50%; }
+  .hs-recon { right: 4%; top: 6%; bottom: auto; width: 42%; }
+  .hs-recon li:nth-child(3) { display: grid; }
+  .hs-dead { display: block; right: 5%; bottom: 13%; width: 38%; }
+  .hs-pay { display: flex; left: 7%; bottom: 12%; }
+}
+
+/* ---- desktop: tall panel beside the copy ---- */
+@media (min-width: 1024px) {
+  .hero-visual:has(.hs) { aspect-ratio: auto; }
+  .hs-mtd { left: 8%; top: 12%; }
+  .hs-chart { left: 5%; top: 37%; width: 56%; }
+  .hs-recon { right: 5%; top: 5%; width: 47%; }
+  .hs-dead { right: 6%; bottom: 3.5%; width: 39%; }
+  .hs-pay { left: 8%; bottom: 10%; }
+}
+/* small laptops: the panel is narrow, so the cards take more of its width */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .hs-chart { width: 64%; }
+  .hs-recon { width: 64%; }
+  .hs-dead { width: 56%; }
+  .hs-mtd { display: none; }
+}
+
+/* ---- pause (button, off-screen, hidden tab) ---- */
+.hero[data-paused] .hs, .hero[data-paused] .hs * { animation-play-state: paused !important; }
+
+/* ---- keyframes (end state = base style) ---- */
+@keyframes hs-float { from { transform: translateY(-5px); } to { transform: translateY(5px); } }
+@keyframes hs-comet { from { stroke-dashoffset: 7; } to { stroke-dashoffset: -100; } }
+@keyframes hs-ping { 0% { transform: scale(1); opacity: .7; } 80%, 100% { transform: scale(3.2); opacity: 0; } }
+@keyframes hs-pulse { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes hs-blink { 50% { opacity: .35; } }
+@keyframes hs-draw { 0% { stroke-dashoffset: 100; opacity: 1; } 30%, 88% { stroke-dashoffset: 0; opacity: 1; } 96%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes hs-area { 0%, 18% { opacity: 0; } 34%, 88% { opacity: 1; } 96%, 100% { opacity: 0; } }
+@keyframes hs-dot { 0%, 26% { transform: scale(0); } 32% { transform: scale(1.3); } 36%, 88% { transform: scale(1); } 96%, 100% { transform: scale(0); } }
+@keyframes hs-pop { 0%, 28% { transform: scale(.6); opacity: 0; } 34% { transform: scale(1.1); opacity: 1; } 38%, 90% { transform: scale(1); opacity: 1; } 97%, 100% { transform: scale(.6); opacity: 0; } }
+@keyframes hs-review { 0%, 36% { opacity: 1; } 40%, 92% { opacity: 0; } 97%, 100% { opacity: 1; } }
+@keyframes hs-ok { 0%, 37% { opacity: 0; transform: scale(.6); } 42% { opacity: 1; transform: scale(1.1); } 46%, 92% { opacity: 1; transform: scale(1); } 97%, 100% { opacity: 0; transform: scale(.6); } }
+@keyframes hs-row { 0%, 37% { background: transparent; } 41% { background: color-mix(in oklab, var(--color-secondary) 12%, white); } 52%, 100% { background: transparent; } }
+@keyframes hs-fill { 0%, 36% { transform: scaleX(.05); } 42% { transform: scaleX(.36); } 50% { transform: scaleX(.68); } 58%, 92% { transform: scaleX(1); } 98%, 100% { transform: scaleX(.05); } }
+@keyframes hs-tick { 0%, 52% { stroke-dashoffset: 100; } 60%, 94% { stroke-dashoffset: 0; } 99%, 100% { stroke-dashoffset: 100; } }
+@keyframes hs-tickbg { 0%, 52% { fill: var(--color-tint-10); } 58%, 94% { fill: color-mix(in oklab, var(--color-secondary) 16%, white); } 99%, 100% { fill: var(--color-tint-10); } }
+@keyframes hs-ring { 0%, 50% { stroke-dashoffset: 100; } 78%, 94% { stroke-dashoffset: 0; } 99%, 100% { stroke-dashoffset: 100; } }

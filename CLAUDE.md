@@ -28,10 +28,10 @@ Placeholders are marked `[TO VERIFY]`, `TO-VERIFY` or `£X`; `npm run check:plac
 `draft: true` entries show in `npm run dev` only.
 
 ## Images and media
-Always `src/assets` + Astro `Image`/`Picture` (the homepage hero `<picture>` from `getImage()` is the one
-exception, for art direction). Width and height always set; LCP image eager + `fetchpriority="high"`,
-everything else lazy. Licensed images only; record every file in `docs/image-licenses.md`.
-Only one autoplay video (the muted hero loop). Maps load on click.
+Always `src/assets` + Astro `Image`/`Picture`. Width and height always set; LCP image eager +
+`fetchpriority="high"`, everything else lazy. Licensed images only; record every file in
+`docs/image-licenses.md`. The homepage hero is an animated HTML/SVG/CSS scene (`HeroScene.astro`), not a
+photo or video; no autoplay video anywhere. Maps load on click.
 
 ## Performance budget (enforced by `npm run check:budget`)
 JS < 30 KB, CSS < 50 KB, hero image < 150 KB, first load < 1 MB per page (gzip). Lighthouse mobile 95+,
