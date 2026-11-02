@@ -27,6 +27,7 @@ filenames given in the brief.
 | `/careers.php` | `/about/` | live | **Please confirm**: no careers page on the new site yet |
 | `/privacy-policy.php` | `/privacy/` | live | **Please confirm** |
 | `/terms-condition.php` | `/terms/` | live | **Please confirm** |
+| `/sitemap.xml` | `/sitemap-index.xml` | live | Confirmed. Old sitemap address, kept for Search Console |
 | `/blogs-detail.php?id=2, 4, 5, 6, 11, 12` | `/insights/` | live sitemap | **Please confirm**. If any post is moved to the new site, add a specific rule above the generic one |
 
 Host-level: `http://` → `https://` and `www.` → bare domain.
