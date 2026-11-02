@@ -246,7 +246,7 @@
 .mmenu-contact { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s1); }
 .mmenu-contact a { display: flex; flex-direction: column; align-items: center; gap: .25rem; min-height: 56px; justify-content: center; font-size: .875rem; font-weight: 600; text-decoration: none; color: var(--color-primary-deep); background: var(--color-white); border-radius: var(--radius); border: 1px solid var(--color-tint-20); }
 
-/* ---- hero: copy left, large picture right (stacked on phones) ---- */
+/* ---- hero: copy left, live scene right (stacked on phones; scene in hero-scene.css) ---- */
 .hero { position: relative; isolation: isolate; overflow: hidden; }
 .hero-grid { position: relative; z-index: 1; }
 .hero-copy { padding-block: var(--s5) var(--s4); max-width: 38rem; }
@@ -270,9 +270,6 @@
 .hero-soft-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--color-primary); }
 .hero-soft-item img { width: auto; }
 .hero-visual { position: relative; aspect-ratio: 5 / 4; max-height: 60svh; width: 100%; overflow: hidden; background: var(--color-tint-10); }
-.hero-visual picture, .hero-poster, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% center; }
-.hero-video { opacity: 0; transition: opacity 1.2s var(--ease-out); }
-.hero[data-video='on'] .hero-video { opacity: 1; }
 .hero-toggle { position: absolute; right: var(--s2); bottom: var(--s2); z-index: 2; background: rgb(255 255 255 / .92); border-color: transparent; }
 @media (min-width: 640px) and (max-width: 1023px) { .hero-visual { aspect-ratio: 16 / 10; } }
 @media (min-width: 1024px) {
@@ -555,7 +552,6 @@
 /* ---- reduced motion: everything still, static layouts ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
-  .hero-video { display: none; }
   .steps-fill { transform: none !important; }
 }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .25s; }

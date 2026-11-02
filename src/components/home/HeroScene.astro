@@ -1,0 +1,143 @@
+---
+/**
+ * Homepage hero visual: a live "finance desk" drawn in HTML, SVG and CSS (no image, no video).
+ * Cash-flow line draws itself, bank lines turn "Matched", deadlines tick off, and dots travel
+ * along arcs from the UK ("Beyond borders"). All figures are illustrative.
+ *
+ * Motion is CSS only. The base styles are the finished state, so prefers-reduced-motion (which
+ * ends every animation at once) shows a complete, still picture. home.ts shows the pause button
+ * and pauses the scene off-screen or in a hidden tab via [data-paused] on the hero.
+ */
+const bank = [
+  { name: 'Card payment', when: 'Today', amount: '£1,240.00', icon: 'in' },
+  { name: 'Supplier invoice', when: 'Today', amount: '−£386.50', icon: 'out' },
+  { name: 'Client receipt', when: 'Yesterday', amount: '£2,400.00', icon: 'in' },
+];
+const deadlines = [
+  { name: 'VAT return', meta: 'Q3', state: 'Filed' },
+  { name: 'Corporation tax', meta: 'CT600', state: 'Filed' },
+  { name: 'Payroll RTI', meta: 'October', state: 'Sent' },
+];
+const months = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+// Cash-flow line in a 300 x 96 box; ends high on the right.
+const line = 'M0 80 C 22 76, 34 62, 52 66 S 86 78, 104 62 S 140 40, 158 47 S 196 58, 214 38 S 252 22, 270 26 S 292 14, 300 10';
+---
+
+<div class="hs" aria-hidden="true">
+  <svg class="hs-bg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" focusable="false">
+    <defs>
+      <pattern id="hs-dots" width="22" height="22" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1.2" />
+      </pattern>
+    </defs>
+    <rect class="hs-dotgrid" width="600" height="600" fill="url(#hs-dots)" />
+    <path class="hs-summit" d="M-20 600 L230 350 L330 450 L420 360 L640 580" />
+    <path class="hs-summit hs-summit-2" d="M-20 470 L200 250 L300 350 L380 270 L640 520" />
+    <g class="hs-arcs">
+      <path pathLength="100" d="M170 470 Q 260 180 520 110" />
+      <path pathLength="100" d="M170 470 Q 90 260 70 80" />
+      <path pathLength="100" d="M170 470 Q 400 380 570 330" />
+    </g>
+    <g class="hs-comets">
+      <path pathLength="100" d="M170 470 Q 260 180 520 110" />
+      <path pathLength="100" d="M170 470 Q 90 260 70 80" />
+      <path pathLength="100" d="M170 470 Q 400 380 570 330" />
+    </g>
+    <g class="hs-nodes">
+      <circle class="hs-home" cx="170" cy="470" r="6" />
+      <circle class="hs-ping" cx="170" cy="470" r="6" />
+      <circle cx="520" cy="110" r="4" />
+      <circle cx="70" cy="80" r="4" />
+      <circle cx="570" cy="330" r="4" />
+    </g>
+  </svg>
+
+  <div class="hs-stage">
+    <div class="hs-chip hs-mtd">
+      <span class="hs-dot"></span>
+      <span><b>HMRC connected</b><small>Making Tax Digital</small></span>
+    </div>
+
+    <div class="hs-card hs-chart">
+      <div class="hs-head">
+        <span class="hs-label">Cash position</span>
+        <span class="hs-live"><i></i>Live</span>
+      </div>
+      <div class="hs-value"><b>£48,210</b><em>+6.2%</em></div>
+      <svg class="hs-graph" viewBox="0 0 300 96" focusable="false">
+        <defs>
+          <linearGradient id="hs-area" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#13b5ea" stop-opacity=".3" />
+            <stop offset="1" stop-color="#13b5ea" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <g class="hs-gridlines">
+          <line x1="0" y1="28" x2="300" y2="28" /><line x1="0" y1="56" x2="300" y2="56" /><line x1="0" y1="84" x2="300" y2="84" />
+        </g>
+        <path class="hs-area" d={`${line} L300 96 L0 96 Z`} fill="url(#hs-area)" />
+        <path class="hs-line" pathLength="100" d={line} />
+        <circle class="hs-end-ring" cx="300" cy="10" r="5" />
+        <circle class="hs-end" cx="300" cy="10" r="5" />
+      </svg>
+      <div class="hs-months">{months.map((m) => <span>{m}</span>)}</div>
+    </div>
+
+    <div class="hs-card hs-recon">
+      <div class="hs-head">
+        <span class="hs-label">Bank reconciliation</span>
+        <span class="hs-count">3 of 3</span>
+      </div>
+      <ul>
+        {
+          bank.map((b, i) => (
+            <li style={`--i:${i}`}>
+              <span class:list={['hs-tx-ico', b.icon]}>
+                <svg viewBox="0 0 24 24" focusable="false"><path d={b.icon === 'in' ? 'M7 17 17 7M9 7h8v8' : 'M17 7 7 17M15 17H7V9'} /></svg>
+              </span>
+              <span class="hs-tx"><b>{b.name}</b><small>{b.when}</small></span>
+              <span class="hs-amt">{b.amount}</span>
+              <span class="hs-state">
+                <span class="hs-review">Review</span>
+                <span class="hs-ok">Matched</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="hs-bar"><i></i></div>
+    </div>
+
+    <div class="hs-card hs-dead">
+      <div class="hs-head">
+        <span class="hs-label">Deadlines</span>
+        <svg class="hs-ring" viewBox="0 0 36 36" focusable="false">
+          <circle cx="18" cy="18" r="15" />
+          <circle class="hs-ring-fill" cx="18" cy="18" r="15" pathLength="100" />
+        </svg>
+      </div>
+      <ul>
+        {
+          deadlines.map((d, i) => (
+            <li style={`--i:${i}`}>
+              <svg class="hs-tick" viewBox="0 0 24 24" focusable="false">
+                <circle cx="12" cy="12" r="11" />
+                <path pathLength="100" d="m7 12.5 3.2 3.2L17 9" />
+              </svg>
+              <span class="hs-dname">{d.name} <small>{d.meta}</small></span>
+              <em>{d.state}</em>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="hs-chip hs-pay">
+      <span class="hs-pay-ico">
+        <svg viewBox="0 0 24 24" focusable="false"><circle cx="9" cy="8" r="3.2" /><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 7.5a3 3 0 0 1 0 6M18 19a5 5 0 0 0-2.5-4.3" /></svg>
+      </span>
+      <span><b>Payroll approved</b><small>12 staff · paid on time</small></span>
+    </div>
+
+    <p class="hs-note">Illustration · example figures</p>
+  </div>
+</div>

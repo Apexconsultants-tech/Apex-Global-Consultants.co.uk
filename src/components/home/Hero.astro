@@ -1,33 +1,16 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
+import HeroScene from './HeroScene.astro';
 import { site } from '../../data/site';
 import { getSoftware } from '../../lib/content';
-import posterDesk from '../../assets/hero-poster.jpg';
-import posterMob from '../../assets/hero-poster-mobile.jpg';
 
 /**
- * Split hero: copy on the left, a large picture on the right (the silent video loop plays inside
- * it). The software the firm works with sits in a small logo row under the buttons.
- * The poster is the LCP image: eager, high priority, art-directed (4:5 on phones, 16:9 above).
- * This <picture> is built with getImage() because <Picture> has no art direction.
- * hero.ts adds the video source after load, unless reduced motion, Data Saver or a slow
- * connection is detected, and pauses it off-screen or in a hidden tab.
+ * Split hero: copy on the left, a live "finance desk" scene on the right (HeroScene: HTML, SVG and
+ * CSS, no image or video, so the headline is the LCP element). The software the firm works with
+ * sits in a small logo row under the buttons. home.ts shows the pause button and pauses the scene
+ * off-screen or in a hidden tab.
  */
-const fmt = async (src: ImageMetadata, widths: number[], format: 'avif' | 'webp', quality: number) => {
-  const imgs = await Promise.all(widths.map((w) => getImage({ src, width: w, format, quality })));
-  return imgs.map((im, i) => `${im.src} ${widths[i]}w`).join(', ');
-};
-const deskW = [800, 1200, 1600];
-const mobW = [480, 720];
-const [dAvif, dWebp, mAvif, mWebp] = await Promise.all([
-  fmt(posterDesk, deskW, 'avif', 55),
-  fmt(posterDesk, deskW, 'webp', 70),
-  fmt(posterMob, mobW, 'avif', 55),
-  fmt(posterMob, mobW, 'webp', 70),
-]);
-const fallback = await getImage({ src: posterDesk, width: 1200, format: 'jpeg', quality: 72 });
-const v = site.hero.video;
 const h = site.hero;
 const software = await getSoftware();
 const logoH = (shape: string) => (shape === 'round' ? 30 : 20);
@@ -81,38 +64,10 @@ const logoH = (shape: string) => (shape === 'round' ? 30 : 20);
   </div>
 
   <div class="hero-visual">
-    <picture>
-      <source media="(max-width: 767px)" type="image/avif" srcset={mAvif} sizes="100vw" />
-      <source media="(max-width: 767px)" type="image/webp" srcset={mWebp} sizes="100vw" />
-      <source type="image/avif" srcset={dAvif} sizes="(min-width: 1024px) 55vw, 100vw" />
-      <source type="image/webp" srcset={dWebp} sizes="(min-width: 1024px) 55vw, 100vw" />
-      <img
-        src={fallback.src}
-        alt="Colleagues planning work together around a meeting table"
-        width={posterDesk.width}
-        height={posterDesk.height}
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        class="hero-poster"
-      />
-    </picture>
-    <video
-      class="hero-video"
-      muted
-      loop
-      playsinline
-      preload="none"
-      aria-hidden="true"
-      tabindex="-1"
-      data-hero-video
-      data-desktop-webm={v.desktop.webm}
-      data-desktop-mp4={v.desktop.mp4}
-      data-mobile-webm={v.mobile.webm}
-      data-mobile-mp4={v.mobile.mp4}></video>
+    <HeroScene />
     <button type="button" class="hero-toggle motion-toggle" aria-pressed="false" data-hero-toggle hidden>
       <Icon name="pause" size={18} class="i-pause" /><Icon name="play" size={18} class="i-play" />
-      <span class="sr-only">Pause background video</span>
+      <span class="sr-only">Pause animation</span>
     </button>
   </div>
 </section>

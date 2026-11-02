@@ -47,8 +47,6 @@ with visible third-party logos; anything without a licence that allows commercia
 | `src/assets/hero/scene-team.jpg`, `scene-laptop.jpg` | (see rows above) | | | | Alternative hero scenes, not used yet |
 | `src/assets/software/*.png` | Third-party trademarks, supplied by client | WhatsApp images from client | Xero, Intuit (QuickBooks), Sage, FreeAgent | 2026-10-30 | Background removed; use per each vendor's brand guidelines |
 | `src/assets/badges/sample-badge-*.png` | Sample (draft only, never published) | Generated | n/a | n/a | Replace with client-supplied logos |
-| `public/media/hero-desktop.{webm,mp4}`, `hero-mobile.{webm,mp4}` | PLACEHOLDER: made from `src/assets/hero/scene-team.jpg` (Unsplash Licence, see that row) | Generated with ffmpeg | n/a | 2026-10-31 | 12 s slow push-in loop, no audio. Replace with licensed office/Manchester timelapse |
-| `src/assets/hero-poster.jpg`, `hero-poster-mobile.jpg` | Unsplash Licence (crop of `scene-team.jpg`) | https://images.unsplash.com/photo-1552664730-d307ca884978 | [TO VERIFY] photographer name | 2026-10-31 | First frame of the loop, 16:9 and 4:5 crops |
 
 **Rejected:** the previously supplied `hero.mp4` (Tower Bridge sunset) is an iStock by Getty Images
 preview with a burned-in watermark. It is not licensed and must not be published. A licence must be

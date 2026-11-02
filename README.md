@@ -82,27 +82,17 @@ Replace the file in `src/assets/...` with a licensed photo **using the same file
 its row in `docs/image-licenses.md`. Astro creates the AVIF/WebP sizes automatically. Never use
 photos of people presented as Apex staff or clients unless they are.
 
-### Hero video
+### Hero scene
 
-The homepage hero shows a still (`src/assets/hero-poster.jpg`, `hero-poster-mobile.jpg`) and fades in a
-silent loop from `public/media/`. The current files are a **placeholder** made from a licensed photo.
-To use real footage (licensed, 1920px or wider), with ffmpeg:
+The homepage hero has no photo or video. Beside the headline is a live "finance desk" built in
+HTML, SVG and CSS (`src/components/home/HeroScene.astro`, styles in `src/styles/hero-scene.css`):
+a cash-flow line that draws itself, bank lines turning "Matched", deadlines ticking off and dots
+travelling from the UK along arcs. The figures are illustrative and labelled as such.
 
-```bash
-# 1. Cut the best 13 s and crossfade the last second into the first so the loop is invisible
-ffmpeg -ss 2 -t 13 -i source.mp4 -an -filter_complex "[0]split[a][b];[a]trim=0:12,setpts=PTS-STARTPTS[main];[b]trim=12:13,setpts=PTS-STARTPTS[end];[main][end]xfade=transition=fade:duration=1:offset=11,format=yuv420p" loop.mp4
-# 2. Desktop 1920 wide (< 2.5 MB) and mobile 720x900 4:5 crop (< 1 MB)
-ffmpeg -i loop.mp4 -an -vf scale=1920:-2 -c:v libvpx-vp9 -b:v 0 -crf 38 -row-mt 1 public/media/hero-desktop.webm
-ffmpeg -i loop.mp4 -an -vf scale=1920:-2 -c:v libx264 -crf 26 -preset slow -movflags +faststart public/media/hero-desktop.mp4
-ffmpeg -i loop.mp4 -an -vf "crop=ih*4/5:ih,scale=720:900" -c:v libvpx-vp9 -b:v 0 -crf 40 public/media/hero-mobile.webm
-ffmpeg -i loop.mp4 -an -vf "crop=ih*4/5:ih,scale=720:900" -c:v libx264 -crf 28 -preset slow -movflags +faststart public/media/hero-mobile.mp4
-# 3. First frame as the stills (the poster must be under 150 KB once Astro compresses it)
-ffmpeg -i loop.mp4 -frames:v 1 -vf scale=1600:-2 src/assets/hero-poster.jpg
-ffmpeg -i loop.mp4 -frames:v 1 -vf "crop=ih*4/5:ih,scale=720:900" src/assets/hero-poster-mobile.jpg
-```
-
-The video never loads under reduced motion, Data Saver or slow connections, pauses off-screen and in
-hidden tabs, and has a pause button. Record its licence in `docs/image-licenses.md`.
+- Card text and figures are set in `HeroScene.astro`; positions per screen size are at the end of
+  `hero-scene.css` (phones show two cards, tablets and desktops four, plus chips).
+- Base styles are the finished state, so reduced motion shows a complete still picture.
+- `src/scripts/home.ts` shows the pause button and pauses the scene off-screen or in a hidden tab.
 
 ### Badges and testimonials
 

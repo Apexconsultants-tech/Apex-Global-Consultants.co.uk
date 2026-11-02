@@ -5,6 +5,7 @@
    ========================================================================== */
 @import './base.css';
 @import './pages.css';
+@import './hero-scene.css';
 
 :root {
   --radius: 20px;
@@ -35,7 +36,7 @@ h3 { letter-spacing: -0.015em; font-weight: 750; }
 .mega-group, .mega-services a, .mega-insight { border-radius: 14px; }
 .mmenu-acc > summary, .mmenu-link { font-weight: 800; letter-spacing: -0.02em; }
 
-/* hero: white, gradient headline accent, photo with a large rounded corner + chevron */
+/* hero: white, gradient headline accent, live scene panel with a large rounded corner */
 .hero { background: var(--color-white); }
 .hero-kicker { padding: .375rem .875rem; border-radius: 999px; background: var(--color-tint-10); color: var(--color-primary-deep); }
 .hero-kicker::before { width: .5rem; height: .5rem; border-radius: 50%; background: var(--color-secondary); }

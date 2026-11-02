@@ -1,55 +1,22 @@
-// Homepage behaviour: hero video, "I need help with" selector, service explorer, software tabs,
+// Homepage behaviour: hero scene pause control, "I need help with" selector, service explorer, software tabs,
 // and the How We Work progress line.
 import { reducedMotion } from './site';
 
-type NetInfo = { saveData?: boolean; effectiveType?: string };
-
+/** Hero scene: show the pause button, and pause when off-screen, in a hidden tab or on request. */
 function initHero(signal: AbortSignal) {
   const hero = document.querySelector<HTMLElement>('[data-hero]');
-  const video = hero?.querySelector<HTMLVideoElement>('[data-hero-video]');
   const btn = hero?.querySelector<HTMLButtonElement>('[data-hero-toggle]');
-  if (!hero || !video || !btn) return;
-
-  const conn = (navigator as Navigator & { connection?: NetInfo }).connection;
-  const slow = conn?.saveData || /(^|-)2g$|^3g$/.test(conn?.effectiveType ?? '');
-  if (reducedMotion() || slow) return; // still image only
+  if (!hero || !btn || reducedMotion()) return; // reduced motion: CSS shows the finished still scene
 
   let userPaused = false;
   let inView = true;
-  const setBtn = (playing: boolean) => {
-    btn.setAttribute('aria-pressed', String(!playing));
-    btn.querySelector('.sr-only')!.textContent = playing ? 'Pause background video' : 'Play background video';
-  };
-  const sync = () => {
-    if (!video.src && !video.querySelector('source')) return;
-    if (!userPaused && inView && !document.hidden) video.play().catch(() => {});
-    else video.pause();
-  };
+  const sync = () => hero.toggleAttribute('data-paused', userPaused || !inView || document.hidden);
 
-  const start = () => {
-    const mobile = matchMedia('(max-width: 767px)').matches;
-    const d = video.dataset;
-    const sources = mobile
-      ? [[d.mobileWebm, 'video/webm'], [d.mobileMp4, 'video/mp4']]
-      : [[d.desktopWebm, 'video/webm'], [d.desktopMp4, 'video/mp4']];
-    for (const [src, type] of sources) {
-      if (!src) continue;
-      const s = document.createElement('source');
-      s.src = src;
-      s.type = type!;
-      video.append(s);
-    }
-    if (!video.querySelector('source')) return;
-    video.addEventListener('playing', () => hero.setAttribute('data-video', 'on'), { once: true, signal });
-    video.load();
-    btn.hidden = false;
-    setBtn(true);
-    sync();
-  };
-
+  btn.hidden = false;
   btn.addEventListener('click', () => {
     userPaused = !userPaused;
-    setBtn(!userPaused);
+    btn.setAttribute('aria-pressed', String(userPaused));
+    btn.querySelector('.sr-only')!.textContent = userPaused ? 'Play animation' : 'Pause animation';
     sync();
   }, { signal });
   const io = new IntersectionObserver(([e]) => {
@@ -59,11 +26,6 @@ function initHero(signal: AbortSignal) {
   io.observe(hero);
   signal.addEventListener('abort', () => io.disconnect());
   document.addEventListener('visibilitychange', sync, { signal });
-
-  // Wait until the page (and the poster, the LCP image) has loaded, then idle.
-  const later = () => ('requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 2000 }) : setTimeout(start, 600));
-  if (document.readyState === 'complete') later();
-  else addEventListener('load', later, { once: true, signal });
 }
 
 /** "I need help with" custom combobox: always opens downwards, same font for value and options. */

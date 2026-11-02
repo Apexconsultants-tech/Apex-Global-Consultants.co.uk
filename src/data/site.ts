@@ -41,17 +41,12 @@ export const site = {
     piTerritory: '[TO VERIFY] territorial coverage of PI insurance',
   },
   hero: {
-    // Silent 12 s loop in public/media (README: "Hero video"). Current files are a licensed
-    // PLACEHOLDER made from src/assets/hero/scene-team.jpg until the client supplies footage.
+    // The visual beside the headline is HeroScene.astro (animated, no media files).
     // Headline: clear about what we do, with a confident, premium tone. No "best"/"top" claims.
     title: 'Accounting and tax,',
     titleAccent: 'handled with precision.',
     line: 'One dedicated accountant for your books, payroll, tax and reporting, at a fixed fee agreed before we start.',
     points: ['Fixed fees, VAT shown upfront', 'UK and overseas companies', 'Cloud accounting set up for you'],
-    video: {
-      desktop: { webm: '/media/hero-desktop.webm', mp4: '/media/hero-desktop.mp4' },
-      mobile: { webm: '/media/hero-mobile.webm', mp4: '/media/hero-mobile.mp4' },
-    },
   },
 } as const;
 
