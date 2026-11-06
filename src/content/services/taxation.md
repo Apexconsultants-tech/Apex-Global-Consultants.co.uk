@@ -51,6 +51,10 @@ price:
     - { label: 'Self Assessment', amount: '£150', unit: return }
     - { label: 'VAT returns', amount: '£75', unit: return }
     - { label: 'Corporation Tax', amount: '£350', unit: return }
+  features:
+    - 'Making Tax Digital set-up and updates'
+    - 'Deadlines tracked for you'
+    - 'HMRC correspondence handled'
 priceNote: Fixed fee per return or a combined monthly fee, agreed in writing before we start.
 related:
   - compliance

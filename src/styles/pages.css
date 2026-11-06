@@ -269,28 +269,47 @@
 .promise-tick { display: grid; place-items: center; flex: none; width: 1.75rem; height: 1.75rem; border-radius: 999px; border: 2px solid var(--color-secondary); color: var(--color-secondary-deep); }
 .pricing-cards { padding-top: clamp(2rem, 1.5rem + 2vw, 3rem); }
 
+/* Price cards: four parts (heading, price, ticks, button) that line up across each row via subgrid.
+   Row one is deep blue, row two deep green; amounts stay deep blue everywhere. */
 .plan-grid { display: grid; gap: var(--s3); }
-@media (min-width: 640px) { .plan-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1280px) { .plan-grid { grid-template-columns: repeat(4, 1fr); gap: var(--s2); } }
+@media (min-width: 640px) { .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .plan-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .plan {
-  display: flex; flex-direction: column; gap: var(--s2); padding: var(--s3); border-radius: var(--radius); background: var(--color-white);
-  border: 1px solid var(--color-tint-20); box-shadow: inset 0 4px 0 var(--g), var(--shadow); transition: transform .3s var(--ease-out);
+  --plan-tint: color-mix(in srgb, var(--g) 8%, var(--color-white));
+  --plan-line: color-mix(in srgb, var(--g) 22%, var(--color-white));
+  position: relative; overflow: hidden;
+  display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 1.25rem;
+  padding: 1.875rem 1.5rem 1.5rem; border-radius: var(--radius); background: var(--color-white);
+  border: 1px solid var(--color-tint-20); box-shadow: var(--shadow);
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
 }
-.plan:hover { transform: translateY(-4px); }
+.plan[data-tone='blue-deep'] { --plan-tint: var(--color-tint-10); --plan-line: var(--color-tint-20); }
+.plan[data-tone='green-deep'] { --plan-tint: color-mix(in srgb, var(--color-secondary) 9%, var(--color-white)); --plan-line: color-mix(in srgb, var(--color-secondary) 28%, var(--color-white)); }
+.plan::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--g); }
+.plan:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgb(5 69 140 / .06), 0 22px 44px -18px rgb(5 69 140 / .32); }
 .plan-head { display: flex; gap: .875rem; align-items: flex-start; }
-.plan-icon { display: grid; place-items: center; flex: none; width: 3rem; height: 3rem; border-radius: 14px; background: var(--g); color: var(--g-on); }
-.plan-title { font-size: 1.25rem; }
-.plan-blurb { margin-top: .375rem; font-size: .9375rem; color: var(--color-muted); line-height: 1.5; }
-.plan-price { padding: 1rem .75rem; border-radius: 14px; background: var(--color-tint-10); text-align: center; }
-.plan-detail { margin-top: .25rem; font-size: .875rem; color: var(--color-muted); }
-.plan-rows { display: grid; gap: .375rem; }
-.plan-rows > div { display: grid; gap: .125rem; padding: .625rem .875rem; border-radius: 12px; background: var(--color-tint-10); }
-.plan-rows dt { font-weight: 700; font-size: .875rem; color: var(--color-ink); }
+.plan-icon { display: grid; place-items: center; flex: none; width: 3rem; height: 3rem; border-radius: 14px; background: var(--g); color: var(--color-white); }
+.plan-title { font-size: 1.1875rem; color: var(--color-primary-deep); }
+.plan-blurb { margin-top: .375rem; font-size: .9063rem; color: var(--color-muted); line-height: 1.5; }
+.plan-price {
+  display: grid; align-content: center; justify-items: center; gap: .25rem; text-align: center;
+  padding: 1.125rem 1rem; border-radius: 16px; background: var(--plan-tint); border: 1px solid var(--plan-line);
+}
+.plan-price .price-amount strong { font-size: clamp(2rem, 1.85rem + .5vw, 2.375rem); }
+.plan-detail { font-size: .8125rem; color: var(--color-muted); line-height: 1.4; }
+.plan-price--rows { justify-items: stretch; text-align: left; padding: .75rem 1rem; }
+.plan-rows-cap { text-align: center; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-muted); }
+.plan-rows { display: grid; }
+.plan-rows > div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .125rem .75rem; padding: .375rem 0; border-bottom: 1px dashed var(--plan-line, var(--color-tint-20)); }
+.plan-rows > div:last-child { border-bottom: 0; }
+.plan-rows dt { font-weight: 650; font-size: .9375rem; color: var(--color-ink); }
 .plan-rows dd { color: var(--color-primary-deep); white-space: nowrap; }
-.plan-rows dd .price-amount-from, .plan-rows dd .price-amount-unit { font-size: .875rem; }
-.plan-rows dd strong { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
-.plan-ticks { font-size: .9375rem; }
-.plan-link { margin-top: auto; align-self: center; }
+.plan-rows dd strong { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.02em; }
+.plan-rows dd .price-amount-from, .plan-rows dd .price-amount-unit { font-size: .8125rem; }
+.plan-ticks { align-content: start; font-size: .9375rem; }
+.plan-ticks .icon { color: var(--color-secondary-deep); }
+.plan-link { align-self: end; width: 100%; min-height: 2.75rem; border-color: var(--g); color: var(--g-text); background: transparent; }
+.plan-link:hover { background: var(--g); color: var(--color-white); }
 
 .plan-note { display: grid; gap: var(--s2); align-items: center; margin-top: var(--s4); padding: var(--s3); border-radius: var(--radius); background: var(--color-tint-5); border: 1px solid var(--color-tint-20); }
 .plan-note-icon { display: none; color: var(--color-primary-deep); }
