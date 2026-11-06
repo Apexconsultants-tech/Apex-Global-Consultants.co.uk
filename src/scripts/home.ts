@@ -25,6 +25,15 @@ function initHero(signal: AbortSignal) {
   });
   io.observe(hero);
   signal.addEventListener('abort', () => io.disconnect());
+
+  // Start the animation once the page has finished loading and the browser is idle.
+  const start = () => !signal.aborted && hero.setAttribute('data-run', '');
+  const later = () =>
+    'requestIdleCallback' in window
+      ? requestIdleCallback(() => setTimeout(start, 1500), { timeout: 4000 })
+      : setTimeout(start, 2500);
+  if (document.readyState === 'complete') later();
+  else addEventListener('load', later, { once: true, signal });
   document.addEventListener('visibilitychange', sync, { signal });
 }
 

@@ -139,6 +139,9 @@
 
 /* ---- pause (button, off-screen, hidden tab) ---- */
 .hero[data-paused] .hs, .hero[data-paused] .hs * { animation-play-state: paused !important; }
+/* Until home.ts starts it (shortly after the page has loaded), the scene is the finished still picture:
+   no animation work competes with loading the page. */
+.hero:not([data-run]) .hs *, .hero:not([data-run]) .hs *::before, .hero:not([data-run]) .hs *::after { animation: none !important; }
 
 /* ---- keyframes (end state = base style) ---- */
 @keyframes hs-float { from { transform: translateY(-5px); } to { transform: translateY(5px); } }
