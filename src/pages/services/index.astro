@@ -5,7 +5,7 @@ import PageHero from '../../components/page/PageHero.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
 import Icon from '../../components/ui/Icon.astro';
 import { getGroups, groupHref, serviceHref, groupTones } from '../../lib/content';
-import heroImg from '../../assets/hero/scene-laptop.jpg';
+import heroImg from '../../assets/hero/services.jpg';
 
 const groups = await getGroups();
 const crumbs = [
@@ -24,7 +24,7 @@ const crumbs = [
     summary="All our services in four clear areas, from monthly bookkeeping and tax returns to technical IFRS reporting."
     crumbs={crumbs}
     image={heroImg}
-    imageAlt="Colleagues working together at laptops in a shared office"
+    imageAlt="Open-plan office with people working at desks and tables"
   />
 
   <section class="section" aria-label="Service areas">

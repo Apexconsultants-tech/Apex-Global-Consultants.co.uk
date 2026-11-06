@@ -59,7 +59,7 @@ const crumbs = [
       <ul role="list" class="ben-grid">
         {
           d.benefits.map((b, i) => (
-            <li class="ben" data-tone={['blue-deep', 'blue', 'green-deep'][i % 3]}>
+            <li class="ben" data-tone="blue-deep">
               <span class="ben-num">{String(i + 1).padStart(2, '0')}</span>
               <p>{b}</p>
             </li>

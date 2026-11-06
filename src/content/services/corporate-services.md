@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: Setting up a UK entity from overseas
     text: We guide overseas founders and groups through incorporation, registered office, bank account preparation, HMRC registrations and the documents UK banks typically ask for.
-    image: ../../assets/help/help-2.jpg
-    imageAlt: Adviser on a video call with an overseas client
+    image: ../../assets/help/corporate-services-1.jpg
+    imageAlt: Business partners shaking hands outside a brick office building
   - title: Never miss a Companies House deadline
     text: We track your confirmation statement, accounts deadline and any filings triggered by changes, so your company stays in good standing.
-    image: ../../assets/help/help-1.jpg
-    imageAlt: Colleagues checking a compliance calendar
+    image: ../../assets/help/corporate-services-2.jpg
+    imageAlt: Desk with company paperwork, calculator, pens and coffee
 keyFacts:
   - value: '12m'
     label: Maximum gap between confirmation statements

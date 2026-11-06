@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: One compliance calendar
     text: We bring every deadline into one schedule, agreed with you at the start, and work to it. You always know what is due, what we need from you, and when it will be filed.
-    image: ../../assets/help/help-1.jpg
-    imageAlt: Team planning compliance deadlines
+    image: ../../assets/help/compliance-1.jpg
+    imageAlt: Notebook, pen and laptop used to plan a compliance calendar
   - title: Controls that fit your size
     text: Internal audit does not need to be heavyweight. We focus on the areas that matter most for your business and recommend changes your team can realistically make.
-    image: ../../assets/help/help-3.jpg
-    imageAlt: Laptop with a control checklist
+    image: ../../assets/help/compliance-2.jpg
+    imageAlt: Finger tapping a tablet to review financial controls
 keyFacts:
   - value: '9m'
     label: Private company accounts deadline after the year end

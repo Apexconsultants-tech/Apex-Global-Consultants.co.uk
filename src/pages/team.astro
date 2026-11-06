@@ -46,7 +46,7 @@ const crumbs = [
                 {entry.data.photo ? (
                   <Image src={entry.data.photo} alt={entry.data.photoAlt ?? entry.data.name} widths={[400, 600]} sizes="(min-width: 1024px) 380px, 100vw" class="person-img" />
                 ) : (
-                  <div class="person-img person-ph" aria-hidden="true"><Icon name="user" size={56} /></div>
+                  <div class="person-img person-ph" aria-hidden="true"><span class="person-initials">{entry.data.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span></div>
                 )}
                 <div class="person-body">
                   <h2 class="person-name">{entry.data.name}</h2>

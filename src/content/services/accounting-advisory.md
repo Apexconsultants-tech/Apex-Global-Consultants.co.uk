@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: Big-firm technical depth, SME pace
     text: Our advisers work through the same standards that large-firm technical teams do, but you deal with them directly. That means quicker answers, models you can follow, and papers written for your auditors and board, not for us.
-    image: ../../assets/help/help-1.jpg
-    imageAlt: Finance team reviewing a technical accounting paper
+    image: ../../assets/help/accounting-advisory-1.jpg
+    imageAlt: Accounting advisers discussing a client file around a meeting table
   - title: Models you keep and can reuse
     text: Every lease or impairment model we build is handed over with notes, so your team can roll it forward next year. If you would rather we do that too, we can.
-    image: ../../assets/help/help-3.jpg
-    imageAlt: Spreadsheet model on a laptop screen
+    image: ../../assets/help/accounting-advisory-2.jpg
+    imageAlt: Laptop and tablet showing financial charts from a reusable model
 keyFacts:
   - value: '2026'
     label: FRS 102 periodic review changes apply to periods beginning on or after 1 January

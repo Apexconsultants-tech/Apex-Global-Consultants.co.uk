@@ -3,8 +3,8 @@ town: Trafford
 order: 5
 headline: Accountants for Trafford businesses, from Trafford Park to Stretford
 summary: Support for Trafford's industrial, logistics and service companies, including the UK operations of overseas groups.
-image: ../../assets/help/help-2.jpg
-imageAlt: Business colleagues discussing plans in a meeting
+image: ../../assets/locations/trafford.jpg
+imageAlt: Converted red-brick warehouse offices under a blue sky
 focus:
   - title: Logistics and industrial firms
     text: Larger payrolls, multiple sites and asset-heavy balance sheets need careful accounting. We handle payroll, fixed asset registers and lease accounting.

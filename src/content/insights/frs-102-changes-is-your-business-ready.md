@@ -7,7 +7,7 @@ reviewed: 2026-10-30
 reviewer: '[TO VERIFY] Reviewer name and qualification'
 author: '[TO VERIFY] Author name'
 image: ../../assets/insights/frs-102-changes.jpg
-imageAlt: Financial statements and notes on a desk
+imageAlt: Glasses and notes beside a laptop on a desk
 topics: [FRS 102, Leases, Revenue]
 featured: true
 draft: true

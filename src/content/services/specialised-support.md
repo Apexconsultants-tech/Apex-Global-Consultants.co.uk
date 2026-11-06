@@ -5,7 +5,7 @@ icon: cloud
 summary: Cloud accounting setup, financial modelling, sector accounting and forensic work when you need it.
 menuBlurb: Cloud setup, modelling and forensic accounting
 image: ../../assets/services/specialised-support.jpg
-imageAlt: Accountant setting up cloud accounting software
+imageAlt: Hands on a laptop keyboard beside technical plans
 seoTitle: Cloud accounting, modelling and forensic support | Apex Global
 seoDescription: "Specialised accounting support: cloud accounting set-up, financial modelling, IFRS conversion, group reporting, sector accounting and forensic work."
 included:
@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: Moving to the cloud without disruption
     text: We migrate your historic balances, set up bank feeds and train your team, so you are running smoothly from the first month.
-    image: ../../assets/help/help-3.jpg
-    imageAlt: Cloud accounting software on a laptop
+    image: ../../assets/help/specialised-support-1.jpg
+    imageAlt: Hands working on a laptop while moving accounts to cloud software
   - title: Models you can explain to a lender
     text: Our financial models are structured, documented and easy to follow, so lenders and investors can see how the numbers were built.
-    image: ../../assets/help/help-1.jpg
-    imageAlt: Colleagues reviewing a financial model
+    image: ../../assets/help/specialised-support-2.jpg
+    imageAlt: Two people shaking hands across a desk after agreeing a plan
 keyFacts:
   - value: 'Cloud'
     label: Setup, migration and training

@@ -3,8 +3,8 @@ town: Altrincham
 order: 1
 headline: Accountants in Altrincham, based at the Atlantic Business Centre
 summary: Our office is on Atlantic Street, so Altrincham businesses can meet us in person as well as by phone and video.
-image: ../../assets/misc/about.jpg
-imageAlt: A bright, modern office workspace
+image: ../../assets/locations/altrincham.jpg
+imageAlt: Red-brick office building with large windows
 focus:
   - title: Meet us in town
     text: Our office is a short walk from the town centre and the Interchange. Book a time and we will meet you at the Atlantic Business Centre.

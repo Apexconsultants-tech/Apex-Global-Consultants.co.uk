@@ -3,8 +3,8 @@ town: Sale
 order: 3
 headline: Bookkeeping, payroll and tax support for Sale businesses
 summary: A dedicated accountant for Sale traders, contractors and small companies, a few minutes from our Altrincham office.
-image: ../../assets/audiences/uk-small-and-medium-businesses.jpg
-imageAlt: Small business owner reviewing figures in their premises
+image: ../../assets/locations/sale.jpg
+imageAlt: Local shop owner standing in front of stocked shelves
 focus:
   - title: Trades and contractors
     text: Builders, electricians and other trades in Sale often deal with the Construction Industry Scheme. We help you keep records and deductions in order.

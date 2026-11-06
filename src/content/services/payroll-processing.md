@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: Payslips your team can trust
     text: We check each run against the previous one before it is finalised and query anything unusual with you. Employees receive secure electronic payslips.
-    image: ../../assets/help/help-3.jpg
-    imageAlt: Payroll software open on a laptop
+    image: ../../assets/help/payroll-1.jpg
+    imageAlt: A payslip next to a Bank of England ten pound note
   - title: One contact for every payroll question
     text: 'Starters, leavers, maternity pay or a change of pay date: your payroll contact handles it and tells you what you need to do.'
-    image: ../../assets/help/help-2.jpg
-    imageAlt: Payroll adviser speaking to a client on a call
+    image: ../../assets/help/payroll-2.jpg
+    imageAlt: Adviser answering a payroll question on the phone
 keyFacts:
   - value: 'Payday'
     label: RTI submissions made on or before every payday

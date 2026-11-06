@@ -432,7 +432,11 @@
 .soft-tab:hover { border-color: var(--color-primary); transform: translateY(-2px); }
 .soft-tab[aria-selected='true'] { border-color: var(--color-primary-deep); box-shadow: 0 0 0 1px var(--color-primary-deep), var(--shadow); }
 .soft-tab-logo { height: auto; max-height: 40px; width: auto; }
-.soft-tab[data-shape='wide'] .soft-tab-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* Every tab shows its logo only, centred at the same visual size (names stay for screen readers). */
+.soft-tab { justify-content: center; }
+.soft-tab[data-shape='round'] .soft-tab-logo { max-height: 36px; }
+.soft-tab[data-shape='wide'] .soft-tab-logo { max-height: 30px; max-width: 132px; }
+.soft-tab .soft-tab-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (min-width: 768px) { .soft-tabs { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; } .soft-tab { justify-content: center; } }
 .soft-stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); align-items: center; }
 .soft-stage > *, .soft-panels { min-width: 0; }
@@ -528,7 +532,7 @@
 .ins-card:hover { transform: translateY(-4px); }
 .ins-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; transition: transform .6s var(--ease-out); }
 .ins-card:hover .ins-img { transform: scale(1.04); }
-.ins-body { display: grid; gap: var(--s1); padding: var(--s3); align-content: start; flex: 1; background: var(--color-white); position: relative; }
+.ins-body { display: flex; flex-direction: column; gap: var(--s1); padding: var(--s3); flex: 1; background: var(--color-white); position: relative; }
 .ins-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; font-size: .875rem; color: var(--color-muted); }
 .ins-title { font-size: 1.1875rem; line-height: 1.25; }
 .ins-link { color: inherit; text-decoration: none; }

@@ -6,8 +6,8 @@ published: 2026-10-08
 reviewed: 2026-10-08
 reviewer: '[TO VERIFY] Reviewer name and qualification'
 author: '[TO VERIFY] Author name'
-image: ../../assets/services/management-reporting.jpg
-imageAlt: Charts and financial reports spread across a meeting table
+image: ../../assets/insights/year-end-checklist.jpg
+imageAlt: Stacks of pound coins rising like a growth chart
 topics: [Year end, Limited companies]
 draft: true
 ---

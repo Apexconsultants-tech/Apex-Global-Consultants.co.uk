@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: Deadlines tracked for you
     text: We keep a calendar of every filing and payment date that applies to you and remind you well in advance, with the amount due. No late-filing penalties because a letter went to the wrong address.
-    image: ../../assets/help/help-2.jpg
-    imageAlt: Adviser on a video call discussing a tax return
+    image: ../../assets/help/taxation-1.jpg
+    imageAlt: Open planner, pen and calculator for tracking tax deadlines
   - title: Planning before the year end, not after
     text: We review your position before your year end so there is still time to act, then explain the options and their trade-offs clearly. We never promise savings; we show you the numbers.
-    image: ../../assets/help/help-1.jpg
-    imageAlt: Adviser and client reviewing figures together
+    image: ../../assets/help/taxation-2.jpg
+    imageAlt: Calculator, glasses, coins and a piggy bank for year-end tax planning
 keyFacts:
   - value: '9m + 1d'
     label: Corporation tax payment deadline after the year end (most companies)

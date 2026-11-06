@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: Books you can actually use
     text: We keep your records in cloud software you can log in to at any time, so your figures are current rather than months out of date. When you need a number for a lender, investor or tax question, it is already there.
-    image: ../../assets/help/help-3.jpg
-    imageAlt: Laptop showing a cloud accounting dashboard next to a notebook
+    image: ../../assets/help/bookkeeping-1.jpg
+    imageAlt: Bookkeeper entering figures on a calculator next to a laptop spreadsheet
   - title: A named bookkeeper who knows your business
     text: You work with the same person each month. They learn how your business runs, spot unusual items early and ask sensible questions instead of sending you long lists of queries.
-    image: ../../assets/help/help-1.jpg
-    imageAlt: Two colleagues reviewing a printed report together
+    image: ../../assets/help/bookkeeping-2.jpg
+    imageAlt: Accountant working on a laptop at a desk by a brick wall
 keyFacts:
   - value: '6 yrs'
     label: How long UK companies must keep accounting records

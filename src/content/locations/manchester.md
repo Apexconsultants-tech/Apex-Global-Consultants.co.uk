@@ -3,8 +3,8 @@ town: Manchester
 order: 2
 headline: Accounting and IFRS reporting for Manchester businesses
 summary: From city-centre start-ups to UK subsidiaries of international groups, we support Manchester companies remotely and in person.
-image: ../../assets/audiences/overseas-companies.jpg
-imageAlt: International team meeting in a modern UK office
+image: ../../assets/locations/manchester.jpg
+imageAlt: Modern offices at MediaCityUK on the waterfront in Greater Manchester
 focus:
   - title: Growing companies
     text: Fast-growing Manchester businesses often outgrow spreadsheets quickly. We set up cloud accounting and monthly management reporting that scales with you.

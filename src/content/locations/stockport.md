@@ -3,8 +3,8 @@ town: Stockport
 order: 4
 headline: Accounts, VAT and management reporting for Stockport firms
 summary: Practical accounting support for Stockport's manufacturers, retailers and service businesses, delivered online and in person.
-image: ../../assets/services/management-reporting.jpg
-imageAlt: Charts and financial reports spread across a meeting table
+image: ../../assets/locations/stockport.jpg
+imageAlt: Shopfronts with painted doors on a red-brick high street
 focus:
   - title: Manufacturers and wholesalers
     text: Stock, margins and cash flow matter most. We produce monthly reports that show where profit is made and where cash is tied up.
