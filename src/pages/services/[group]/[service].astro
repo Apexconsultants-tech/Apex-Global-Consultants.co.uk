@@ -7,6 +7,7 @@ import InPageNav from '../../../components/page/InPageNav.astro';
 import FaqList from '../../../components/page/FaqList.astro';
 import ServiceCards from '../../../components/page/ServiceCards.astro';
 import FinalCta from '../../../components/home/FinalCta.astro';
+import Price from '../../../components/ui/Price.astro';
 import Icon from '../../../components/ui/Icon.astro';
 import { getServiceIndex, getFaqs, groupHref } from '../../../lib/content';
 import { serviceSchema, faqSchema } from '../../../lib/schema';
@@ -120,7 +121,25 @@ const schema = [
           <p class="price-note">{d.priceNote}</p>
         </div>
         <div class="price-side">
-          <p class="price-from">From <strong>{d.priceFrom}</strong> per month + VAT</p>
+          {
+            d.price.rows ? (
+              <dl class="plan-rows">
+                {d.price.rows.map((r) => (
+                  <div>
+                    <dt>{r.label}</dt>
+                    <dd>
+                      <span class="price-amount-from">From</span> <strong>{r.amount}</strong> <span class="price-amount-unit">/ {r.unit}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            ) : (
+              <div>
+                <Price price={d.price} />
+                {d.price.detail && <p class="plan-detail">{d.price.detail}</p>}
+              </div>
+            )
+          }
           <a href="/contact/#book" class="btn btn-primary" data-track="booking">Get a fixed-fee quote <Icon name="arrow" size={18} /></a>
         </div>
       </div>

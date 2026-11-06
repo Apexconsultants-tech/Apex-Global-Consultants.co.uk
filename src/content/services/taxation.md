@@ -43,8 +43,15 @@ keyFacts:
     label: Filing deadline for the CT600 return
   - value: '1m + 7d'
     label: VAT return and payment deadline after each period
-priceFrom: '£X'
-priceNote: Fixed fee per return or a combined monthly fee, agreed in writing before we start. Prices exclude VAT.
+price:
+  amount: '£75'
+  unit: return
+  blurb: 'Practical tax support to keep you compliant and tax-efficient.'
+  rows:
+    - { label: 'Self Assessment', amount: '£150', unit: return }
+    - { label: 'VAT returns', amount: '£75', unit: return }
+    - { label: 'Corporation Tax', amount: '£350', unit: return }
+priceNote: Fixed fee per return or a combined monthly fee, agreed in writing before we start.
 related:
   - compliance
   - bookkeeping

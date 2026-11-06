@@ -4,6 +4,7 @@ import PageHero from '../components/page/PageHero.astro';
 import FaqList from '../components/page/FaqList.astro';
 import FinalCta from '../components/home/FinalCta.astro';
 import Icon from '../components/ui/Icon.astro';
+import Price from '../components/ui/Price.astro';
 import { getServiceIndex, getFaqs } from '../lib/content';
 import { faqSchema } from '../lib/schema';
 
@@ -13,35 +14,102 @@ const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Pricing', href: '/pricing/' },
 ];
+const promises = ['Fixed and transparent fees', 'Flexible and scalable', 'UK-based expert support', 'No hidden charges'];
 ---
 
 <BaseLayout
-  title="Pricing and fixed fees | Apex Global"
-  description="How Apex Global prices accounting, tax and payroll work: fixed fees agreed in writing before we start, with VAT clearly stated and no surprise charges."
+  title="Pricing and packages | Apex Global"
+  description="Starting prices for bookkeeping, payroll, tax returns, management reporting, advisory, company secretarial and compliance work, with fixed fees agreed upfront."
   breadcrumbs={crumbs}
   schema={faqs.length ? [faqSchema(faqs)] : []}
 >
-  <PageHero title="Pricing" summary="Fixed fees, agreed in writing before any work starts, with VAT clearly stated." crumbs={crumbs} />
+  <PageHero
+    title="Pricing & Packages"
+    summary="Clear, competitive and transparent fees for UK businesses and international clients."
+    crumbs={crumbs}
+  />
 
-  <section class="section" aria-label="Starting prices">
+  <section class="section-sm pricing-top" aria-label="Our fee promise">
     <div class="wrap">
-      <ul role="list" class="price-grid">
+      <ul role="list" class="promise-strip">
         {
-          index.map(({ service: s, group: g, href, tone }) => (
-            <li class="price-tile" data-tone={tone}>
-              <p class="svc-area"><span class="svc-num">{g.data.number}</span>{g.data.title}</p>
-              <h2 class="price-tile-h"><Icon name={s.data.icon} size={22} />{s.data.title}</h2>
-              <p class="price-from">From <strong>{s.data.priceFrom}</strong> per month + VAT</p>
-              <p class="price-note">{s.data.priceNote}</p>
-              <a href={href} class="link-arrow">About {s.data.title.toLowerCase()} <Icon name="arrow" size={18} /></a>
+          promises.map((p) => (
+            <li>
+              <span class="promise-tick"><Icon name="check" size={18} /></span>
+              {p}
             </li>
           ))
         }
       </ul>
-      <p class="fine-print">
-        Prices shown are starting points. Your fixed fee depends on the size and complexity of your business and is confirmed in a written proposal before
-        you commit.
-      </p>
+    </div>
+  </section>
+
+  <section class="section pricing-cards" aria-labelledby="prices-title">
+    <div class="wrap">
+      <h2 id="prices-title" class="sr-only">Starting prices by service</h2>
+      <ul role="list" class="plan-grid">
+        {
+          index.map(({ service: s, href, tone }) => {
+            const p = s.data.price;
+            return (
+              <li class="plan" data-tone={tone}>
+                <div class="plan-head">
+                  <span class="plan-icon"><Icon name={s.data.icon} size={24} /></span>
+                  <div>
+                    <h3 class="plan-title">{s.data.title}</h3>
+                    <p class="plan-blurb">{p.blurb}</p>
+                  </div>
+                </div>
+
+                {p.rows ? (
+                  <dl class="plan-rows">
+                    {p.rows.map((r) => (
+                      <div>
+                        <dt>{r.label}</dt>
+                        <dd>
+                          <span class="price-amount-from">From</span> <strong>{r.amount}</strong> <span class="price-amount-unit">/ {r.unit}</span>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : (
+                  <div class="plan-price">
+                    <Price price={p} />
+                    {p.detail && <p class="plan-detail">{p.detail}</p>}
+                  </div>
+                )}
+
+                {p.features.length > 0 && (
+                  <ul role="list" class="ticks plan-ticks">
+                    {p.features.map((f) => (
+                      <li>
+                        <Icon name="check" size={18} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <a href={href} class="link-arrow plan-link">
+                  Learn more<span class="sr-only"> about {s.data.title.toLowerCase()}</span> <Icon name="arrow" size={18} />
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <div class="plan-note">
+        <span class="plan-note-icon"><Icon name="info" size={22} /></span>
+        <p>
+          <strong>Please note:</strong> prices are starting fees and may vary depending on the size, complexity and specific requirements of your business.
+          A clear, fixed-fee proposal will be provided after an initial consultation.
+        </p>
+        <div class="plan-note-actions">
+          <a href="/contact/?subject=Quote%20request#book" class="btn btn-primary" data-track="quote">Request a quote <Icon name="arrow" size={18} /></a>
+          <a href="/contact/#book" class="btn btn-green" data-track="booking"><Icon name="calendar" size={18} /> Book a free consultation</a>
+        </div>
+      </div>
     </div>
   </section>
 

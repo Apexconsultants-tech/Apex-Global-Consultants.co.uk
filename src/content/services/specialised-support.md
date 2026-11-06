@@ -43,8 +43,15 @@ keyFacts:
     label: Integrated P&L, balance sheet and cash flow models
   - value: '1'
     label: Point of contact for every project
-priceFrom: '£X'
-priceNote: Projects are quoted as a fixed fee; ongoing support can be monthly. Prices exclude VAT.
+price:
+  amount: '£450'
+  unit: project
+  blurb: 'Technical, project-based accounting and reporting solutions.'
+  features:
+    - 'IFRS 16 (leases) and IAS 36 (impairment)'
+    - 'IFRS conversion and group reporting'
+    - 'Financial modelling and analysis'
+priceNote: Projects are quoted as a fixed fee; ongoing support can be monthly.
 related:
   - bookkeeping
   - management-reporting

@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+/** "From £35 / month" in one consistent style (pricing page and service pages). */
+interface Props {
+  price: CollectionEntry<'services'>['data']['price'];
+  class?: string;
+}
+const { price: p, class: cls } = Astro.props;
+---
+
+<p class:list={['price-amount', cls]}>
+  {p.from && <span class="price-amount-from">From</span>}
+  <strong>{p.amount}</strong>
+  <span class="price-amount-unit">/ {p.unit}</span>
+</p>

@@ -43,7 +43,14 @@ keyFacts:
     label: Lease models with journals and disclosures
   - value: 'IAS 36'
     label: Impairment testing with sensitivity analysis
-priceFrom: '£X'
+price:
+  amount: '£125'
+  unit: hour
+  blurb: 'Expert advice on accounting, reporting and financial process improvement.'
+  features:
+    - 'IFRS, UK GAAP and FRS 102 advice'
+    - 'Process and control improvements'
+    - 'Finance function support'
 priceNote: Project work is quoted as a fixed fee per deliverable; ongoing support can be agreed monthly.
 related:
   - compliance

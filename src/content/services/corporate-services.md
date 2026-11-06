@@ -43,8 +43,15 @@ keyFacts:
     label: Time allowed to file the confirmation statement
   - value: 'ID'
     label: Identity verification required for directors and PSCs
-priceFrom: '£X'
-priceNote: Formation is a fixed one-off fee; ongoing company secretarial support is priced monthly. Prices exclude VAT.
+price:
+  amount: '£150'
+  unit: service
+  blurb: 'Company set-up and ongoing company secretarial support.'
+  features:
+    - 'UK company formation'
+    - 'Companies House filings and updates'
+    - 'Corporate changes (directors, shares and more)'
+priceNote: Formation is a fixed one-off fee; ongoing company secretarial support is priced monthly.
 related:
   - compliance
   - taxation
