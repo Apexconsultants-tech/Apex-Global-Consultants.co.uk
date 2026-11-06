@@ -159,7 +159,8 @@
 .svc-card { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius); background: var(--color-white); box-shadow: inset 0 4px 0 var(--g), 0 1px 0 var(--color-tint-20), 0 12px 30px -20px rgb(5 69 140 / .35); transition: transform .3s var(--ease-out), box-shadow .3s; }
 .svc-card:hover { transform: translateY(-4px); box-shadow: inset 0 4px 0 var(--g), var(--shadow); }
 .svc-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.svc-body { display: grid; gap: var(--s1); padding: var(--s3); flex: 1; align-content: start; }
+.svc-body { display: flex; flex-direction: column; gap: var(--s1); padding: var(--s3); flex: 1; }
+.svc-more { margin-top: auto; padding-top: var(--s1); }
 .svc-area { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g-text, var(--color-primary-deep)); }
 .svc-num { display: inline-grid; place-items: center; width: 1.625rem; height: 1.625rem; border-radius: 7px; background: var(--g, var(--color-primary-deep)); color: var(--g-on, var(--color-white)); font-size: .75rem; letter-spacing: 0; }
 .svc-title { font-size: 1.1875rem; }
@@ -255,6 +256,14 @@
 .person-role { color: var(--color-secondary-deep); font-weight: 650; }
 .person-q { font-size: .875rem; color: var(--color-muted); }
 .person-bio { font-size: .9688rem; margin-top: var(--s1); }
+.person-initials { font-family: var(--font-head); font-size: 3.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-primary-deep); }
+/* A single profile sits centred as one wide card: initials panel on the left, details on the right. */
+.team-grid > .person:only-child { grid-column: 1 / -1; width: 100%; max-width: 56rem; margin-inline: auto; }
+@media (min-width: 768px) {
+  .team-grid > .person:only-child { display: grid; grid-template-columns: 16rem minmax(0, 1fr); }
+  .team-grid > .person:only-child .person-img { aspect-ratio: auto; height: 100%; min-height: 18rem; }
+  .team-grid > .person:only-child .person-body { padding: var(--s4); align-content: center; }
+}
 
 /* ---- pricing page ---- */
 /* "From £35 / month" (Price.astro, pricing rows) */

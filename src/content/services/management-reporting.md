@@ -30,12 +30,12 @@ included:
 howWeHelp:
   - title: Reports that lead to decisions
     text: Each report ends with the few points that need your attention. We meet to talk them through, so the numbers turn into actions.
-    image: ../../assets/help/help-1.jpg
-    imageAlt: Team discussing a monthly management report
+    image: ../../assets/help/management-reporting-1.jpg
+    imageAlt: Printed management report with bar and line charts beside a coffee
   - title: Built on accurate books
     text: Because our reporting sits on reconciled bookkeeping, you can trust the figures rather than debating them.
-    image: ../../assets/help/help-3.jpg
-    imageAlt: Dashboard of KPIs on a laptop
+    image: ../../assets/help/management-reporting-2.jpg
+    imageAlt: Hands typing on a laptop showing an accounting spreadsheet
 keyFacts:
   - value: '13 wks'
     label: Rolling short-term cash flow forecast

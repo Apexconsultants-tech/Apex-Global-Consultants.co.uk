@@ -3,8 +3,8 @@ town: Cheshire
 order: 6
 headline: Accounting and tax for Cheshire businesses and families
 summary: From Knutsford and Wilmslow to rural estates and family companies, we support Cheshire clients online and at their premises.
-image: ../../assets/help/help-1.jpg
-imageAlt: Two colleagues reviewing a printed report together
+image: ../../assets/locations/cheshire.jpg
+imageAlt: Bright home office with a desk, plants and large windows
 focus:
   - title: Family-owned companies
     text: We help family businesses plan salaries, dividends and shareholdings, and keep company records and registers properly maintained.
