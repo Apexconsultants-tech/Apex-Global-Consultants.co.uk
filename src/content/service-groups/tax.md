@@ -8,6 +8,7 @@ forWho: Limited companies, directors, sole traders and landlords with UK tax to 
 image: ../../assets/services/taxation.jpg
 imageAlt: Tax return documents and a calculator on a desk
 services: [taxation]
+featuredInsight: making-tax-digital-guide
 seoDescription: Corporation tax, self assessment, VAT and Making Tax Digital support with tax planning built in, for UK businesses and individuals.
 ---
 

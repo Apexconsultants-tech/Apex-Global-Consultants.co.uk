@@ -8,6 +8,7 @@ forWho: New companies, overseas groups opening a UK entity, and directors who wa
 image: ../../assets/services/corporate-services.jpg
 imageAlt: Company director signing formation documents
 services: [corporate-services, compliance]
+featuredInsight: new-uk-company-size-and-audit-thresholds
 seoDescription: UK company formation, statutory registers, Companies House filings, annual accounts and compliance support from an Altrincham accounting firm.
 ---
 
