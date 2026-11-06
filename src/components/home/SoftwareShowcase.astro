@@ -38,7 +38,7 @@ const logoH = (shape: string) => (shape === 'round' ? 40 : 28);
             >
               <Image
                 src={s.data.logo}
-                alt=""
+                alt={`${s.data.name} logo`}
                 height={logoH(s.data.logoShape)}
                 width={Math.round((logoH(s.data.logoShape) * s.data.logo.width) / s.data.logo.height)}
                 densities={[1, 2]}

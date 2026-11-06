@@ -1,5 +1,6 @@
 ---
 title: 'Tax guide for taxi and ride-hailing drivers (2026/27)'
+seoTitle: "Taxi and Uber driver tax guide 2026/27 | Apex Global"
 description: A plain-English tax guide for Uber, Bolt, FreeNow and minicab drivers covering what to declare, car expenses, tax rates, key dates and HMRC letters.
 taxYear: '2026/27'
 published: 2026-11-06
@@ -7,7 +8,7 @@ reviewed: 2026-11-06
 reviewer: 'Sandeep Kumar, Director'
 author: 'Apex Global Consulting Services'
 image: ../../assets/insights/taxi-drivers-tax.jpg
-imageAlt: Illustration of a car icon beside a receipt, representing tax for drivers
+imageAlt: A black cab at night with its yellow TAXI sign lit
 topics: [Self Assessment, Sole traders, Drivers]
 featured: true
 ---

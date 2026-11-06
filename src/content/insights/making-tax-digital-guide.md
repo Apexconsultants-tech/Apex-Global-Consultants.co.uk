@@ -1,13 +1,14 @@
 ---
 title: 'Making Tax Digital: a complete guide for sole traders, landlords and VAT-registered businesses'
-description: Who must use Making Tax Digital for Income Tax and when, how quarterly updates work, the penalties, MTD for VAT and how to get ready.
+seoTitle: "Making Tax Digital guide 2026: who, when and how | Apex Global"
+description: "Making Tax Digital for Income Tax explained: who must join from April 2026, quarterly updates, deadlines, penalties, MTD for VAT and how to get ready."
 taxYear: '2026/27'
 published: 2026-11-06
 reviewed: 2026-11-06
 reviewer: 'Sandeep Kumar, Director'
 author: 'Apex Global Consulting Services'
 image: ../../assets/insights/making-tax-digital.jpg
-imageAlt: Illustration of a cloud icon beside a bar chart, representing digital tax records
+imageAlt: Laptop on a desk showing financial charts and figures in cloud accounting software
 topics: [Making Tax Digital, Self Assessment, VAT]
 featured: true
 ---

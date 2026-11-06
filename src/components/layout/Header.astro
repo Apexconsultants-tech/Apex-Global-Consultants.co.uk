@@ -128,7 +128,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
               </div>
               {ins && (
                 <a href={`/insights/${ins.id}/`} class="mega-insight">
-                  <Image src={ins.data.image} alt="" width={320} height={180} loading="lazy" class="mega-insight-img" />
+                  <Image src={ins.data.image} alt={ins.data.imageAlt} width={320} height={180} loading="lazy" class="mega-insight-img" />
                   <span class="mega-insight-meta">Insight · Tax year {ins.data.taxYear}</span>
                   <strong>{ins.data.title}</strong>
                   <span class="mega-insight-date">{formatDate(ins.data.published)}</span>

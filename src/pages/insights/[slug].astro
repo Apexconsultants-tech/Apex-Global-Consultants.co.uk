@@ -27,7 +27,7 @@ const schema = [
 ];
 ---
 
-<BaseLayout title={`${d.title} | Apex Global`} description={d.description} image={d.image} type="article" breadcrumbs={crumbs} schema={schema} noindex={d.draft}>
+<BaseLayout title={d.seoTitle ?? `${d.title} | Apex Global`} description={d.description} image={d.image} type="article" breadcrumbs={crumbs} schema={schema} noindex={d.draft}>
   <article>
     <header class="page-hero page-hero--text">
       <div class="wrap article-head">

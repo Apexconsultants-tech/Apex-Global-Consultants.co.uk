@@ -1,5 +1,6 @@
 ---
 title: 'Common errors in the cash flow statement, and how to avoid them'
+seoTitle: "Cash flow statement errors and how to fix them | Apex Global"
 description: The nine cash flow statement errors the FRC keeps finding, from interest classification and overdrafts to non-cash items, with the fix for each one.
 taxYear: '2026/27'
 published: 2026-11-06
@@ -7,7 +8,7 @@ reviewed: 2026-11-06
 reviewer: 'Sandeep Kumar, Director'
 author: 'Apex Global Consulting Services'
 image: ../../assets/insights/cash-flow-errors.jpg
-imageAlt: Illustration of a magnifying glass beside a bar chart, representing a review of financial statements
+imageAlt: Calculator on printed financial statements next to a laptop
 topics: [IAS 7, Financial reporting, FRC]
 ---
 
