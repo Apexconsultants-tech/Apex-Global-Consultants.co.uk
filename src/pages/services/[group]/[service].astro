@@ -37,7 +37,7 @@ const nav = [
   ...(faqs.length ? [{ id: 'faqs', label: 'FAQs' }] : []),
 ];
 const schema = [
-  serviceSchema({ name: d.title, description: d.summary, url: new URL(href, site.url).href }),
+  serviceSchema({ name: d.title, description: d.summary, url: new URL(href, site.url).href, price: d.price }),
   ...(faqs.length ? [faqSchema(faqs)] : []),
 ];
 ---

@@ -6,7 +6,7 @@ summary: Annual accounts, statutory returns and internal controls that keep you 
 menuBlurb: Annual accounts, filings, audits and risk
 image: ../../assets/services/compliance.jpg
 imageAlt: Finance team reviewing a set of annual accounts
-seoTitle: Annual accounts and compliance services | Apex Global
+seoTitle: "Annual accounts and statutory compliance | Apex Global"
 seoDescription: Annual accounts, HMRC and Companies House submissions, internal audits, governance and risk management for UK companies and UK subsidiaries.
 included:
   - title: Annual accounts and returns

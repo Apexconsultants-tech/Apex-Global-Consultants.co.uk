@@ -1,5 +1,6 @@
 ---
 title: Reporting & Advisory
+seoTitle: "IFRS and FRS 102 reporting and advisory | Apex Global"
 number: '03'
 order: 3
 oneLine: IFRS, UK GAAP and FRS 102 expertise, plus specialist support when needed.

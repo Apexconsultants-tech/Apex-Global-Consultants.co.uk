@@ -2,25 +2,69 @@
 import BaseLayout from './BaseLayout.astro';
 import PageHero from '../components/page/PageHero.astro';
 
+/**
+ * Legal pages (privacy, terms, complaints, accessibility).
+ * Optional: a header photo, an "At a glance" summary (slot="summary") and a contents list.
+ * The contents list is a sticky sidebar on desktop and a fold-out panel on phones and tablets.
+ */
 interface Props {
   title: string;
   description: string;
   path: string;
   updated: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  toc?: { id: string; label: string; level?: number }[];
 }
-const { title, description, path, updated } = Astro.props;
+const { title, description, path, updated, image, imageAlt, toc = [] } = Astro.props;
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: title, href: path },
 ];
+const hasSummary = Astro.slots.has('summary');
 ---
 
 <BaseLayout title={`${title} | Apex Global`} description={description} breadcrumbs={crumbs}>
-  <PageHero title={title} summary={`Last updated ${updated}`} crumbs={crumbs} />
+  <PageHero title={title} summary={`Last updated ${updated}`} crumbs={crumbs} image={image} imageAlt={imageAlt} />
   <section class="section-sm">
-    <div class="wrap">
-      <div class="prose legal">
-        <slot />
+    <div class:list={['wrap', { 'legal-grid': toc.length > 0 }]}>
+      {
+        toc.length > 0 && (
+          <>
+            <aside class="legal-toc" aria-labelledby="toc-h">
+              <p id="toc-h" class="legal-toc-h">On this page</p>
+              <ol role="list">
+                {toc.map((t) => (
+                  <li class:list={[{ sub: t.level === 2 }]}>
+                    <a href={`#${t.id}`}>{t.label}</a>
+                  </li>
+                ))}
+              </ol>
+            </aside>
+            <details class="legal-toc-m">
+              <summary>On this page</summary>
+              <ol role="list">
+                {toc.map((t) => (
+                  <li class:list={[{ sub: t.level === 2 }]}>
+                    <a href={`#${t.id}`}>{t.label}</a>
+                  </li>
+                ))}
+              </ol>
+            </details>
+          </>
+        )
+      }
+      <div class="legal-main">
+        {
+          hasSummary && (
+            <div class="legal-summary">
+              <slot name="summary" />
+            </div>
+          )
+        }
+        <div class="prose legal">
+          <slot />
+        </div>
       </div>
     </div>
   </section>

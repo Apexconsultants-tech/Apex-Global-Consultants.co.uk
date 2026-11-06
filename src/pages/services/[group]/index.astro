@@ -26,7 +26,7 @@ const crumbs = [
 ---
 
 <BaseLayout
-  title={`${d.title} services | Apex Global`}
+  title={d.seoTitle ?? `${d.title} services | Apex Global`}
   description={d.seoDescription}
   image={d.image}
   breadcrumbs={crumbs}

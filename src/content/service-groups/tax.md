@@ -1,5 +1,6 @@
 ---
 title: Tax
+seoTitle: "Tax accountants for businesses and individuals | Apex Global"
 number: '02'
 order: 2
 oneLine: Corporate and personal tax, VAT and Making Tax Digital, planned ahead.

@@ -2,7 +2,7 @@
 name: '[TO VERIFY] Team member name'
 role: '[TO VERIFY] Role'
 qualifications: '[TO VERIFY] Qualifications'
-order: 1
+order: 99
 draft: true
 ---
 

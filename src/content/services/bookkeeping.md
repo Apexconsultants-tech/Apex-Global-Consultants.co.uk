@@ -6,8 +6,8 @@ summary: Accurate, up-to-date books every month, so you always know where your b
 menuBlurb: Transactions, ledgers and bank reconciliations
 image: ../../assets/services/bookkeeping.jpg
 imageAlt: Bookkeeper reconciling a business bank account on a laptop
-seoTitle: Bookkeeping services for UK businesses | Apex Global
-seoDescription: 'Monthly bookkeeping from Altrincham for UK and international businesses: transaction recording, payables, receivables, ledgers and bank reconciliation.'
+seoTitle: "Bookkeeping services from £99 a month | Apex Global"
+seoDescription: "Bookkeeping services for UK small businesses and sole traders from £99 a month: transactions, bank reconciliations and monthly summaries in Xero or QuickBooks."
 included:
   - title: Recording transactions
     text: Every sale, purchase, receipt and payment posted to the right account, with supporting documents attached.

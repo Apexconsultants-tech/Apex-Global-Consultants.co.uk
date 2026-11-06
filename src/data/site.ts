@@ -33,7 +33,6 @@ export const site = {
     number: '447777622790',
     display: '+44 7777 622790',
   },
-  clientPortalUrl: '/contact/#client-portal-TO-VERIFY',
   social: [
     // Public profile URLs only. An empty list hides the icons.
     // { name: 'LinkedIn', url: 'https://www.linkedin.com/company/...' },
@@ -45,8 +44,8 @@ export const site = {
       'Apex Global Consulting Services Limited is supervised for anti-money laundering purposes by the Institute of Accountants and Bookkeepers (IAB).',
     professionalBody:
       'Our director, Sandeep Kumar, is a Fellow of the Institute of Chartered Accountants of Pakistan (FCA, ICAP) and a member of the Association of Chartered Certified Accountants (ACCA).',
-    piInsurer: '[TO VERIFY] professional indemnity insurer',
-    piTerritory: '[TO VERIFY] territorial coverage of PI insurance',
+    // Professional indemnity insurance: add insurer and territory here when the client confirms them,
+    // and restore the row on the About page.
   },
   hero: {
     // The visual beside the headline is HeroScene.astro (animated, no media files).

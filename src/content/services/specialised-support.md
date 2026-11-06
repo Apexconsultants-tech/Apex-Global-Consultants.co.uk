@@ -7,7 +7,7 @@ menuBlurb: Cloud setup, modelling and forensic accounting
 image: ../../assets/services/specialised-support.jpg
 imageAlt: Accountant setting up cloud accounting software
 seoTitle: Cloud accounting, modelling and forensic support | Apex Global
-seoDescription: 'Specialised accounting support: cloud accounting setup and management, business advisory, financial modelling, sector-specific accounting and forensic accounting.'
+seoDescription: "Specialised accounting support: cloud accounting set-up, financial modelling, IFRS conversion, group reporting, sector accounting and forensic work."
 included:
   - title: Cloud accounting setup
     text: Software selection, chart of accounts, bank feeds and app integrations set up properly from the start.
