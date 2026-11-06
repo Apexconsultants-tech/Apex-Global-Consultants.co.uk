@@ -37,6 +37,7 @@ function initHelp(signal: AbortSignal) {
   const btn = combo.querySelector<HTMLButtonElement>('[data-combo-btn]')!;
   const list = combo.querySelector<HTMLElement>('[data-combo-list]')!;
   const valueEl = btn.querySelector<HTMLElement>('.help-value')!;
+  const submitBtn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
   const opts = [...list.querySelectorAll<HTMLElement>('[role=option]')];
 
   // Swap the native select for the custom control.
@@ -63,10 +64,20 @@ function initHelp(signal: AbortSignal) {
     list.hidden = false;
     btn.setAttribute('aria-expanded', 'true');
     requestAnimationFrame(() => list.classList.add('is-open'));
+    // The list opens downwards OVER the page and scrolls inside itself, so the page (and the
+    // "Show me" button) stays where it is. Only if the field sits too low to show a useful list
+    // is the field lifted once to just under the sticky header.
+    const fieldTop = btn.getBoundingClientRect().top;
+    let room = innerHeight - btn.getBoundingClientRect().bottom - 24;
+    if (room < 260) {
+      const lift = fieldTop - 128;
+      if (lift > 0) {
+        scrollBy({ top: lift, behavior: reducedMotion() ? 'auto' : 'smooth' });
+        room += lift;
+      }
+    }
+    list.style.maxHeight = `${Math.max(220, Math.min(room, 640))}px`;
     setActive(selected() >= 0 ? selected() : 0);
-    // Always opens downwards: if the list would run off the screen, bring it into view.
-    const r = list.getBoundingClientRect();
-    if (r.bottom > innerHeight) scrollBy({ top: r.bottom - innerHeight + 16, behavior: reducedMotion() ? 'auto' : 'smooth' });
   };
   const close = () => {
     if (!isOpen()) return;
@@ -81,7 +92,11 @@ function initHelp(signal: AbortSignal) {
     combo.dataset.chosen = '';
     native.value = opts[i].dataset.value!;
     close();
-    btn.focus();
+    // Hand straight over to "Show me": it is on screen, focused and highlighted.
+    submitBtn.classList.remove('is-ready');
+    void submitBtn.offsetWidth;
+    submitBtn.classList.add('is-ready');
+    submitBtn.focus({ preventScroll: true });
   };
 
   btn.addEventListener('click', () => (isOpen() ? close() : open()), { signal });
