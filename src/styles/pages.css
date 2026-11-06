@@ -74,6 +74,33 @@
 .intro-text { margin-inline: auto; font-size: var(--fs-lead); }
 .intro-lead { font-size: clamp(1.1875rem, 1.1rem + .4vw, 1.4375rem); font-weight: 600; color: var(--color-primary-deep); line-height: 1.45; }
 .legal h2 { margin-top: 1.6em; }
+/* FAQ sections: decorative outlined words in the side space (FaqDeco.astro), wide screens only. */
+.faq-zone { position: relative; isolation: isolate; overflow: hidden; }
+.faq-zone > .wrap { position: relative; z-index: 1; }
+.faq-deco { display: none; }
+@media (min-width: 1200px) {
+  .faq-deco { display: block; position: absolute; inset: 0; z-index: 0; pointer-events: none; user-select: none; }
+  .faq-deco span {
+    --c: color-mix(in srgb, var(--color-primary) 34%, var(--color-white));
+    position: absolute; white-space: nowrap; line-height: 1;
+    font-family: var(--font-head); font-weight: 800; letter-spacing: -0.03em;
+    font-size: calc(clamp(2.75rem, 0.5rem + 3.4vw, 4.75rem) * var(--fit, 1));
+    color: transparent; -webkit-text-stroke: 1.5px var(--c); opacity: .7;
+  }
+  .faq-deco span:nth-child(even) { --c: color-mix(in srgb, var(--color-secondary) 36%, var(--color-white)); }
+  /* two words drawn as soft solid shapes for variety */
+  .faq-deco span:nth-child(2), .faq-deco span:nth-child(5) { color: color-mix(in srgb, var(--color-primary) 7%, var(--color-white)); -webkit-text-stroke: 0; opacity: 1; }
+  .faq-deco span:nth-child(5) { color: color-mix(in srgb, var(--color-secondary) 9%, var(--color-white)); }
+  .tinted .faq-deco span:nth-child(2) { color: color-mix(in srgb, var(--color-primary) 13%, var(--color-white)); }
+  .tinted .faq-deco span:nth-child(5) { color: color-mix(in srgb, var(--color-secondary) 14%, var(--color-white)); }
+  .faq-deco span:nth-child(1) { left: 3%; top: 8%; transform: rotate(-11deg); }
+  .faq-deco span:nth-child(2) { left: -1%; top: 40%; transform: rotate(7deg) skewX(-6deg); }
+  .faq-deco span:nth-child(3) { left: 4%; top: 72%; transform: rotate(-5deg); }
+  .faq-deco span:nth-child(4) { right: 3%; top: 12%; transform: rotate(9deg); }
+  .faq-deco span:nth-child(5) { right: -1%; top: 44%; transform: rotate(-8deg) skewX(6deg); }
+  .faq-deco span:nth-child(6) { right: 5%; top: 76%; transform: rotate(4deg); }
+}
+@media (prefers-contrast: more) { .faq-deco { display: none; } }
 /* legal pages: contents + summary */
 .legal-grid { display: grid; gap: var(--s3); }
 .legal-main { min-width: 0; }

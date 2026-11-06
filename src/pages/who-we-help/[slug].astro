@@ -1,4 +1,5 @@
 ---
+import FaqDeco from '../../components/page/FaqDeco.astro';
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/page/PageHero.astro';
@@ -78,7 +79,8 @@ const crumbs = [
 
   {
     faqs.length > 0 && (
-      <section class="section" aria-labelledby="aud-faq-title">
+      <section class="section faq-zone" aria-labelledby="aud-faq-title">
+        <FaqDeco words={services.map((x) => x.service.data.title.split(' ')[0])} />
         <div class="wrap narrow">
           <h2 id="aud-faq-title" class="h2 center">Common questions</h2>
           <FaqList items={faqs} />

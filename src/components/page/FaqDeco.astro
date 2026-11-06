@@ -1,0 +1,18 @@
+---
+/**
+ * Decorative backdrop for FAQ sections: large outlined words (tax, advisory and the page's services)
+ * in very light sky blue and green, tilted, filling the empty side space on wide screens.
+ * Purely visual: aria-hidden, behind the content, hidden below 1200px. Place it as the first child
+ * of a section with the `faq-zone` class.
+ */
+interface Props {
+  words?: readonly string[];
+}
+const defaults = ['Tax', 'Advisory', 'VAT', 'Payroll', 'Accounts', 'IFRS'];
+const { words = [] } = Astro.props;
+const list = [...new Set([...words, ...defaults])].slice(0, 6);
+---
+
+<div class="faq-deco" aria-hidden="true">
+  {list.map((w) => <span style={`--fit:${Math.min(1, 8 / Math.max(w.length, 1)).toFixed(2)}`}>{w}</span>)}
+</div>

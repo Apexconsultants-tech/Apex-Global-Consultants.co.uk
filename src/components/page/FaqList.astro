@@ -20,3 +20,26 @@ const { items } = Astro.props;
     ))
   }
 </div>
+
+<script>
+  // On devices with a mouse, an answer opens while the pointer rests on its question and closes when
+  // it leaves (short delays avoid flicker). Touch and keyboard keep the normal click/Enter toggle.
+  document.addEventListener('astro:page-load', () => {
+    const hover = matchMedia('(hover: hover) and (pointer: fine)');
+    document.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach((item) => {
+      if (item.dataset.hoverReady) return;
+      item.dataset.hoverReady = '1';
+      let timer = 0;
+      const set = (open: boolean, delay: number) => {
+        clearTimeout(timer);
+        timer = window.setTimeout(() => (item.open = open), delay);
+      };
+      item.addEventListener('pointerenter', (e) => { if (hover.matches && e.pointerType === 'mouse') set(true, 120); });
+      item.addEventListener('pointerleave', (e) => { if (hover.matches && e.pointerType === 'mouse') set(false, 180); });
+      // A mouse click while hovering would otherwise close the answer it just opened.
+      item.querySelector('summary')?.addEventListener('click', (e) => {
+        if (hover.matches && e.detail > 0 && item.open) e.preventDefault();
+      });
+    });
+  });
+</script>

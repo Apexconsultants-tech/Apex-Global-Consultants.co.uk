@@ -1,4 +1,5 @@
 ---
+import FaqDeco from '../components/page/FaqDeco.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/page/PageHero.astro';
 import FaqList from '../components/page/FaqList.astro';
@@ -118,7 +119,8 @@ const promises = ['Fixed and transparent fees', 'Flexible and scalable', 'UK-bas
 
   {
     faqs.length > 0 && (
-      <section class="section tinted" aria-labelledby="fees-faq">
+      <section class="section tinted faq-zone" aria-labelledby="fees-faq">
+        <FaqDeco words={['Fixed fees', 'Bookkeeping', 'Payroll', 'Tax', 'Advisory', 'VAT']} />
         <div class="wrap narrow">
           <h2 id="fees-faq" class="h2 center">Questions about fees</h2>
           <FaqList items={faqs} />

@@ -1,4 +1,5 @@
 ---
+import FaqDeco from '../../../components/page/FaqDeco.astro';
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -148,7 +149,8 @@ const schema = [
 
   {
     faqs.length > 0 && (
-      <section class="section tinted" id="faqs" aria-labelledby="faq-title">
+      <section class="section tinted faq-zone" id="faqs" aria-labelledby="faq-title">
+        <FaqDeco words={[d.title.split(' ')[0], g.data.title.split(' ')[0], 'Tax', 'Advisory']} />
         <div class="wrap narrow">
           <h2 id="faq-title" class="h2 center">{d.title} questions</h2>
           <FaqList items={faqs} />

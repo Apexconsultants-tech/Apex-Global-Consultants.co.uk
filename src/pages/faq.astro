@@ -1,4 +1,5 @@
 ---
+import FaqDeco from '../components/page/FaqDeco.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/page/PageHero.astro';
 import FaqList from '../components/page/FaqList.astro';
@@ -8,14 +9,14 @@ import InPageNav from '../components/page/InPageNav.astro';
 import { faqSchema } from '../lib/schema';
 
 const topics = [
-  { id: 'getting-started', title: 'Getting started' },
-  { id: 'fees', title: 'Fees and pricing' },
-  { id: 'individuals', title: 'Self Assessment tax returns' },
-  { id: 'tax', title: 'Making Tax Digital and VAT' },
-  { id: 'payroll', title: 'Payroll and directors' },
-  { id: 'companies', title: 'Companies, audit and reporting' },
-  { id: 'general', title: 'Working with us' },
-  { id: 'overseas', title: 'Overseas companies' },
+  { id: 'getting-started', title: 'Getting started', words: ['Advice', 'Tax', 'Start-up', 'Accounts'] },
+  { id: 'fees', title: 'Fees and pricing', words: ['Fixed fees', 'Bookkeeping', 'Payroll', 'Tax'] },
+  { id: 'individuals', title: 'Self Assessment tax returns', words: ['Tax return', 'Sole trader', 'HMRC', 'Tax'] },
+  { id: 'tax', title: 'Making Tax Digital and VAT', words: ['MTD', 'VAT', 'Digital', 'Tax'] },
+  { id: 'payroll', title: 'Payroll and directors', words: ['Payroll', 'PAYE', 'Pensions', 'Directors'] },
+  { id: 'companies', title: 'Companies, audit and reporting', words: ['Audit', 'IFRS', 'FRS 102', 'Advisory'] },
+  { id: 'general', title: 'Working with us', words: ['Advisory', 'Cloud', 'Accounts', 'Tax'] },
+  { id: 'overseas', title: 'Overseas companies', words: ['Global', 'IFRS', 'UK entity', 'Advisory'] },
 ] as const;
 const sets = await Promise.all(topics.map(async (t) => ({ ...t, items: (await getFaqs({ topic: t.id })).map((f) => f.data) })));
 const all = sets.flatMap((s) => s.items);
@@ -37,7 +38,8 @@ const crumbs = [
     sets
       .filter((s) => s.items.length)
       .map((s, i) => (
-        <section class:list={['section-sm', { tinted: i % 2 === 1 }]} aria-labelledby={`faq-${s.id}`}>
+        <section class:list={['section-sm', 'faq-zone', { tinted: i % 2 === 1 }]} aria-labelledby={`faq-${s.id}`}>
+          <FaqDeco words={s.words} />
           <div class="wrap narrow">
             <h2 id={`faq-${s.id}`} class="h3-lg">{s.title}</h2>
             <FaqList items={s.items} />
