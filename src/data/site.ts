@@ -8,6 +8,8 @@ export const site = {
   name: 'Apex Global',
   legalName: 'Apex Global Consulting Services Limited',
   tagline: 'Beyond numbers. Beyond borders.',
+  // Shown under the logo in the header and footer.
+  serviceLine: ['Tax', 'Accounting', 'Assurance', 'Consulting'],
   companyNumber: '15905648',
   registration: 'Registered in England and Wales under the Companies Act 2006',
   registeredIn: 'England and Wales',
@@ -20,6 +22,9 @@ export const site = {
     country: 'United Kingdom',
     countryCode: 'GB',
   },
+  // Registered office at Companies House (differs from the trading office above).
+  registeredOffice: 'Office 5793, Peregrine Road, Ilford, England, IG6 3SZ',
+  icoNumber: 'ZB825809',
   geo: { lat: 53.3936, lng: -2.3586 }, // approximate: Atlantic Street, Altrincham
   phone: { display: '+44 (0) 204 553 8806', tel: '+442045538806' },
   email: 'info@apexglobalconsultants.co.uk',
@@ -35,8 +40,11 @@ export const site = {
   ] as { name: 'LinkedIn' | 'Facebook' | 'Instagram' | 'X'; url: string }[],
   hours: 'Monday to Friday, 9:00 to 17:30',
   compliance: {
-    amlSupervisor: '[TO VERIFY] anti-money-laundering supervisory body',
-    professionalBody: '[TO VERIFY] professional body membership, if any',
+    amlSupervisorName: 'the Institute of Accountants and Bookkeepers (IAB)',
+    amlSupervisor:
+      'Apex Global Consulting Services Limited is supervised for anti-money laundering purposes by the Institute of Accountants and Bookkeepers (IAB).',
+    professionalBody:
+      'Our director, Sandeep Kumar, is a Fellow of the Institute of Chartered Accountants of Pakistan (FCA, ICAP) and a member of the Association of Chartered Certified Accountants (ACCA).',
     piInsurer: '[TO VERIFY] professional indemnity insurer',
     piTerritory: '[TO VERIFY] territorial coverage of PI insurance',
   },
@@ -46,13 +54,15 @@ export const site = {
     title: 'Accounting and tax,',
     titleAccent: 'handled with precision.',
     line: 'One dedicated accountant for your books, payroll, tax and reporting, at a fixed fee agreed before we start.',
-    points: ['Fixed fees, VAT shown upfront', 'UK and overseas companies', 'Cloud accounting set up for you'],
+    points: ['Fixed fees', 'UK and overseas companies', 'Cloud accounting set up for you'],
   },
 } as const;
 
 export const whatsappHref = `https://wa.me/${site.whatsapp.number}`;
 export const telHref = `tel:${site.phone.tel}`;
 export const mailHref = `mailto:${site.email}`;
+/** "File your tax return" buttons: the contact form with Taxation preselected (forms.ts). */
+export const taxReturnHref = '/contact/?service=Taxation&subject=Tax%20return#book';
 // Standard UK order: office, street, town, county, postcode, country.
 export const addressLines = [
   site.address.line1,

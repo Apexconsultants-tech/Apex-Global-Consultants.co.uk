@@ -10,7 +10,7 @@ seoDescription: Fixed-fee bookkeeping, tax, payroll and annual accounts for UK s
 promise: "Reliable numbers, on-time filings and an accountant who knows your business."
 benefits:
   - "One dedicated accountant, not a call centre"
-  - "Fixed monthly fee agreed upfront, VAT stated"
+  - "Fixed monthly fee agreed upfront"
   - "Books, payroll and tax handled in one place"
 challenges:
   - Books that are always a few months behind, so decisions are made on old numbers.
@@ -25,6 +25,6 @@ services:
   - management-reporting
 ---
 
-You run the business; we keep the numbers accurate and the filings on time. You get one dedicated accountant who learns how your business works, a fixed fee agreed upfront with VAT shown, and clear answers when you need them.
+You run the business; we keep the numbers accurate and the filings on time. You get one dedicated accountant who learns how your business works, a fixed fee agreed upfront, and clear answers when you need them.
 
 As you grow, we add what you need: payroll when you take on staff, management reporting when you need sharper information, and cloud accounting that scales with you.

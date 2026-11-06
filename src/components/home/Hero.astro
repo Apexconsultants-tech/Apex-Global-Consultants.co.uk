@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import HeroScene from './HeroScene.astro';
-import { site } from '../../data/site';
+import { site, taxReturnHref } from '../../data/site';
 import { getSoftware } from '../../lib/content';
 
 /**
@@ -37,6 +37,7 @@ const logoH = (shape: string) => (shape === 'round' ? 30 : 20);
       </ul>
       <div class="hero-actions">
         <a href="/contact/#book" class="btn btn-primary btn-lg" data-track="booking">Book a free consultation</a>
+        <a href={taxReturnHref} class="btn btn-green btn-lg" data-track="tax_return">File your tax return</a>
         <a href="#services" class="hero-link">Explore our services <Icon name="arrow" size={18} /></a>
       </div>
       <div class="hero-soft">

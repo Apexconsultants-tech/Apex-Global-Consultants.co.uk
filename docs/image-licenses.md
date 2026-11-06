@@ -46,6 +46,9 @@ with visible third-party logos; anything without a licence that allows commercia
 | `src/assets/hero/hero-square.jpg` | Unsplash Licence | https://images.unsplash.com/photo-1551836022-d5d88e9218df | [TO VERIFY] photographer name from unsplash.com | 2026-10-31 | Square crop, light brand grade |
 | `src/assets/hero/scene-team.jpg`, `scene-laptop.jpg` | (see rows above) | | | | Alternative hero scenes, not used yet |
 | `src/assets/software/*.png` | Third-party trademarks, supplied by client | WhatsApp images from client | Xero, Intuit (QuickBooks), Sage, FreeAgent | 2026-10-30 | Background removed; use per each vendor's brand guidelines |
+| `src/assets/software/freeagent.png` | Third-party trademark (FreeAgent) | Official vector logo from freeagent.com, replaced at the client's request | FreeAgent Central Ltd | 2026-11-06 | Rendered in FreeAgent brand blue #0069bf on transparent, 1008x240 |
+| `src/assets/insights/making-tax-digital.jpg`, `payroll-essentials.jpg`, `audit-thresholds.jpg`, `ifrs-for-smes.jpg`, `cash-flow-errors.jpg`, `taxi-drivers-tax.jpg`, `start-up-loans.jpg` | Original artwork (Apex Global) | Generated from SVG in the brand palette, using the site's own line icons | Apex Global website build | 2026-11-06 | None; no text, no third-party marks |
+| `src/content/audiences/individuals-and-sole-traders.md` image | (see `src/assets/services/taxation.jpg` row) | | | | Reuses the taxation photo |
 | `src/assets/badges/sample-badge-*.png` | Sample (draft only, never published) | Generated | n/a | n/a | Replace with client-supplied logos |
 
 **Rejected:** the previously supplied `hero.mp4` (Tower Bridge sunset) is an iStock by Getty Images
