@@ -1,5 +1,6 @@
 ---
 title: 'Payroll essentials for small businesses and directors (2026/27)'
+seoTitle: "Payroll guide 2026/27 for employers and directors | Apex Global"
 description: What employers and company directors must do on payroll in 2026/27, what an employee really costs, the key deadlines and how to stay compliant.
 taxYear: '2026/27'
 published: 2026-11-06
@@ -7,7 +8,7 @@ reviewed: 2026-11-06
 reviewer: 'Sandeep Kumar, Director'
 author: 'Apex Global Consulting Services'
 image: ../../assets/insights/payroll-essentials.jpg
-imageAlt: Illustration of a payslip icon beside a bar chart, representing payroll
+imageAlt: Reading glasses resting on a laptop keyboard beside a calculator, ready for a payroll run
 topics: [Payroll, Directors, Employers]
 featured: true
 ---

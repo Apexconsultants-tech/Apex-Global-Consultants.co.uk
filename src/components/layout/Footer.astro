@@ -8,9 +8,11 @@ import { getGroups, groupHref } from '../../lib/content';
 const groups = await getGroups();
 const company = [
   { label: 'About us', href: '/about/' },
+  { label: 'Our team', href: '/team/' },
   { label: 'Who we help', href: '/who-we-help/' },
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Insights', href: '/insights/' },
+  { label: 'FAQs', href: '/faq/' },
   { label: 'Contact', href: '/contact/' },
 ];
 const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLines.join(', '))}`;

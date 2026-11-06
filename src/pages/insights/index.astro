@@ -13,8 +13,8 @@ const crumbs = [
 ---
 
 <BaseLayout
-  title="Insights: tax and reporting updates | Apex Global"
-  description="Practical articles on UK tax, Making Tax Digital, FRS 102 and IFRS reporting from Apex Global, each showing the tax year, review date and reviewer."
+  title="UK tax and accounting guides | Apex Global insights"
+  description="Plain-English guides on Making Tax Digital, Self Assessment, payroll, audit thresholds, Start Up Loans and IFRS reporting, dated and reviewed by our accountants."
   breadcrumbs={crumbs}
 >
   <PageHero title="Insights" summary="Tax and reporting updates in plain English, reviewed and dated." crumbs={crumbs} />
@@ -25,7 +25,7 @@ const crumbs = [
           <ul role="list" class="ins-grid">
             {items.map((a, i) => (
               <li class="ins-card">
-                <Image src={a.data.image} alt="" widths={[400, 640, 800]} sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw" class="ins-img" loading={i < 3 ? 'eager' : 'lazy'} />
+                <Image src={a.data.image} alt={a.data.imageAlt} widths={[400, 640, 800]} sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw" class="ins-img" loading={i < 3 ? 'eager' : 'lazy'} />
                 <div class="ins-body">
                   <p class="ins-meta">
                     <span class="tag">Tax year {a.data.taxYear}</span>

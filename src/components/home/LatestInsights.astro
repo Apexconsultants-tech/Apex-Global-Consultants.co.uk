@@ -28,7 +28,7 @@ const items = (await getInsights(samples)).slice(0, 3);
             <li class="ins-card">
               <Image
                 src={a.data.image}
-                alt=""
+                alt={a.data.imageAlt}
                 widths={[400, 640, 800]}
                 sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
                 class="ins-img"

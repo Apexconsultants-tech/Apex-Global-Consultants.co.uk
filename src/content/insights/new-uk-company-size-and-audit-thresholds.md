@@ -1,13 +1,14 @@
 ---
 title: 'New UK company size thresholds: less reporting and fewer audits'
-description: UK company size limits rose by around 50% for years starting on or after 6 April 2025. See the new thresholds and what changes if your company moves down a size.
+seoTitle: "New UK company size and audit thresholds | Apex Global"
+description: "UK company size limits rose by around 50% from 6 April 2025. See the new micro, small and medium thresholds and when your company is audit exempt."
 taxYear: '2026/27'
 published: 2026-11-06
 reviewed: 2026-11-06
 reviewer: 'Sandeep Kumar, Director'
 author: 'Apex Global Consulting Services'
 image: ../../assets/insights/audit-thresholds.jpg
-imageAlt: Illustration of an office building icon beside a falling bar chart, representing company size limits
+imageAlt: Modern red-brick office building with large windows
 topics: [Companies House, Audit, Annual accounts]
 ---
 

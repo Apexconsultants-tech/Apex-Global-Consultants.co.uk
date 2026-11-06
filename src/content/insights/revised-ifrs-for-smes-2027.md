@@ -1,5 +1,6 @@
 ---
 title: 'Revised IFRS for SMEs: what changes from 1 January 2027'
+seoTitle: "Revised IFRS for SMEs 2027: what changes | Apex Global"
 description: The third edition of the IFRS for SMEs Accounting Standard brings it closer to full IFRS. See the six revised sections and what each means for you.
 taxYear: '2026/27'
 published: 2026-11-06
@@ -7,7 +8,7 @@ reviewed: 2026-11-06
 reviewer: 'Sandeep Kumar, Director'
 author: 'Apex Global Consulting Services'
 image: ../../assets/insights/ifrs-for-smes.jpg
-imageAlt: Illustration of a balance scales icon beside a bar chart, representing accounting standards
+imageAlt: Finance colleagues discussing accounting figures around a laptop in a meeting
 topics: [IFRS for SMEs, Financial reporting]
 ---
 

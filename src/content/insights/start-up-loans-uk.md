@@ -1,5 +1,6 @@
 ---
 title: 'Start Up Loans in the UK: who can apply, how it works and what it costs'
+seoTitle: "Start Up Loans UK: eligibility, costs and how to apply"
 description: The government-backed Start Up Loan explained, covering eligibility, how much you can borrow, the 7.5% fixed rate, repayment examples and how to apply.
 taxYear: '2026/27'
 published: 2026-11-06
@@ -7,7 +8,7 @@ reviewed: 2026-11-06
 reviewer: 'Sandeep Kumar, Director'
 author: 'Apex Global Consulting Services'
 image: ../../assets/insights/start-up-loans.jpg
-imageAlt: Illustration of a growing leaf beside a pound symbol, representing business funding
+imageAlt: A small start-up team planning around a table with laptops, notebooks and coffee
 topics: [Funding, Start-ups]
 ---
 
