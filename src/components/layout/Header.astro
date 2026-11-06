@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
-import { site, mainNav, telHref, mailHref, whatsappHref } from '../../data/site';
+import { site, mainNav, telHref, mailHref, whatsappHref, taxReturnHref } from '../../data/site';
 import { getGroups, getInsights, groupHref, serviceHref, formatDate } from '../../lib/content';
 
 interface Props {
@@ -38,6 +38,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     <div class="wrap header-row">
       <a href="/" class="brand" aria-label="Apex Global Consulting Services, home">
         <Logo width={250} eager class="brand-logo" />
+        <span class="brand-line">{site.serviceLine.map((w, i) => <>{i > 0 && <span class="brand-sep" aria-hidden="true" />}<span>{w}{i < site.serviceLine.length - 1 && <span class="sr-only">,</span>}</span></>)}</span>
       </a>
 
       <nav class="main-nav" aria-label="Main">
@@ -181,6 +182,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
   </nav>
   <div class="mmenu-foot">
     <a href="/contact/#book" class="btn btn-primary btn-block" data-track="booking">Book a free consultation</a>
+    <a href={taxReturnHref} class="btn btn-green btn-block" data-track="tax_return">File your tax return</a>
     <div class="mmenu-contact">
       <a href={telHref} data-track="call"><Icon name="phone" size={20} />Call us</a>
       <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={20} />WhatsApp</a>

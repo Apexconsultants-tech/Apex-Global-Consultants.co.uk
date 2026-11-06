@@ -19,8 +19,8 @@ const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 <footer class="site-footer">
   <div class="wrap footer-top">
     <div class="footer-brand">
-      <a href="/" aria-label="Apex Global Consulting Services, home"><Logo width={260} /></a>
-      <p class="footer-desc">Accounting, tax and financial reporting for UK and international businesses, from Altrincham.</p>
+      <a href="/" class="brand brand--footer" aria-label="Apex Global Consulting Services, home"><Logo width={260} /><span class="brand-line">{site.serviceLine.map((w, i) => <>{i > 0 && <span class="brand-sep" aria-hidden="true" />}<span>{w}{i < site.serviceLine.length - 1 && <span class="sr-only">,</span>}</span></>)}</span></a>
+      <p class="footer-desc">Accounting, tax and financial reporting for UK and international businesses, from Altrincham, Manchester, UK.</p>
     </div>
 
     <nav class="footer-cols" aria-label="Footer">
@@ -50,7 +50,7 @@ const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
     <div class="wrap footer-legal-row">
       <p>
         © <span data-year>{new Date().getFullYear()}</span> {site.legalName}. Registered in England and Wales, Company No. {site.companyNumber}.
-        Registered office as above.
+        Registered office: {site.registeredOffice}.
       </p>
       <ul role="list" class="footer-legal-links">
         {legalLinks.filter((l) => l.label !== 'Sitemap').map((l) => <li><a href={l.href}>{l.label}</a></li>)}

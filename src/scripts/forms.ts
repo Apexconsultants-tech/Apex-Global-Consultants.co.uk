@@ -48,8 +48,22 @@ const statusMessages: Record<string, string> = {
   error: 'Sorry, your message could not be sent. Please try again, or call or email us directly.',
 };
 
+/** Links such as "File your tax return" open the contact form with a service and subject filled in. */
+function prefill(params: URLSearchParams) {
+  const form = document.querySelector<HTMLFormElement>('#book form[data-form]');
+  if (!form) return;
+  const service = params.get('service');
+  const select = form.querySelector<HTMLSelectElement>('select[name="service"]');
+  if (service && select && [...select.options].some((o) => o.value === service)) select.value = service;
+  const subject = params.get('subject');
+  const input = form.querySelector<HTMLInputElement>('input[name="subject"]');
+  if (subject && input && !input.value) input.value = subject.slice(0, 120);
+}
+
 export function initForms(signal: AbortSignal) {
-  const status = new URLSearchParams(location.search).get('status');
+  const params = new URLSearchParams(location.search);
+  prefill(params);
+  const status = params.get('status');
   const box = status && statusMessages[status] ? document.querySelector<HTMLElement>('#book [data-form-error]') : null;
   if (box) {
     box.textContent = statusMessages[status!];

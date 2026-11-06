@@ -3,7 +3,7 @@ import { env } from '../../data/site';
 import { getServices } from '../../lib/content';
 
 /**
- * Callback form (short) or enquiry form (contact page). Field names match public/contact.php.
+ * Call back form (short) or enquiry form (contact page). Field names match public/contact.php.
  * Never asks for UTR, NI numbers, bank details or documents (those go through the client portal).
  * Turnstile loads only when the visitor first interacts with the form (forms.ts).
  */
@@ -58,11 +58,27 @@ const services = variant === 'enquiry' ? await getServices() : [];
   </div>
   {
     variant === 'enquiry' && (
+      <div class="form-field">
+        <label class="label" for={id('company')}>Company (optional)</label>
+        <input class="field" id={id('company')} name="company" type="text" autocomplete="organization" maxlength="120" />
+      </div>
+    )
+  }
+  <div class="form-field">
+    <label class="label" for={id('subject')}>Subject {variant === 'callback' ? <span aria-hidden="true">*</span> : '(optional)'}</label>
+    <input class="field" id={id('subject')} name="subject" type="text" required={variant === 'callback'} maxlength="120" />
+  </div>
+  {
+    variant === 'callback' ? (
+      <div class="form-field">
+        <label class="label" for={id('message')}>Description (optional)</label>
+        <textarea class="field field-area field-area--sm" id={id('message')} name="message" maxlength="3000" aria-describedby={id('msg-hint')} />
+        <p id={id('msg-hint')} class="form-note">
+          A few words about what you need. Please do not include tax references, National Insurance numbers or bank details.
+        </p>
+      </div>
+    ) : (
       <>
-        <div class="form-field">
-          <label class="label" for={id('company')}>Company (optional)</label>
-          <input class="field" id={id('company')} name="company" type="text" autocomplete="organization" maxlength="120" />
-        </div>
         <div class="form-field">
           <label class="label" for={id('message')}>How can we help? <span aria-hidden="true">*</span></label>
           <textarea class="field field-area" id={id('message')} name="message" required maxlength="3000" aria-describedby={id('msg-hint')} />
@@ -80,7 +96,7 @@ const services = variant === 'enquiry' ? await getServices() : [];
   <div class="turnstile-slot" data-sitekey={env.turnstileSiteKey}></div>
   <noscript><p class="form-note">Please enable JavaScript to send this form, or call or email us instead.</p></noscript>
   <p class="form-error" role="alert" data-form-error hidden></p>
-  <button type="submit" class="btn btn-primary btn-block">{variant === 'callback' ? 'Request a callback' : 'Send enquiry'}</button>
+  <button type="submit" class="btn btn-primary btn-block">{variant === 'callback' ? 'Request a call back' : 'Send enquiry'}</button>
   <p class="form-note">
     By sending this form you agree we may contact you about your enquiry. See our <a href="/privacy/">privacy notice</a>.
   </p>

@@ -10,7 +10,7 @@ const audiences = await getAudiences();
   <div class="wrap">
     <header class="section-head">
       <p class="eyebrow">Who we help</p>
-      <h2 id="who-title" class="h2">Built around three kinds of client</h2>
+      <h2 id="who-title" class="h2">Built around four kinds of client</h2>
     </header>
     <ul role="list" class="who-grid">
       {
@@ -20,7 +20,7 @@ const audiences = await getAudiences();
               src={a.data.image}
               alt={a.data.imageAlt}
               widths={[400, 640, 800]}
-              sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1280px) 320px, (min-width: 768px) 50vw, 100vw"
               class="who-img"
               loading="lazy"
             />

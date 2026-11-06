@@ -14,7 +14,7 @@ const crumbs = [
 const values = [
   { icon: 'scales', title: 'Technical depth', text: 'IFRS, UK GAAP and tax knowledge usually found in large firms, applied to owner-managed businesses.' },
   { icon: 'users', title: 'One point of contact', text: 'A dedicated accountant who knows your business and answers your calls.' },
-  { icon: 'pound', title: 'Fixed, clear fees', text: 'A written fixed fee before we start, with VAT shown. Extra work is always agreed first.' },
+  { icon: 'pound', title: 'Fixed, clear fees', text: 'A written fixed fee before we start. Extra work is always agreed first.' },
   { icon: 'globe', title: 'UK and beyond', text: 'Support for UK companies and for overseas groups running a UK entity.' },
 ];
 ---
@@ -41,10 +41,18 @@ const values = [
           service of a smaller practice.
         </p>
         <p>
-          We support owner-managed businesses, UK subsidiaries of overseas groups and in-house finance teams with bookkeeping, tax, payroll, compliance and
-          IFRS and FRS 102 reporting.
+          {site.legalName} was set up in England by Sandeep Kumar. Sandeep is a fellow chartered accountant and a chartered certified accountant with more
+          than 15 years in external audit and advisory, including managerial positions at PwC UK in London and at BDO overseas.
         </p>
-        <p class="todo">[TO VERIFY] Add the firm's story: founding year, founders' background and key qualifications.</p>
+        <p>
+          During that time he audited and advised businesses in the United Kingdom and overseas, from owner-managed companies to international groups. He
+          saw that growing businesses needed the same technical expertise as large companies, but often found it expensive and rarely dealt with the same
+          person twice.
+        </p>
+        <p>
+          Today we support individuals, sole traders, owner-managed businesses, UK subsidiaries of overseas groups and in-house finance teams with
+          bookkeeping, tax, payroll, compliance and IFRS and FRS 102 reporting.
+        </p>
       </div>
     </div>
   </section>
@@ -75,14 +83,16 @@ const values = [
         <dl class="details">
           <div><dt>Legal name</dt><dd>{site.legalName}</dd></div>
           <div><dt>Registration</dt><dd>{site.registration}, Company No. {site.companyNumber}</dd></div>
-          <div><dt>Registered office</dt><dd>{addressLines.join(', ')}</dd></div>
+          <div><dt>Registered office</dt><dd>{site.registeredOffice}</dd></div>
+          <div><dt>Trading office</dt><dd>{addressLines.join(', ')}</dd></div>
+          <div><dt>ICO registration</dt><dd>{site.icoNumber}</dd></div>
         </dl>
       </div>
       <div>
         <h2 class="h3-lg">Regulation and insurance</h2>
         <dl class="details">
-          <div><dt>Anti-money-laundering supervision</dt><dd class="todo">{site.compliance.amlSupervisor}</dd></div>
-          <div><dt>Professional body</dt><dd class="todo">{site.compliance.professionalBody}</dd></div>
+          <div><dt>Anti-money laundering supervision</dt><dd>{site.compliance.amlSupervisor}</dd></div>
+          <div><dt>Professional body</dt><dd>{site.compliance.professionalBody}</dd></div>
           <div><dt>Professional indemnity insurance</dt><dd class="todo">{site.compliance.piInsurer}; {site.compliance.piTerritory}</dd></div>
         </dl>
       </div>

@@ -20,6 +20,7 @@ const tone = ['blue-deep', 'blue', 'green-deep', 'green'];
       <div class="help-combo" data-combo>
         <select id="help-select" name="service" class="help-native" aria-labelledby="help-label" required>
           <option value="" disabled selected>choose a service…</option>
+          <option value="/services/">All services</option>
           {
             groups.map((g) => (
               <optgroup label={g.data.title}>
@@ -47,6 +48,11 @@ const tone = ['blue-deep', 'blue', 'green-deep', 'green'];
         </button>
 
         <div id="help-list" class="help-list" role="listbox" aria-labelledby="help-label" data-combo-list hidden>
+          <div role="option" id="help-o-all" class="help-opt help-opt--all" aria-selected="false" data-value="/services/">
+            <Icon name="clipboard" size={20} class="help-opt-icon" />
+            <span class="help-opt-text">All services</span>
+            <Icon name="check" size={18} class="help-opt-check" />
+          </div>
           {
             groups.map((g, gi) => (
               <div role="group" class="help-group" aria-labelledby={`help-g-${g.id}`} data-tone={tone[gi % 4]}>

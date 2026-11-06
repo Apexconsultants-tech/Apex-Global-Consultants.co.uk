@@ -130,6 +130,7 @@ $email = apex_line('email', 150);
 $phone = preg_replace('/[^0-9+()\s-]/', '', apex_line('phone', 30)) ?? '';
 $company = apex_line('company', 120);
 $service = apex_line('service', 80);
+$subject = apex_line('subject', 120);
 $bestTime = apex_line('best_time', 20);
 $source = apex_line('source', 200);
 $message = apex_text('message', 3000);
@@ -163,13 +164,14 @@ function apex_mailer(array $cfg): PHPMailer
     return $m;
 }
 
-$labels = ['callback' => 'callback request', 'enquiry' => 'enquiry', 'newsletter' => 'newsletter signup'];
+$labels = ['callback' => 'call back request', 'enquiry' => 'enquiry', 'newsletter' => 'newsletter signup'];
 $lines = array_filter([
     'Form' => ucfirst($labels[$type]),
     'Name' => $name,
     'Email' => $email,
     'Phone' => $phone,
     'Company' => $company,
+    'Subject' => $subject,
     'Service' => $service,
     'Best time to call' => $bestTime,
     'Page' => $source,
@@ -187,7 +189,7 @@ try {
     $m = apex_mailer($cfg);
     $m->addAddress((string) $cfg['to_email']);
     $m->addReplyTo($email, $name); // PHPMailer validates and rejects line breaks
-    $m->Subject = 'Apex Global website enquiry: ' . $labels[$type] . ($name !== '' ? ' from ' . $name : '');
+    $m->Subject = 'Apex Global website enquiry: ' . $labels[$type] . ($name !== '' ? ' from ' . $name : '') . ($subject !== '' ? ' (' . $subject . ')' : '');
     $m->Body = $body;
     $m->send();
 } catch (MailException $e) {
