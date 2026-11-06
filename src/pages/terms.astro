@@ -1,33 +1,87 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { site } from '../data/site';
+import { site, mailHref } from '../data/site';
 ---
 
 <LegalLayout
   title="Website terms of use"
   path="/terms/"
-  updated="30 October 2026"
+  updated="29 October 2026"
   description="Terms of use for the Apex Global Consulting Services website, including the general-information disclaimer for articles and website content."
 >
-  <p class="todo">[TO VERIFY] Starting draft. Have these terms reviewed before publishing.</p>
-  <h2>About these terms</h2>
   <p>
-    This website is operated by {site.legalName}, {site.registration}, Company No. {site.companyNumber}. By using the site you accept these terms.
+    These terms govern your use of www.apexglobalconsultants.co.uk. By using the website you accept them. If you do not agree, please do not use the
+    website.
   </p>
-  <h2>Information, not advice</h2>
+
+  <h2>1. About us</h2>
   <p>
-    Content on this website, including insights and FAQs, is general information only. It is not tax, accounting, financial or legal advice and does not
-    create a client relationship. We provide advice only under a signed engagement letter, based on your circumstances.
+    This website is operated by {site.legalName} ("Apex Global", "we", "us"), a private limited company registered in England and Wales, company number
+    {site.companyNumber}.
   </p>
-  <h2>Accuracy</h2>
+
+  <h2>2. Using our website</h2>
   <p>
-    We review content regularly and show the tax year and review date on each article, but rules change. We do not accept liability for loss arising
-    from reliance on website content, to the extent permitted by law.
+    You may use this website for your own information and to contact us. We aim to keep it available and up to date, but we do not guarantee that it will
+    be uninterrupted, error-free or free of viruses. We may change, suspend or withdraw any part of the website without notice.
   </p>
-  <h2>Intellectual property</h2>
-  <p>Content and design are owned by us or our licensors. You may print or share pages for personal, non-commercial use with attribution.</p>
-  <h2>Links</h2>
-  <p>Links to other websites are provided for convenience. We are not responsible for their content.</p>
-  <h2>Law</h2>
-  <p>These terms are governed by the law of England and Wales, and the courts of England and Wales have jurisdiction.</p>
+
+  <h2>3. No professional advice</h2>
+  <p>
+    The content of this website, including articles on tax, accounting and regulatory changes, is general information only. It is not professional advice
+    and should not be relied on as such. Tax rules and rates change, and the right answer depends on your circumstances. Please
+    <a href="/contact/">speak to us</a> before acting on anything you read here.
+  </p>
+  <p>
+    We only act for clients under a signed engagement letter. Our services are governed by that engagement letter and our terms of business, not by these
+    website terms. Contacting us through the website does not create a client relationship.
+  </p>
+
+  <h2>4. Intellectual property</h2>
+  <p>
+    The website and its content, including text, design, logos and graphics, belong to Apex Global or our licensors and are protected by copyright and
+    other intellectual property laws. You may print or download one copy of a page for your own personal, non-commercial use. You may not copy, republish,
+    sell or otherwise use any content commercially without our written permission.
+  </p>
+
+  <h2>5. Acceptable use</h2>
+  <p>You must not use the website:</p>
+  <ul>
+    <li>for any unlawful or fraudulent purpose</li>
+    <li>to send spam or submit false information through our forms</li>
+    <li>to introduce viruses or other harmful material, or try to gain unauthorised access to the website or our systems</li>
+  </ul>
+  <p>We may report any such use to the relevant authorities.</p>
+
+  <h2>6. Links to other websites</h2>
+  <p>
+    Our website links to other sites, such as HMRC, Companies House and our social media pages. We have no control over those sites and are not responsible
+    for their content or how they use your data. You may link to our homepage in a fair and lawful way, but not in a way that suggests an endorsement we
+    have not given.
+  </p>
+
+  <h2>7. Our liability</h2>
+  <p>
+    To the extent permitted by law, we are not liable for any loss or damage arising from your use of, or reliance on, this website or its content,
+    including loss of profit, business or data. Nothing in these terms limits our liability for death or personal injury caused by our negligence, for
+    fraud or fraudulent misrepresentation, or for anything else that cannot be limited under English law.
+  </p>
+
+  <h2>8. Privacy and cookies</h2>
+  <p>
+    We handle any personal data you give us through the website in line with our <a href="/privacy/">Privacy Notice</a>, which also explains how we use
+    cookies.
+  </p>
+
+  <h2>9. Changes to these terms</h2>
+  <p>We may update these terms from time to time. The version on this page applies each time you use the website, so please check it regularly.</p>
+
+  <h2>10. Governing law</h2>
+  <p>
+    These terms are governed by the law of England and Wales, and the courts of England and Wales have exclusive jurisdiction over any dispute arising from
+    them.
+  </p>
+
+  <h2>11. Contact us</h2>
+  <p>If you have any questions about these terms, please email <a href={mailHref}>{site.email}</a>.</p>
 </LegalLayout>

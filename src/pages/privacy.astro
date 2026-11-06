@@ -1,53 +1,320 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
 import { site, mailHref, addressLines } from '../data/site';
+
+// Client's privacy notice, last revised 29 October 2026. Part 1: clients; Part 2: this website.
 ---
 
 <LegalLayout
   title="Privacy notice"
   path="/privacy/"
-  updated="30 October 2026"
-  description="How Apex Global Consulting Services Limited collects, uses and protects personal information from website visitors, enquirers and clients."
+  updated="29 October 2026"
+  description="How Apex Global Consulting Services Limited collects, uses, shares and protects personal data for clients and for visitors to this website."
 >
-  <p class="todo">[TO VERIFY] This notice is a starting draft. Have it reviewed against your actual processing, retention periods and ICO registration before publishing.</p>
-  <h2>Who we are</h2>
   <p>
-    {site.legalName} ("we", "us") is the controller of personal information collected through this website. {site.registration}, Company No.
-    {site.companyNumber}. Address: {addressLines.join(', ')}. ICO registration number: <span class="todo">[TO VERIFY]</span>.
+    This privacy policy has two parts. <a href="#part-1">Part 1</a> is our privacy notice for clients and people whose data we handle when providing
+    accounting, tax, payroll, company secretarial and advisory services. <a href="#part-2">Part 2</a> explains how we handle information collected through
+    our website.
   </p>
-  <h2>What we collect through this website</h2>
+
+  <h2 id="part-1">Part 1: Client privacy notice</h2>
+
+  <h3>1.1 Who we are</h3>
+  <p>
+    {site.legalName} ("Apex Global", "we", "us") is a private limited company registered in England and Wales, company number {site.companyNumber}. We are
+    the data controller for the personal data described in this notice.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr><th scope="row">Registered office</th><td>{site.registeredOffice}</td></tr>
+        <tr><th scope="row">Trading office</th><td>{addressLines.join(', ')}</td></tr>
+        <tr><th scope="row">ICO registration number</th><td>{site.icoNumber}</td></tr>
+        <tr><th scope="row">Privacy contact</th><td><a href={mailHref}>{site.email}</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    We are not required to appoint a Data Protection Officer; please send all privacy questions and requests to <a href={mailHref}>{site.email}</a>. Where we only process data on your
+    instructions, for example running your payroll or keeping your books, we may act as your processor, and our engagement letter sets out those terms.
+  </p>
+
+  <h3>1.2 What are your rights?</h3>
+  <p>You have the right to:</p>
   <ul>
-    <li>Contact and callback forms: your name, email address, phone number, company (optional), the service you are interested in and your message.</li>
-    <li>Technical data needed to protect our forms from spam, processed by Cloudflare Turnstile, and your IP address for rate limiting.</li>
+    <li>be told how we use your personal data (this notice)</li>
+    <li>access a copy of the personal data we hold about you</li>
+    <li>have inaccurate or incomplete data corrected</li>
+    <li>have your data erased where we no longer have a reason to keep it</li>
+    <li>restrict how we use your data while a concern is looked into</li>
+    <li>object to our use of your data based on legitimate interests, and to direct marketing at any time</li>
+    <li>data portability: receive data you gave us in a common electronic format, or have it sent to another organisation</li>
+    <li>withdraw consent at any time, where we rely on it</li>
   </ul>
   <p>
-    Please do not send tax references, National Insurance numbers, bank details or documents through the website. Clients share these through our secure
-    client portal.
+    To use any of these rights, email <a href={mailHref}>{site.email}</a> or write to our registered office. We may ask you to prove your identity. We reply within one month, which can
+    be extended by two months for complex requests. There is normally no fee.
   </p>
-  <h2>Why we use it and our lawful basis</h2>
+  <p>
+    Some rights are limited by law. We must keep anti-money laundering records for the full retention period even if you ask us to delete them. We will not
+    tell you whether we have considered or made a suspicious activity report, because doing so could be a tipping-off offence under the Proceeds of Crime
+    Act 2002, and we may withhold information from an access request where disclosing it would prejudice the prevention or detection of crime.
+  </p>
+  <p>
+    <strong>Complaints.</strong> If you are unhappy with how we have handled your personal data, please complain to us first at <a href={mailHref}>{site.email}</a>. We will acknowledge
+    your complaint within 30 days, investigate it without undue delay, and tell you the outcome. You can also complain to the Information Commissioner's
+    Office at any time: <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk/make-a-complaint</a>, helpline 0303 123 1113, or
+    Information Commissioner's Office, Wycliffe House, Water Lane, Wilmslow, Cheshire SK9 5AF.
+  </p>
+
+  <h3>1.3 Data collection</h3>
+  <p>
+    We collect only the personal data we need to deliver the services in our engagement letter and to meet our legal and professional obligations. If you
+    do not provide it, we may be unable to act for you.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Who you are</th><th scope="col">What we collect</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Individual or sole trader client</td>
+          <td>
+            Name, address, date of birth, contact details, photo ID and proof of address, National Insurance number, Unique Taxpayer Reference, income,
+            expenses, bank statements, pension, investment and property details
+          </td>
+        </tr>
+        <tr>
+          <td>Directors, beneficial owners (anyone owning or controlling more than 25% of shares or voting rights) and people who control management of client businesses</td>
+          <td>Name, date of birth, nationality, home address, photo ID and proof-of-address documents, shareholdings, and results of identity, PEP and sanctions checks</td>
+        </tr>
+        <tr>
+          <td>All clients, for anti-money laundering purposes</td>
+          <td>
+            Purpose and intended nature of our relationship, expected annual turnover, client risk rating (low, medium or high) and the reasons for it,
+            results of Companies House and online searches, and, for higher-risk clients and PEPs, source of wealth and source of funds
+          </td>
+        </tr>
+        <tr>
+          <td>Client employees (payroll)</td>
+          <td>Name, address, date of birth, National Insurance number, tax code, pay, hours, bank details, pension, student loan and statutory pay information</td>
+        </tr>
+        <tr><td>People in client records</td><td>Names and payment details of customers and suppliers in invoices and bank transactions</td></tr>
+        <tr><td>Contacts at suppliers and other firms</td><td>Name, job title, work email and phone</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    We collect data from you, and also from HMRC, Companies House, your bank or accounting software, your previous accountant, identity verification
+    agencies and public sanctions lists. We collect special category data (for example health information for statutory sick pay or tax reliefs) only
+    where the work requires it, under the Data Protection Act 2018 Schedule 1 conditions or with your explicit consent.
+  </p>
+
+  <h3>1.4 Use of data</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Purpose</th><th scope="col">Lawful basis (UK GDPR Article 6)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Customer due diligence, client risk assessment, PEP and sanctions screening, and ongoing monitoring (section 1.5)</td>
+          <td>Legal obligation (Money Laundering Regulations 2017)</td>
+        </tr>
+        <tr>
+          <td>Bookkeeping, accounts, tax, VAT, payroll and company secretarial work</td>
+          <td>Contract with you; legal obligation for filings with HMRC and Companies House</td>
+        </tr>
+        <tr><td>Reporting suspicious activity to the National Crime Agency</td><td>Legal obligation (Proceeds of Crime Act 2002)</td></tr>
+        <tr>
+          <td>Keeping working papers and records of our advice</td>
+          <td>Legal obligation; legitimate interests in meeting professional standards and defending claims</td>
+        </tr>
+        <tr><td>Billing and collecting fees</td><td>Contract with you</td></tr>
+        <tr>
+          <td>Telling clients about tax deadlines and our other services</td>
+          <td>Legitimate interests and PECR soft opt-in for existing clients, with an unsubscribe link in every message; otherwise your consent</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Your data is handled by Apex Global staff. We do not sell personal data, and we do not make decisions about you based solely on automated processing.
+  </p>
+
+  <h3>1.5 Anti-money laundering checks</h3>
+  <p>
+    Accountants are required by the Money Laundering Regulations 2017 and the Proceeds of Crime Act 2002 to check who their clients are. Our AML Policies
+    and Procedures set out how we do this; in summary:
+  </p>
   <ul>
-    <li>To respond to your enquiry and take steps at your request before entering into a contract (contract).</li>
-    <li>To keep our website and forms secure (legitimate interests).</li>
-    <li>To meet anti-money-laundering and other legal obligations once you become a client (legal obligation).</li>
+    <li>
+      <strong>Customer due diligence.</strong> Before we act, we verify your identity with photo ID and proof of address, identify and verify the beneficial
+      owners of a business, record the purpose and intended nature of our relationship, and run independent checks against Companies House, online sources
+      and the UK and UN sanctions lists.
+    </li>
+    <li>
+      <strong>Client risk assessment.</strong> We rate every client as low, medium or high risk. Factors that make a client high risk include high-risk
+      countries, cash-intensive or high-value businesses, unusually complex ownership, high-net-worth individuals and politically exposed persons (PEPs).
+    </li>
+    <li>
+      <strong>Enhanced due diligence.</strong> For high-risk clients and PEPs (including their family members and close associates), we collect more
+      information, including source of wealth and source of funds, and our MLRO approves the relationship.
+    </li>
+    <li>
+      <strong>Ongoing monitoring.</strong> We review high-risk clients every 6 months and all other clients every 12 months, and immediately if your
+      identity, ownership or the services we provide change. We re-screen clients against sanctions lists at least annually.
+    </li>
+    <li>
+      <strong>Suspicious activity reports.</strong> Our staff must report any knowledge or suspicion of money laundering or terrorist financing to our MLRO,
+      who decides whether to report it to the National Crime Agency. We keep a log of these reports. The law does not allow us to tell you if a report has
+      been made.
+    </li>
   </ul>
-  <h2>Analytics and cookies</h2>
   <p>
-    We use Cloudflare Web Analytics, which does not use cookies or collect personal information to track you across sites. This website does not set
-    advertising or tracking cookies. If you choose to load the map on our contact page, Google may set cookies under its own policy.
+    We use personal data collected for these checks only to prevent money laundering and terrorist financing, unless another use is allowed by law or you
+    have agreed to it. We do not rely on due diligence carried out by other firms.
   </p>
-  <h2>Who we share it with</h2>
+
+  <h3>1.6 How long we keep it</h3>
   <p>
-    Our website host and email provider, Cloudflare (security and analytics) and professional advisers where necessary. We do not sell personal
-    information. Where providers process data outside the UK, appropriate safeguards are in place.
+    We keep client files, working papers and accounting, tax and payroll records for a minimum of six years from the end of our engagement or the period
+    they relate to. This meets HMRC and Companies Act record-keeping rules and the Limitation Act 1980. Customer due diligence records are kept for at
+    least five years from the end of the business relationship, as the Money Laundering Regulations 2017 require.
   </p>
-  <h2>How long we keep it</h2>
   <p>
-    Enquiries that do not lead to an engagement are kept for up to <span class="todo">[TO VERIFY] 12 months</span>. Client records are kept as required
-    by law, usually for at least five years after the end of the business relationship for anti-money-laundering purposes.
+    We may keep records for longer while an HMRC enquiry, complaint, legal claim or regulatory request is open. After that, data no longer needed is
+    securely destroyed. Marketing data is kept until you opt out.
   </p>
-  <h2>Your rights</h2>
+
+  <h3>1.7 Sharing your personal data</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Recipient</th><th scope="col">Why</th></tr></thead>
+      <tbody>
+        <tr><td>HMRC and Companies House</td><td>To file returns and accounts and act as your agent</td></tr>
+        <tr><td>Our anti-money laundering supervisory body and the National Crime Agency</td><td>When the law requires it; we may not be allowed to tell you</td></tr>
+        <tr><td>Pension providers, banks and lenders</td><td>For auto-enrolment, or when you ask us to provide accounts or references</td></tr>
+        <tr><td>Your previous or new accountant</td><td>Professional clearance when you change accountant</td></tr>
+        <tr>
+          <td>
+            Suppliers and contractors who process data for us: accounting and payroll software (such as Xero, QuickBooks, Sage and FreeAgent), identity
+            verification, email and cloud storage, client portal and e-signature, and IT support providers
+          </td>
+          <td>To deliver our services, under written contracts that require them to protect your data</td>
+        </tr>
+        <tr><td>A buyer or successor of our practice</td><td>To complete a sale or merger, under confidentiality terms</td></tr>
+      </tbody>
+    </table>
+  </div>
   <p>
-    You can ask for access to, correction or deletion of your personal information, object to or restrict processing, and withdraw consent. Contact us at
-    <a href={mailHref}>{site.email}</a>. You can also complain to the Information Commissioner's Office at ico.org.uk.
+    Where any of these suppliers stores or accesses data outside the UK, we make sure the transfer is protected, for example by a UK adequacy decision or
+    the ICO's International Data Transfer Agreement.
+  </p>
+
+  <h2 id="part-2">Part 2: Website privacy notice</h2>
+  <p>This part covers www.apexglobalconsultants.co.uk. Questions about it can be sent to <a href={mailHref}>{site.email}</a>.</p>
+
+  <h3>2.1 Data collection</h3>
+  <p>
+    You can browse our website without giving us any personal data. We collect personal data only when you choose to give it to us, for example when you:
+  </p>
+  <ul>
+    <li>request a quote or call back through our forms</li>
+    <li>contact us by email or WhatsApp</li>
+    <li>subscribe to our newsletter or tax updates</li>
+    <li>apply for a job with us</li>
+  </ul>
+  <p>
+    This can include your name, business name, email, phone number, the service you are interested in, and anything you write in a message or attach to an
+    email. Job applications include your CV and qualifications. We collect the minimum needed and do not ask for sensitive information through the website.
+    Please do not send tax references, National Insurance numbers, bank details or documents through our website forms.
+  </p>
+  <p>Our website also records technical data automatically: IP address, browser and device type, pages viewed and the site that referred you (see 2.4).</p>
+
+  <h3>2.2 Use of data</h3>
+  <p>
+    We use website data to answer your enquiry, prepare a quote, process your job application (including the competence and integrity checks our
+    anti-money laundering policy requires for relevant roles), send updates you subscribed to, and keep the website secure and working well. Our lawful
+    bases are steps before entering a contract at your request, our legitimate interests in running and improving our website, and your consent for
+    newsletters and non-essential cookies. We will not add you to marketing lists unless you opt in, and you can unsubscribe at any time.
+  </p>
+  <p>Website enquiries that do not become a client are kept for 2 years; unsuccessful job applications for 6 months.</p>
+
+  <h3>2.3 Third parties</h3>
+  <p>We share website data only with:</p>
+  <ul>
+    <li>our website host and our email provider, which deliver the website and our form messages, and Cloudflare, which protects the website and its forms from spam and attacks, all of whom process it for us under contract</li>
+    <li>Cloudflare Web Analytics, which counts visits without cookies and without tracking you across other websites</li>
+    <li>government bodies, regulators or law enforcement where the law requires it</li>
+  </ul>
+  <p>We do not sell your data, rent our mailing lists or send mailings on behalf of other organisations.</p>
+
+  <h3>2.4 Use of cookies</h3>
+  <p>Cookies are small text files a website stores on your device. This is how our website uses them:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Type</th><th scope="col">Purpose</th><th scope="col">Consent needed?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Strictly necessary</td>
+          <td>Keep the site secure and working and protect our forms from spam. Cloudflare may set security cookies for this.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Analytics</td>
+          <td>Count visits and see which pages are useful, to improve the site. We use Cloudflare Web Analytics, which does not set cookies.</td>
+          <td>No cookies are used</td>
+        </tr>
+        <tr>
+          <td>Marketing and social media</td>
+          <td>Track visits across sites for advertising. We do not use these.</td>
+          <td>Not applicable</td>
+        </tr>
+        <tr>
+          <td>Maps</td>
+          <td>The map on our contact page loads only if you choose to show it. Google may then set cookies under its own policy.</td>
+          <td>Your choice: the map loads only when you click</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    You can block or delete cookies in your browser settings; the <a href="https://ico.org.uk/for-the-public/online/cookies/" rel="noopener">ICO has guidance</a> on how. Blocking necessary cookies may stop parts of the site working. If we ever add optional cookies, we will ask for your consent first and update this notice.
+  </p>
+
+  <h3>2.5 Transfer of data outside the UK</h3>
+  <p>Some website providers may store data outside the UK. We protect those transfers in the same way as in section 1.7.</p>
+
+  <h3>2.6 Third-party links</h3>
+  <p>
+    Our website links to other sites, such as HMRC, Companies House and our social media pages. This policy does not cover those sites; please read their
+    own privacy policies.
+  </p>
+
+  <h3>2.7 Your choices</h3>
+  <p>You do not need to register to use our website. You can unsubscribe from our emails through the link in each message, or by contacting us.</p>
+
+  <h3>2.8 Access and correction</h3>
+  <p>
+    You can ask to see, correct or delete the data you gave us through the website by emailing <a href={mailHref}>{site.email}</a>. Your full rights, and how to complain, are set out in
+    section 1.2.
+  </p>
+
+  <h3>2.9 Security</h3>
+  <p>
+    We apply our firm-wide information security policies to website data. Our site uses HTTPS encryption, access to submitted data is limited to authorised
+    staff, and all staff are bound by confidentiality. If a breach is likely to put you at risk, we will tell you and report it to the ICO within 72 hours
+    where the law requires.
+  </p>
+
+  <h3>2.10 Changes to this policy</h3>
+  <p>
+    We review this policy at least once a year. If we make a material change, we will show a notice on our homepage for at least two weeks and update the
+    "Last updated" date above.
+  </p>
+
+  <h3>2.11 Copyright</h3>
+  <p>
+    The content of this website belongs to {site.legalName} or its licensors and is protected by copyright. You may print or save one copy of a page for your
+    own personal, non-commercial use. Any other copying, distribution or commercial use needs our written permission. See our
+    <a href="/terms/">website terms of use</a>.
   </p>
 </LegalLayout>
