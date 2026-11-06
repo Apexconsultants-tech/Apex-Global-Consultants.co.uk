@@ -15,8 +15,12 @@ export async function getAudiences() {
 }
 
 export async function getInsights(withSamples = false) {
+  // Newest first; on the same date, featured articles lead.
   return (await getCollection('insights', pick(withSamples))).sort(
-    (a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
+    (a, b) =>
+      b.data.published.valueOf() - a.data.published.valueOf() ||
+      Number(b.data.featured) - Number(a.data.featured) ||
+      a.data.title.localeCompare(b.data.title),
   );
 }
 

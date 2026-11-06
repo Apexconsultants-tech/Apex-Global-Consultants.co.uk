@@ -8,6 +8,7 @@ forWho: Owner-managed businesses and growing teams who want reliable numbers wit
 image: ../../assets/services/bookkeeping.jpg
 imageAlt: Bookkeeper reconciling a business bank account on a laptop
 services: [bookkeeping, payroll-processing, management-reporting]
+featuredInsight: payroll-essentials-for-small-businesses
 seoDescription: Bookkeeping, payroll processing and monthly management reporting for UK and international businesses, from an accounting firm in Altrincham.
 ---
 

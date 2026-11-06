@@ -8,7 +8,7 @@ forWho: Finance teams, groups and growing companies that need technical depth fo
 image: ../../assets/services/accounting-advisory.jpg
 imageAlt: Advisers discussing financial statements in a meeting room
 services: [accounting-advisory, specialised-support]
-featuredInsight: frs-102-changes-is-your-business-ready
+featuredInsight: revised-ifrs-for-smes-2027
 seoDescription: Technical accounting advice on IFRS, UK GAAP and FRS 102, IFRS 16, IAS 36 and ESG reporting, plus specialised accounting support for projects.
 ---
 
