@@ -88,6 +88,12 @@ export async function getLocations() {
   return (await getCollection('locations')).sort((a, b) => a.data.order - b.data.order);
 }
 
+/** FAQs tagged for a "Who we help" audience, in order. */
+export async function getFaqsForAudience(id: string) {
+  const all = await getCollection('faqs');
+  return all.filter((f) => f.data.audiences.includes(id)).sort((a, b) => a.data.order - b.data.order);
+}
+
 /** FAQs linked to any of the given services, without duplicates, in order. */
 export async function getFaqsForServices(ids: string[]) {
   const all = await getCollection('faqs');
