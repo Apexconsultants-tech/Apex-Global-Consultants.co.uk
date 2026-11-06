@@ -6,8 +6,8 @@ summary: Accurate, on-time payroll with PAYE, RTI submissions and year-end forms
 menuBlurb: PAYE, RTI, payslips, P45s and P60s
 image: ../../assets/services/payroll-processing.jpg
 imageAlt: Payroll specialist checking payslips on screen
-seoTitle: Payroll processing and PAYE services | Apex Global
-seoDescription: 'Outsourced payroll for UK employers: payroll calculation, PAYE, RTI submissions, tax code updates, P45s, P60s and HMRC payment schedules.'
+seoTitle: "Payroll services for small businesses from £35 | Apex Global"
+seoDescription: "Outsourced payroll for UK employers and directors from £35 a month: PAYE, RTI submissions, payslips, auto-enrolment pensions, P45s, P60s and HMRC payments."
 included:
   - title: Payroll calculation
     text: Gross-to-net calculations covering salary, overtime, bonuses, statutory pay and deductions.

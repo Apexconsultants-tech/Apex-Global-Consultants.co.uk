@@ -6,8 +6,8 @@ summary: Corporate and personal tax compliance, VAT and Making Tax Digital, with
 menuBlurb: Corporation tax, personal tax, VAT and MTD
 image: ../../assets/services/taxation.jpg
 imageAlt: Tax adviser meeting a business owner at a desk
-seoTitle: Corporation tax, VAT and personal tax | Apex Global
-seoDescription: Corporation tax, self assessment, VAT and Making Tax Digital support from Altrincham. Fixed fees agreed upfront, deadlines tracked for you.
+seoTitle: "Tax returns, VAT and Corporation Tax accountants | Apex Global"
+seoDescription: "Self Assessment tax returns from £150, VAT returns from £75 and Corporation Tax from £350, plus Making Tax Digital support from accountants in Altrincham."
 included:
   - title: Corporation tax returns
     text: CT600 returns and computations prepared from your accounts, with reliefs and allowances reviewed every year.

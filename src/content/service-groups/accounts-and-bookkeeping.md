@@ -1,5 +1,6 @@
 ---
 title: Accounts & Bookkeeping
+seoTitle: "Bookkeeping, payroll and management accounts | Apex Global"
 number: '01'
 order: 1
 oneLine: Books, payroll and monthly figures kept accurate and up to date.

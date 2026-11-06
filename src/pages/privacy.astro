@@ -1,6 +1,111 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
 import { site, mailHref, addressLines } from '../data/site';
+import Icon from '../components/ui/Icon.astro';
+import photo from '../assets/legal/privacy.jpg';
+
+const toc = [
+  {
+    id: 'part-1',
+    label: 'Part 1: Client privacy notice',
+    level: 1
+  },
+  {
+    id: 's1-1',
+    label: '1.1 Who we are',
+    level: 2
+  },
+  {
+    id: 's1-2',
+    label: '1.2 What are your rights?',
+    level: 2
+  },
+  {
+    id: 's1-3',
+    label: '1.3 Data collection',
+    level: 2
+  },
+  {
+    id: 's1-4',
+    label: '1.4 Use of data',
+    level: 2
+  },
+  {
+    id: 's1-5',
+    label: '1.5 Anti-money laundering checks',
+    level: 2
+  },
+  {
+    id: 's1-6',
+    label: '1.6 How long we keep it',
+    level: 2
+  },
+  {
+    id: 's1-7',
+    label: '1.7 Sharing your personal data',
+    level: 2
+  },
+  {
+    id: 'part-2',
+    label: 'Part 2: Website privacy notice',
+    level: 1
+  },
+  {
+    id: 's2-1',
+    label: '2.1 Data collection',
+    level: 2
+  },
+  {
+    id: 's2-2',
+    label: '2.2 Use of data',
+    level: 2
+  },
+  {
+    id: 's2-3',
+    label: '2.3 Third parties',
+    level: 2
+  },
+  {
+    id: 's2-4',
+    label: '2.4 Use of cookies',
+    level: 2
+  },
+  {
+    id: 's2-5',
+    label: '2.5 Transfer of data outside the UK',
+    level: 2
+  },
+  {
+    id: 's2-6',
+    label: '2.6 Third-party links',
+    level: 2
+  },
+  {
+    id: 's2-7',
+    label: '2.7 Your choices',
+    level: 2
+  },
+  {
+    id: 's2-8',
+    label: '2.8 Access and correction',
+    level: 2
+  },
+  {
+    id: 's2-9',
+    label: '2.9 Security',
+    level: 2
+  },
+  {
+    id: 's2-10',
+    label: '2.10 Changes to this policy',
+    level: 2
+  },
+  {
+    id: 's2-11',
+    label: '2.11 Copyright',
+    level: 2
+  }
+];
 
 // Client's privacy notice, last revised 29 October 2026. Part 1: clients; Part 2: this website.
 ---
@@ -10,16 +115,36 @@ import { site, mailHref, addressLines } from '../data/site';
   path="/privacy/"
   updated="29 October 2026"
   description="How Apex Global Consulting Services Limited collects, uses, shares and protects personal data for clients and for visitors to this website."
+  image={photo}
+  imageAlt="Two padlocks resting on a laptop keyboard, representing data security"
+  toc={toc}
 >
+  <Fragment slot="summary">
+    <h2>At a glance</h2>
+    <dl class="glance">
+      <div><dt>Data controller</dt><dd>{site.legalName}</dd></div>
+      <div><dt>ICO registration</dt><dd>{site.icoNumber}</dd></div>
+      <div><dt>Company number</dt><dd>{site.companyNumber}</dd></div>
+      <div><dt>Privacy contact</dt><dd><a href={mailHref}>{site.email}</a></dd></div>
+    </dl>
+    <ul role="list" class="ticks" style="margin-top:1rem">
+      <li><Icon name="check" size={20} />We collect only what we need to act for you and meet the law.</li>
+      <li><Icon name="check" size={20} />We never sell your personal data.</li>
+      <li><Icon name="check" size={20} />Our website uses no advertising or tracking cookies.</li>
+      <li><Icon name="check" size={20} />You can ask to see, correct or delete your data at any time.</li>
+    </ul>
+  </Fragment>
   <p>
     This privacy policy has two parts. <a href="#part-1">Part 1</a> is our privacy notice for clients and people whose data we handle when providing
     accounting, tax, payroll, company secretarial and advisory services. <a href="#part-2">Part 2</a> explains how we handle information collected through
     our website.
   </p>
 
-  <h2 id="part-1">Part 1: Client privacy notice</h2>
+  <section class="legal-part" aria-labelledby="part-1">
+  <p class="legal-kicker">Part 1</p>
+  <h2 id="part-1">Client privacy notice</h2>
 
-  <h3>1.1 Who we are</h3>
+  <h3 id="s1-1">1.1 Who we are</h3>
   <p>
     {site.legalName} ("Apex Global", "we", "us") is a private limited company registered in England and Wales, company number {site.companyNumber}. We are
     the data controller for the personal data described in this notice.
@@ -39,7 +164,7 @@ import { site, mailHref, addressLines } from '../data/site';
     instructions, for example running your payroll or keeping your books, we may act as your processor, and our engagement letter sets out those terms.
   </p>
 
-  <h3>1.2 What are your rights?</h3>
+  <h3 id="s1-2">1.2 What are your rights?</h3>
   <p>You have the right to:</p>
   <ul>
     <li>be told how we use your personal data (this notice)</li>
@@ -67,7 +192,7 @@ import { site, mailHref, addressLines } from '../data/site';
     Information Commissioner's Office, Wycliffe House, Water Lane, Wilmslow, Cheshire SK9 5AF.
   </p>
 
-  <h3>1.3 Data collection</h3>
+  <h3 id="s1-3">1.3 Data collection</h3>
   <p>
     We collect only the personal data we need to deliver the services in our engagement letter and to meet our legal and professional obligations. If you
     do not provide it, we may be unable to act for you.
@@ -109,7 +234,7 @@ import { site, mailHref, addressLines } from '../data/site';
     where the work requires it, under the Data Protection Act 2018 Schedule 1 conditions or with your explicit consent.
   </p>
 
-  <h3>1.4 Use of data</h3>
+  <h3 id="s1-4">1.4 Use of data</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th scope="col">Purpose</th><th scope="col">Lawful basis (UK GDPR Article 6)</th></tr></thead>
@@ -139,7 +264,7 @@ import { site, mailHref, addressLines } from '../data/site';
     Your data is handled by Apex Global staff. We do not sell personal data, and we do not make decisions about you based solely on automated processing.
   </p>
 
-  <h3>1.5 Anti-money laundering checks</h3>
+  <h3 id="s1-5">1.5 Anti-money laundering checks</h3>
   <p>
     Accountants are required by the Money Laundering Regulations 2017 and the Proceeds of Crime Act 2002 to check who their clients are. Our AML Policies
     and Procedures set out how we do this; in summary:
@@ -173,7 +298,7 @@ import { site, mailHref, addressLines } from '../data/site';
     have agreed to it. We do not rely on due diligence carried out by other firms.
   </p>
 
-  <h3>1.6 How long we keep it</h3>
+  <h3 id="s1-6">1.6 How long we keep it</h3>
   <p>
     We keep client files, working papers and accounting, tax and payroll records for a minimum of six years from the end of our engagement or the period
     they relate to. This meets HMRC and Companies Act record-keeping rules and the Limitation Act 1980. Customer due diligence records are kept for at
@@ -184,7 +309,7 @@ import { site, mailHref, addressLines } from '../data/site';
     securely destroyed. Marketing data is kept until you opt out.
   </p>
 
-  <h3>1.7 Sharing your personal data</h3>
+  <h3 id="s1-7">1.7 Sharing your personal data</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th scope="col">Recipient</th><th scope="col">Why</th></tr></thead>
@@ -209,10 +334,14 @@ import { site, mailHref, addressLines } from '../data/site';
     the ICO's International Data Transfer Agreement.
   </p>
 
-  <h2 id="part-2">Part 2: Website privacy notice</h2>
+  </section>
+
+  <section class="legal-part legal-part--green" aria-labelledby="part-2">
+  <p class="legal-kicker">Part 2</p>
+  <h2 id="part-2">Website privacy notice</h2>
   <p>This part covers www.apexglobalconsultants.co.uk. Questions about it can be sent to <a href={mailHref}>{site.email}</a>.</p>
 
-  <h3>2.1 Data collection</h3>
+  <h3 id="s2-1">2.1 Data collection</h3>
   <p>
     You can browse our website without giving us any personal data. We collect personal data only when you choose to give it to us, for example when you:
   </p>
@@ -229,7 +358,7 @@ import { site, mailHref, addressLines } from '../data/site';
   </p>
   <p>Our website also records technical data automatically: IP address, browser and device type, pages viewed and the site that referred you (see 2.4).</p>
 
-  <h3>2.2 Use of data</h3>
+  <h3 id="s2-2">2.2 Use of data</h3>
   <p>
     We use website data to answer your enquiry, prepare a quote, process your job application (including the competence and integrity checks our
     anti-money laundering policy requires for relevant roles), send updates you subscribed to, and keep the website secure and working well. Our lawful
@@ -238,7 +367,7 @@ import { site, mailHref, addressLines } from '../data/site';
   </p>
   <p>Website enquiries that do not become a client are kept for 2 years; unsuccessful job applications for 6 months.</p>
 
-  <h3>2.3 Third parties</h3>
+  <h3 id="s2-3">2.3 Third parties</h3>
   <p>We share website data only with:</p>
   <ul>
     <li>our website host and our email provider, which deliver the website and our form messages, and Cloudflare, which protects the website and its forms from spam and attacks, all of whom process it for us under contract</li>
@@ -247,7 +376,7 @@ import { site, mailHref, addressLines } from '../data/site';
   </ul>
   <p>We do not sell your data, rent our mailing lists or send mailings on behalf of other organisations.</p>
 
-  <h3>2.4 Use of cookies</h3>
+  <h3 id="s2-4">2.4 Use of cookies</h3>
   <p>Cookies are small text files a website stores on your device. This is how our website uses them:</p>
   <div class="table-wrap">
     <table>
@@ -280,41 +409,42 @@ import { site, mailHref, addressLines } from '../data/site';
     You can block or delete cookies in your browser settings; the <a href="https://ico.org.uk/for-the-public/online/cookies/" rel="noopener">ICO has guidance</a> on how. Blocking necessary cookies may stop parts of the site working. If we ever add optional cookies, we will ask for your consent first and update this notice.
   </p>
 
-  <h3>2.5 Transfer of data outside the UK</h3>
+  <h3 id="s2-5">2.5 Transfer of data outside the UK</h3>
   <p>Some website providers may store data outside the UK. We protect those transfers in the same way as in section 1.7.</p>
 
-  <h3>2.6 Third-party links</h3>
+  <h3 id="s2-6">2.6 Third-party links</h3>
   <p>
     Our website links to other sites, such as HMRC, Companies House and our social media pages. This policy does not cover those sites; please read their
     own privacy policies.
   </p>
 
-  <h3>2.7 Your choices</h3>
+  <h3 id="s2-7">2.7 Your choices</h3>
   <p>You do not need to register to use our website. You can unsubscribe from our emails through the link in each message, or by contacting us.</p>
 
-  <h3>2.8 Access and correction</h3>
+  <h3 id="s2-8">2.8 Access and correction</h3>
   <p>
     You can ask to see, correct or delete the data you gave us through the website by emailing <a href={mailHref}>{site.email}</a>. Your full rights, and how to complain, are set out in
     section 1.2.
   </p>
 
-  <h3>2.9 Security</h3>
+  <h3 id="s2-9">2.9 Security</h3>
   <p>
     We apply our firm-wide information security policies to website data. Our site uses HTTPS encryption, access to submitted data is limited to authorised
     staff, and all staff are bound by confidentiality. If a breach is likely to put you at risk, we will tell you and report it to the ICO within 72 hours
     where the law requires.
   </p>
 
-  <h3>2.10 Changes to this policy</h3>
+  <h3 id="s2-10">2.10 Changes to this policy</h3>
   <p>
     We review this policy at least once a year. If we make a material change, we will show a notice on our homepage for at least two weeks and update the
     "Last updated" date above.
   </p>
 
-  <h3>2.11 Copyright</h3>
+  <h3 id="s2-11">2.11 Copyright</h3>
   <p>
     The content of this website belongs to {site.legalName} or its licensors and is protected by copyright. You may print or save one copy of a page for your
     own personal, non-commercial use. Any other copying, distribution or commercial use needs our written permission. See our
     <a href="/terms/">website terms of use</a>.
   </p>
+  </section>
 </LegalLayout>

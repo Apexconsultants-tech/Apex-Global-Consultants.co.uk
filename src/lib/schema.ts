@@ -24,7 +24,15 @@ export function organizationSchema(logoUrl: string) {
       addressCountry: site.address.countryCode,
     },
     geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
-    areaServed: [{ '@type': 'Country', name: 'United Kingdom' }, 'Worldwide'],
+    areaServed: [
+      ...['Altrincham', 'Manchester', 'Sale', 'Stockport', 'Trafford'].map((name) => ({ '@type': 'City', name })),
+      { '@type': 'AdministrativeArea', name: 'Cheshire' },
+      { '@type': 'Country', name: 'United Kingdom' },
+    ],
+    priceRange: '££',
+    currenciesAccepted: 'GBP',
+    founder: { '@type': 'Person', name: 'Sandeep Kumar', jobTitle: 'Director' },
+    knowsAbout: ['Bookkeeping', 'Self Assessment tax returns', 'Corporation Tax', 'VAT returns', 'Making Tax Digital', 'Payroll', 'Management accounts', 'IFRS', 'FRS 102', 'Company formation'],
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -49,7 +57,9 @@ export function breadcrumbSchema(items: { name: string; href: string }[]) {
   };
 }
 
-export function serviceSchema(s: { name: string; description: string; url: string }) {
+/** A service, with its starting price as an Offer when one is published. */
+export function serviceSchema(s: { name: string; description: string; url: string; price?: { amount: string; unit: string } }) {
+  const value = s.price ? Number(s.price.amount.replace(/[^0-9.]/g, '')) : NaN;
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -59,6 +69,16 @@ export function serviceSchema(s: { name: string; description: string; url: strin
     serviceType: s.name,
     provider: { '@id': orgId },
     areaServed: { '@type': 'Country', name: 'United Kingdom' },
+    ...(Number.isFinite(value)
+      ? {
+          offers: {
+            '@type': 'Offer',
+            url: s.url,
+            priceCurrency: 'GBP',
+            priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: value, priceCurrency: 'GBP', unitText: s.price!.unit },
+          },
+        }
+      : {}),
   };
 }
 
@@ -87,7 +107,7 @@ export function articleSchema(a: {
     image: a.image,
     datePublished: a.published.toISOString(),
     dateModified: a.reviewed.toISOString(),
-    author: { '@type': 'Person', name: a.author },
+    author: /Apex Global/.test(a.author) ? { '@id': orgId } : { '@type': 'Person', name: a.author },
     publisher: { '@id': orgId },
   };
 }

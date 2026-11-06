@@ -1,5 +1,6 @@
 ---
 title: Corporate & Compliance
+seoTitle: "Company formation, accounts and compliance | Apex Global"
 number: '04'
 order: 4
 oneLine: Company formation, statutory filings and annual accounts handled properly.

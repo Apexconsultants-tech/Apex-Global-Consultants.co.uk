@@ -6,7 +6,7 @@ summary: Monthly reports, forecasts and KPIs that show what is happening and wha
 menuBlurb: KPIs, cash flow forecasts and variance analysis
 image: ../../assets/services/management-reporting.jpg
 imageAlt: Manager presenting a KPI dashboard to colleagues
-seoTitle: Management accounts and reporting | Apex Global
+seoTitle: "Management accounts and reporting services | Apex Global"
 seoDescription: 'Management reporting for growing businesses: performance and revenue reports, cash flow forecasts, variance and trend analysis, benchmarking and KPI monitoring.'
 included:
   - title: Performance and revenue reporting
