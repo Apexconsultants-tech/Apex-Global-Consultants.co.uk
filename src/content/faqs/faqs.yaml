@@ -33,7 +33,7 @@
   topic: general
   order: 2
   question: Which accounting software do you work with?
-  answer: We work with the main cloud accounting packages used by UK businesses and can recommend one that suits your size and sector. We also help with migration and training.
+  answer: We work with Xero, QuickBooks, Sage and FreeAgent, the main cloud accounting packages used by UK businesses, and can recommend the one that suits your size and sector. We also handle migration, bank feeds and training.
 - id: response-time
   topic: general
   order: 3
@@ -43,7 +43,7 @@
   topic: overseas
   order: 1
   question: Can you help us set up a UK company from abroad?
-  answer: Yes. We handle incorporation, the registered office, HMRC registrations for corporation tax, VAT and PAYE, and ongoing accounting and filings, working in your time zone where possible.
+  answer: Yes. We handle company formation at Companies House, HMRC registrations for corporation tax, VAT and PAYE, and your ongoing bookkeeping, accounts and filings, working in your time zone where possible.
 - id: overseas-reporting
   topic: overseas
   order: 2
@@ -115,11 +115,6 @@
   services: [corporate-services]
   question: How long does it take to form a UK company?
   answer: Online incorporation at Companies House is often completed within 24 hours once all information and identity verification are in place.
-- id: cs-office
-  topic: service
-  services: [corporate-services]
-  question: Can you provide a registered office address?
-  answer: '[TO VERIFY] Confirm whether Apex offers a registered office service and on what terms.'
 - id: cs-idv
   topic: service
   services: [corporate-services, compliance]
@@ -160,3 +155,165 @@
   services: [specialised-support]
   question: When would I need forensic accounting?
   answer: When records need to be reconstructed or a loss, dispute or irregularity needs to be investigated. We will discuss the scope confidentially before any work begins.
+
+# ---- Added November 2026 from the client's price list and guides ----
+# topic: the section on /faq/. services / audiences: which service and "Who we help" pages also show it.
+- id: fees-bookkeeping
+  topic: fees
+  order: 3
+  services: [bookkeeping]
+  audiences: [uk-small-and-medium-businesses, individuals-and-sole-traders]
+  question: How much does bookkeeping cost?
+  answer: Our bookkeeping costs £99 a month for up to 50 transactions a month. That covers recording and categorising transactions, bank and account reconciliation and a monthly management summary. Busier businesses get a fixed monthly quote based on transaction volume and the number of bank accounts.
+- id: fees-payroll
+  topic: fees
+  order: 4
+  services: [payroll-processing]
+  audiences: [uk-small-and-medium-businesses]
+  question: How much does payroll cost?
+  answer: Payroll starts from £35 a month, which includes one employee, then £6 a month for each additional employee. It covers PAYE and RTI submissions to HMRC, pension auto-enrolment support, payslips, P60s, P45s and year-end reporting.
+- id: fees-tax-returns
+  topic: fees
+  order: 5
+  services: [taxation]
+  audiences: [individuals-and-sole-traders, uk-small-and-medium-businesses]
+  question: How much does a tax return cost?
+  answer: A Self Assessment tax return starts from £150, VAT returns from £75 per return and a Corporation Tax return from £350. The exact fee depends on your income sources and records, and we confirm it in writing before we start.
+- id: fees-other-services
+  topic: fees
+  order: 6
+  question: What do your other services cost?
+  answer: Management reporting starts from £175 a month, accounting advisory from £125 an hour, specialised IFRS and reporting projects from £450 a project, corporate services from £150 per service and ongoing compliance support from £250 a year. Our pricing page shows what each one includes.
+- id: tax-need-return
+  topic: individuals
+  order: 1
+  services: [taxation]
+  audiences: [individuals-and-sole-traders]
+  question: Do I need to file a Self Assessment tax return?
+  answer: Usually yes if you are self-employed and your trading income is over £1,000 a year, if you receive rental income, if you have untaxed income such as overseas income, or if HMRC asks you to. This applies even if you also have a PAYE job. If you are unsure, we will check for you.
+- id: tax-deadlines
+  topic: individuals
+  order: 2
+  services: [taxation]
+  audiences: [individuals-and-sole-traders]
+  question: When are the Self Assessment deadlines?
+  answer: Online tax returns and any tax owed are due by 31 January after the end of the tax year, along with your first payment on account for the current year. The second payment on account is due by 31 July. If you are newly self-employed, register with HMRC by 5 October after the end of your first tax year.
+- id: tax-payments-on-account
+  topic: individuals
+  order: 3
+  services: [taxation]
+  audiences: [individuals-and-sole-traders]
+  question: What are payments on account?
+  answer: If your Self Assessment tax bill is over £1,000, HMRC usually asks you to pay half of next year's tax in advance, in January and July. We work out what you owe and tell you what to set aside each month so the payments are not a surprise.
+- id: tax-drivers
+  topic: individuals
+  order: 4
+  services: [taxation]
+  audiences: [individuals-and-sole-traders]
+  question: I drive for Uber, Bolt or a minicab firm. What can I claim?
+  answer: You declare your full fares, including tips and bonuses, then claim expenses such as app commission, licences, phone costs and parking. For your car you claim either a mileage rate (55p a mile for the first 10,000 business miles in 2026/27) or a share of your actual running costs. Our tax guide for drivers explains both.
+- id: tax-hmrc-letter
+  topic: individuals
+  order: 5
+  services: [taxation]
+  audiences: [individuals-and-sole-traders]
+  question: I have had a letter from HMRC about my income. What should I do?
+  answer: Do not ignore it. Online platforms now report earnings to HMRC, so it can compare them with your returns. Telling HMRC about anything you missed before it finds it usually means lower penalties. We can review your position and make the disclosure for you.
+- id: mtd-who
+  topic: tax
+  order: 1
+  services: [taxation, bookkeeping]
+  audiences: [individuals-and-sole-traders]
+  question: Does Making Tax Digital for Income Tax apply to me?
+  answer: It applies to sole traders and landlords whose qualifying income (gross self-employment turnover plus gross rental income) is over £50,000 from 6 April 2026, over £30,000 from April 2027 and over £20,000 from April 2028. HMRC uses your tax return from two years earlier to decide. Employment income, pensions and dividends do not count.
+- id: mtd-quarterly
+  topic: tax
+  order: 2
+  services: [taxation]
+  question: What do I have to send HMRC under Making Tax Digital?
+  answer: You keep digital records in compatible software, send four quarterly updates (due 7 August, 7 November, 7 February and 7 May) and then a final declaration by 31 January that replaces your tax return. Each update is still due even if you had no income in that quarter.
+- id: mtd-tax-change
+  topic: tax
+  order: 3
+  services: [taxation]
+  question: Does Making Tax Digital change how much tax I pay?
+  answer: No. Making Tax Digital changes how and how often you report your income, not the tax rates or the 31 January and 31 July payment dates.
+- id: mtd-spreadsheets
+  topic: tax
+  order: 4
+  services: [taxation, bookkeeping]
+  question: Can I keep using spreadsheets for Making Tax Digital?
+  answer: Yes, as long as you use bridging software to send the figures to HMRC digitally. Many landlords and simple businesses do this, although cloud software with bank feeds usually saves more time.
+- id: mtd-agent
+  topic: tax
+  order: 5
+  services: [taxation, bookkeeping]
+  audiences: [individuals-and-sole-traders]
+  question: Can you handle Making Tax Digital for me?
+  answer: Yes. Once you authorise us as your agent with HMRC, we set up compatible software, keep your digital records, submit every quarterly update on time and file your final declaration.
+- id: mtd-vat
+  topic: tax
+  order: 6
+  services: [taxation]
+  question: Does Making Tax Digital apply to VAT?
+  answer: Yes. Since April 2022 every VAT-registered business must keep digital VAT records and file VAT returns through compatible software, whatever its turnover. The VAT registration threshold is £90,000 of taxable turnover in a rolling 12 months.
+- id: payroll-director-only
+  topic: payroll
+  order: 1
+  services: [payroll-processing]
+  audiences: [uk-small-and-medium-businesses]
+  question: Do I need a payroll if I am the only director?
+  answer: Usually yes. If you pay yourself a salary above the lower earnings limit, you must register as an employer with HMRC and report each payment in real time, even if you are the only person on the payroll. We set this up for you.
+- id: payroll-director-salary
+  topic: payroll
+  order: 2
+  services: [payroll-processing, taxation]
+  audiences: [uk-small-and-medium-businesses]
+  question: What salary should I pay myself as a company director?
+  answer: Many directors take a small salary, often around the lower earnings limit (£6,708) or the personal allowance (£12,570) in 2026/27, and take the rest as dividends from profits. The right mix depends on your profits, other income and pension plans, so we work it out with you each year.
+- id: payroll-deadlines
+  topic: payroll
+  order: 3
+  services: [payroll-processing]
+  question: When do employers have to report and pay HMRC?
+  answer: You send a Full Payment Submission to HMRC on or before each payday, and pay PAYE, National Insurance and student loan deductions by the 22nd of the following month in cleared funds. Pension contributions are also due by the 22nd.
+- id: payroll-pension
+  topic: payroll
+  order: 4
+  services: [payroll-processing]
+  question: Do I have to put my employees into a workplace pension?
+  answer: Yes. You must automatically enrol workers aged 22 to State Pension age who earn over £10,000 a year. Total contributions must be at least 8% of qualifying earnings, with at least 3% from you as the employer.
+- id: company-audit
+  topic: companies
+  order: 1
+  services: [compliance]
+  audiences: [uk-small-and-medium-businesses, overseas-companies, finance-teams]
+  question: Does my company need an audit?
+  answer: Most small companies are exempt. For financial years starting on or after 6 April 2025, a company is small if it meets two of three limits (turnover up to £15 million, balance sheet total up to £7.5 million, up to 50 employees), normally for two years in a row. Group membership, your articles or your shareholders can still require an audit.
+- id: company-size
+  topic: companies
+  order: 2
+  services: [compliance, corporate-services]
+  question: What are the new company size thresholds?
+  answer: From 6 April 2025, a micro company has turnover up to £1 million, a balance sheet up to £500,000 and up to 10 employees; a small company up to £15 million, £7.5 million and 50 employees; and a medium company up to £54 million, £27 million and 250 employees. You need to meet two of the three limits.
+- id: company-ifrs-smes
+  topic: companies
+  order: 3
+  services: [accounting-advisory, specialised-support]
+  audiences: [finance-teams, overseas-companies]
+  question: When does the revised IFRS for SMEs take effect?
+  answer: The third edition of the IFRS for SMEs Accounting Standard applies to accounting periods starting on or after 1 January 2027, and early adoption is allowed. It brings revenue, fair value, consolidation, financial instruments and business combinations closer to full IFRS; leases are unchanged for now.
+- id: company-cash-flow
+  topic: companies
+  order: 4
+  services: [accounting-advisory, management-reporting]
+  audiences: [finance-teams]
+  question: Can you review our cash flow statement before we file?
+  answer: Yes. We check the classification of interest, overdrafts, leases, acquisitions and intragroup balances, the reconciliation to the rest of the accounts and the non-cash disclosures IAS 7 requires. These are the areas the FRC most often challenges.
+- id: startup-loan
+  topic: getting-started
+  order: 4
+  services: [management-reporting, corporate-services]
+  audiences: [uk-small-and-medium-businesses, individuals-and-sole-traders]
+  question: Can you help me apply for a Start Up Loan?
+  answer: Yes. Start Up Loans are government-backed personal loans of £500 to £25,000 at a 7.5% fixed rate. We prepare the business plan, 12-month cash flow forecast and personal survival budget for your application, then look after your accounts and tax once you are trading.

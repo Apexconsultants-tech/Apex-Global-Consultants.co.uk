@@ -67,8 +67,9 @@ const faqs = defineCollection({
   schema: z.object({
     question: z.string(),
     answer: z.string(),
-    topic: z.enum(['general', 'fees', 'getting-started', 'overseas', 'service']),
+    topic: z.enum(['general', 'fees', 'getting-started', 'overseas', 'tax', 'individuals', 'payroll', 'companies', 'service']),
     services: z.array(z.string()).default([]),
+    audiences: z.array(z.string()).default([]),
     order: z.number().default(100),
   }),
 });
@@ -145,6 +146,7 @@ const serviceGroups = defineCollection({
       number: z.string(),
       order: z.number(),
       oneLine: z.string().max(90),
+      seoTitle: z.string().max(65).optional(),
       explainer: z.string().max(420),
       forWho: z.string().max(160),
       image: image(),
@@ -160,6 +162,7 @@ const insights = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      seoTitle: z.string().max(65).optional(),
       description: z.string().min(70).max(165),
       taxYear: z.string(),
       published: z.coerce.date(),

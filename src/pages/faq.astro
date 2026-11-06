@@ -4,11 +4,16 @@ import PageHero from '../components/page/PageHero.astro';
 import FaqList from '../components/page/FaqList.astro';
 import FinalCta from '../components/home/FinalCta.astro';
 import { getFaqs } from '../lib/content';
+import InPageNav from '../components/page/InPageNav.astro';
 import { faqSchema } from '../lib/schema';
 
 const topics = [
   { id: 'getting-started', title: 'Getting started' },
-  { id: 'fees', title: 'Fees' },
+  { id: 'fees', title: 'Fees and pricing' },
+  { id: 'individuals', title: 'Self Assessment tax returns' },
+  { id: 'tax', title: 'Making Tax Digital and VAT' },
+  { id: 'payroll', title: 'Payroll and directors' },
+  { id: 'companies', title: 'Companies, audit and reporting' },
   { id: 'general', title: 'Working with us' },
   { id: 'overseas', title: 'Overseas companies' },
 ] as const;
@@ -21,12 +26,13 @@ const crumbs = [
 ---
 
 <BaseLayout
-  title="Frequently asked questions | Apex Global"
-  description="Answers to common questions about working with Apex Global: fees, switching accountant, identity checks, software and support for overseas companies."
+  title="Accountant FAQs: fees, tax returns, MTD and payroll | Apex Global"
+  description="Answers from our Altrincham accountants on fees, Self Assessment tax returns, Making Tax Digital, payroll, audit exemption and switching accountant."
   breadcrumbs={crumbs}
   schema={[faqSchema(all)]}
 >
-  <PageHero title="Frequently asked questions" summary="Straight answers about fees, getting started and how we work." crumbs={crumbs} />
+  <PageHero title="Frequently asked questions" summary="Straight answers about fees, tax returns, Making Tax Digital, payroll and how we work." crumbs={crumbs} />
+  <InPageNav items={sets.filter((s) => s.items.length).map((s) => ({ id: `faq-${s.id}`, label: s.title }))} />
   {
     sets
       .filter((s) => s.items.length)
