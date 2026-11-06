@@ -85,6 +85,17 @@ h3 { letter-spacing: -0.015em; font-weight: 750; }
 .who-card .ticks .icon { color: var(--color-accent); }
 .who-more { color: var(--color-accent); }
 .who-card:has(.who-link:focus-visible) { outline-color: var(--color-primary-deep); }
+/* Symmetry: photo, title, promise, ticks and "How we help" line up across each row (subgrid). */
+@supports (grid-template-rows: subgrid) {
+  .who-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
+  .who-body { grid-row: 2 / span 4; display: grid; grid-template-rows: subgrid; row-gap: var(--s2); }
+  .who-title { align-self: end; }
+  .who-more { align-self: end; padding-top: var(--s1); }
+}
+@media (min-width: 1280px) {
+  .who-title { font-size: 1.625rem; }
+  .who-body { padding: 0 var(--s3) var(--s3); }
+}
 
 /* why: tiles beside the photo */
 .why-media { border-radius: 28px; }
