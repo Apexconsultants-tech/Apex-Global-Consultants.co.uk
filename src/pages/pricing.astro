@@ -49,10 +49,11 @@ const promises = ['Fixed and transparent fees', 'Flexible and scalable', 'UK-bas
       <h2 id="prices-title" class="sr-only">Starting prices by service</h2>
       <ul role="list" class="plan-grid">
         {
-          index.map(({ service: s, href, tone }) => {
+          index.map(({ service: s, href }, i) => {
             const p = s.data.price;
+            // Row one (accounts, payroll, reporting, tax) is blue; row two (advisory, corporate) is green.
             return (
-              <li class="plan" data-tone={tone}>
+              <li class="plan" data-tone={i < 4 ? 'blue-deep' : 'green-deep'}>
                 <div class="plan-head">
                   <span class="plan-icon"><Icon name={s.data.icon} size={24} /></span>
                   <div>
@@ -62,16 +63,20 @@ const promises = ['Fixed and transparent fees', 'Flexible and scalable', 'UK-bas
                 </div>
 
                 {p.rows ? (
-                  <dl class="plan-rows">
-                    {p.rows.map((r) => (
-                      <div>
-                        <dt>{r.label}</dt>
-                        <dd>
-                          <span class="price-amount-from">From</span> <strong>{r.amount}</strong> <span class="price-amount-unit">/ {r.unit}</span>
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
+                  <div class="plan-price plan-price--rows">
+                    <p class="plan-rows-cap">From, per {p.rows[0].unit}</p>
+                    <dl class="plan-rows">
+                      {p.rows.map((r) => (
+                        <div>
+                          <dt>{r.label}</dt>
+                          <dd>
+                            <span class="sr-only">from </span>
+                            <strong>{r.amount}</strong>
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
                 ) : (
                   <div class="plan-price">
                     <Price price={p} />
@@ -79,18 +84,16 @@ const promises = ['Fixed and transparent fees', 'Flexible and scalable', 'UK-bas
                   </div>
                 )}
 
-                {p.features.length > 0 && (
-                  <ul role="list" class="ticks plan-ticks">
-                    {p.features.map((f) => (
-                      <li>
-                        <Icon name="check" size={18} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <ul role="list" class="ticks plan-ticks">
+                  {p.features.map((f) => (
+                    <li>
+                      <Icon name="check" size={18} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
 
-                <a href={href} class="link-arrow plan-link">
+                <a href={href} class="btn plan-link">
                   Learn more<span class="sr-only"> about {s.data.title.toLowerCase()}</span> <Icon name="arrow" size={18} />
                 </a>
               </li>

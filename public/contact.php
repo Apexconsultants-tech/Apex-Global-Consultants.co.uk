@@ -17,6 +17,8 @@ use PHPMailer\PHPMailer\Exception as MailException;
 
 // Absolute path to the private config, one level ABOVE public_html.
 define('APEX_CONFIG', dirname(__DIR__) . '/apex-private/smtp-config.php');
+// Every form (call back, consultation/enquiry, quote request) is delivered to this inbox.
+define('APEX_TO_EMAIL', 'info@apexglobalconsultants.co.uk');
 define('APEX_RATE_DIR', dirname(__DIR__) . '/apex-private/rate-limit');
 define('APEX_RATE_MAX', 5);          // submissions allowed...
 define('APEX_RATE_WINDOW', 600);     // ...per IP per 10 minutes
@@ -187,9 +189,15 @@ if ($message !== '') {
 
 try {
     $m = apex_mailer($cfg);
-    $m->addAddress((string) $cfg['to_email']);
+    $m->addAddress(APEX_TO_EMAIL, 'Apex Global Consulting Services');
+    // An extra address in the private config (if different) gets a blind copy.
+    $extra = trim((string) ($cfg['to_email'] ?? ''));
+    if ($extra !== '' && strcasecmp($extra, APEX_TO_EMAIL) !== 0 && filter_var($extra, FILTER_VALIDATE_EMAIL)) {
+        $m->addBCC($extra);
+    }
     $m->addReplyTo($email, $name); // PHPMailer validates and rejects line breaks
-    $m->Subject = 'Apex Global website enquiry: ' . $labels[$type] . ($name !== '' ? ' from ' . $name : '') . ($subject !== '' ? ' (' . $subject . ')' : '');
+    $kind = stripos($subject, 'quote') !== false ? 'quote request' : $labels[$type];
+    $m->Subject = 'New website ' . $kind . ($subject !== '' ? ': ' . $subject : '') . ($name !== '' ? ' (' . $name . ')' : '');
     $m->Body = $body;
     $m->send();
 } catch (MailException $e) {
