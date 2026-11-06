@@ -8,15 +8,17 @@ export default defineConfig({
   trailingSlash: 'always',
   output: 'static',
   build: { format: 'directory', inlineStylesheets: 'always' },
-  // One self-hosted variable font (Plus Jakarta Sans, latin subset, SIL OFL) with a metric-matched
-  // fallback, so swapping in causes no layout shift. Preloaded once in BaseLayout.
+  // One self-hosted variable font (Plus Jakarta Sans, latin subset, SIL OFL), preloaded once in
+  // BaseLayout, with a metric-matched fallback. display: 'optional' means the font is used when it
+  // arrives in time for first paint (almost always, as it is preloaded) and is never swapped in later,
+  // so text never moves (CLS 0, required by Lighthouse CI). Later pages use the cached font.
   fonts: [
     {
       provider: fontProviders.local(),
       name: 'Plus Jakarta Sans',
       cssVariable: '--font-jakarta',
       fallbacks: ['Arial', 'sans-serif'],
-      options: { variants: [{ src: ['./src/assets/fonts/plus-jakarta-sans-var.woff2'], weight: '200 800', style: 'normal', display: 'swap' }] },
+      options: { variants: [{ src: ['./src/assets/fonts/plus-jakarta-sans-var.woff2'], weight: '200 800', style: 'normal', display: 'optional' }] },
     },
   ],
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },

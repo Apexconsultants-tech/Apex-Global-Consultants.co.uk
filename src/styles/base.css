@@ -293,7 +293,7 @@
 .hero-soft-list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1); }
 .hero-soft-item { display: grid; place-items: center; height: 2.75rem; padding: 0 .75rem; border-radius: var(--radius); background: var(--color-white); border: 1px solid var(--color-tint-20); transition: transform .2s var(--ease-out), box-shadow .2s, border-color .2s; }
 .hero-soft-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--color-primary); }
-.hero-soft-item img { width: auto; }
+/* Keep the width/height attributes so each logo's box is reserved before it loads (no layout shift). */
 .hero-visual { position: relative; aspect-ratio: 5 / 4; max-height: 60svh; width: 100%; overflow: hidden; background: var(--color-tint-10); }
 .hero-toggle { position: absolute; right: var(--s2); bottom: var(--s2); z-index: 2; background: rgb(255 255 255 / .92); border-color: transparent; }
 @media (min-width: 640px) and (max-width: 1023px) { .hero-visual { aspect-ratio: 16 / 10; } }
@@ -434,8 +434,9 @@
 .soft-tab-logo { height: auto; max-height: 40px; width: auto; }
 /* Every tab shows its logo only, centred at the same visual size (names stay for screen readers). */
 .soft-tab { justify-content: center; }
-.soft-tab[data-shape='round'] .soft-tab-logo { max-height: 36px; }
-.soft-tab[data-shape='wide'] .soft-tab-logo { max-height: 30px; max-width: 132px; }
+/* Fixed heights (width follows the image's own proportions) so nothing moves while logos load. */
+.soft-tab[data-shape='round'] .soft-tab-logo { height: 36px; max-height: none; }
+.soft-tab[data-shape='wide'] .soft-tab-logo { height: 28px; max-height: none; max-width: 132px; object-fit: contain; }
 .soft-tab .soft-tab-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (min-width: 768px) { .soft-tabs { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; } .soft-tab { justify-content: center; } }
 .soft-stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); align-items: center; }
