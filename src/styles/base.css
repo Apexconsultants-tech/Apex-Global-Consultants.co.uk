@@ -203,7 +203,21 @@
   .menu-btn { display: none; }
   .header-row { gap: var(--s2); }
 }
-@media (min-width: 1024px) and (max-width: 1179px) { .nav-link { padding-inline: 0.4rem; font-size: 0.9375rem; } .nav-link::after { left: .4rem; right: .4rem; } .header-cta { padding-inline: 0.875rem; } }
+.nav-link { white-space: nowrap; }
+/* Seven menu items: tighten on smaller laptops so everything stays on one line. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .header-row { gap: .75rem; }
+  .main-nav ul { gap: 0; }
+  .nav-link { padding-inline: 0.45rem; font-size: 0.9063rem; }
+  .nav-link::after { left: .45rem; right: .45rem; }
+  .header-cta { padding-inline: 0.875rem; font-size: 0.875rem; }
+}
+@media (min-width: 1024px) and (max-width: 1119px) {
+  .brand { --logo-w: 220px; }
+  .nav-link { padding-inline: 0.3rem; font-size: 0.875rem; }
+  .nav-link::after { left: .3rem; right: .3rem; }
+  .header-cta { padding-inline: 0.75rem; font-size: 0.8125rem; }
+}
 
 /* ---- mega menu ---- */
 .mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--color-white); box-shadow: 0 24px 48px -24px rgb(5 69 140 / .35); border-top: 1px solid var(--color-tint-20); opacity: 0; transform: translateY(-8px); transition: opacity .22s var(--ease-out), transform .22s var(--ease-out); }

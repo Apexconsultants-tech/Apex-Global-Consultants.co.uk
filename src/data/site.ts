@@ -83,6 +83,7 @@ export const mainNav = [
   { label: 'Who We Help', href: '/who-we-help/' },
   { label: 'Software', href: '/software/' },
   { label: 'Insights', href: '/insights/' },
+  { label: 'Pricing', href: '/pricing/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
 ];
