@@ -43,8 +43,15 @@ keyFacts:
     label: Accounts prepared to current UK GAAP
   - value: '1'
     label: Combined calendar for every filing
-priceFrom: '£X'
-priceNote: Annual accounts are quoted as a fixed fee; internal audit and risk work are quoted per review. Prices exclude VAT.
+price:
+  amount: '£250'
+  unit: year
+  blurb: 'Ongoing compliance and governance support for your business.'
+  features:
+    - 'Annual compliance health check'
+    - 'Statutory filing and record keeping'
+    - 'AML, KYC and governance support'
+priceNote: Annual accounts are quoted as a fixed fee; internal audit and risk work are quoted per review.
 related:
   - taxation
   - corporate-services

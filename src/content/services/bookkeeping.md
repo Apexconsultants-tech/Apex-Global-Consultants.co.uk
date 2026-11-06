@@ -43,7 +43,16 @@ keyFacts:
     label: Bank reconciliations as standard
   - value: '1'
     label: Dedicated bookkeeper for your account
-priceFrom: '£X'
+price:
+  from: false
+  amount: '£99'
+  unit: month
+  detail: 'Up to 50 transactions a month'
+  blurb: 'Day-to-day bookkeeping, bank reconciliation and monthly accounts.'
+  features:
+    - 'Recording and categorising transactions'
+    - 'Bank and account reconciliation'
+    - 'Monthly management summary'
 priceNote: Fixed monthly fee based on transaction volume and the number of bank accounts, agreed before we start.
 related:
   - management-reporting

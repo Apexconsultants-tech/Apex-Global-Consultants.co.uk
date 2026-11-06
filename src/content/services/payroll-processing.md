@@ -43,8 +43,16 @@ keyFacts:
     label: Monthly PAYE payment date for electronic payments
   - value: '31 May'
     label: Deadline to give employees their P60
-priceFrom: '£X'
-priceNote: Fixed monthly fee based on the number of employees and pay frequency. Prices exclude VAT.
+price:
+  amount: '£35'
+  unit: month
+  detail: 'Includes 1 employee, then £6 per additional employee'
+  blurb: 'Compliant, hassle-free payroll for your team.'
+  features:
+    - 'PAYE and RTI submissions'
+    - 'Pension auto-enrolment support'
+    - 'P60, P45 and year-end reporting'
+priceNote: Fixed monthly fee based on the number of employees and pay frequency.
 related:
   - bookkeeping
   - taxation

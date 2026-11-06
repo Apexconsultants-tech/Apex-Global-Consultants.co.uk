@@ -3,7 +3,7 @@
   topic: fees
   order: 1
   question: Do you charge fixed fees?
-  answer: Yes. After a free consultation we send a written proposal with a fixed fee for the work agreed. The fee states whether VAT is added, so there are no surprises.
+  answer: Yes. After a free consultation we send a written proposal with a fixed fee for the work agreed. You know the cost before any work starts, so there are no surprises.
 - id: what-included-fee
   topic: fees
   order: 2

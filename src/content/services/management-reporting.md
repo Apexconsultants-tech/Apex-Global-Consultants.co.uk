@@ -43,8 +43,15 @@ keyFacts:
     label: Or quarterly management accounts
   - value: 'KPIs'
     label: Agreed with you, tracked consistently
-priceFrom: '£X'
-priceNote: Fixed monthly fee depending on frequency and the depth of analysis. Prices exclude VAT.
+price:
+  amount: '£175'
+  unit: month
+  blurb: 'Insightful reports to help you monitor performance and growth.'
+  features:
+    - 'Monthly or quarterly reports'
+    - 'Profit and loss, cash flow and KPIs'
+    - 'Customised management packs'
+priceNote: Fixed monthly fee depending on frequency and the depth of analysis.
 related:
   - bookkeeping
   - accounting-advisory

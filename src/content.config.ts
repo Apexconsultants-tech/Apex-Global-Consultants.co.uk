@@ -28,7 +28,16 @@ const services = defineCollection({
       included: z.array(z.object({ title: z.string(), text: z.string(), icon: IconName })).min(3),
       howWeHelp: z.array(z.object({ title: z.string(), text: z.string(), image: image(), imageAlt: z.string() })).min(2),
       keyFacts: z.array(z.object({ value: z.string(), label: z.string() })).min(3).max(4),
-      priceFrom: z.string(), // e.g. "£X" placeholder until confirmed
+      // Starting price shown on /pricing/ and the service page (client price list, November 2026).
+      price: z.object({
+        from: z.boolean().default(true), // false: a fixed price rather than "From"
+        amount: z.string(),
+        unit: z.string(), // "month", "return", "hour"...
+        detail: z.string().optional(),
+        blurb: z.string().max(90),
+        rows: z.array(z.object({ label: z.string(), amount: z.string(), unit: z.string() })).optional(),
+        features: z.array(z.string()).max(4).default([]),
+      }),
       priceNote: z.string(),
       related: z.array(reference('services')).max(3),
       ...seo,
