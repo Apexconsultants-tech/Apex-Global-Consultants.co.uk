@@ -371,26 +371,51 @@
 .price-card .plan-rows { min-width: min(100%, 20rem); }
 
 /* ---- contact ---- */
+/* contact methods: three equal cards with solid deep-blue icons */
+.contact-ways-section { padding-top: var(--s5); }
+.cways { display: grid; gap: var(--s2); }
+@media (min-width: 768px) { .cways { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s3); } }
+.cways .cway { display: grid; justify-items: start; gap: .25rem; height: 100%; padding: var(--s3); border-radius: 20px; background: var(--color-white); color: var(--color-ink); text-decoration: none; box-shadow: inset 0 0 0 1px var(--color-tint-20), var(--shadow); transition: transform .2s, box-shadow .2s; }
+.cways .cway:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--color-primary-deep), var(--shadow); }
+.cways .cway:focus-visible { outline: 3px solid var(--color-primary-deep); outline-offset: 3px; }
+.cway-ico { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; margin-bottom: var(--s1); border-radius: 50%; background: var(--color-primary-deep); color: var(--color-white); box-shadow: 0 0 0 6px var(--color-tint-10); }
+.cway-ico svg { stroke-width: 2.25; }
+.cway-label { font-size: .8125rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-secondary-deep); }
+.cway-value { font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); font-weight: 750; color: var(--color-primary-deep); }
+.cway-action { display: inline-flex; align-items: center; gap: .375rem; margin-top: auto; padding-top: var(--s1); font-weight: 650; color: var(--color-muted); }
+.cways .cway:hover .cway-action { color: var(--color-primary-deep); }
+.cways-hours { display: flex; align-items: center; justify-content: center; gap: var(--s1); margin-top: var(--s3); color: var(--color-muted); text-align: center; }
+.cways-hours svg { flex: none; color: var(--color-primary-deep); }
+@media (prefers-reduced-motion: reduce) { .cways .cway, .cways .cway:hover { transition: none; transform: none; } }
+
+/* form + office */
 .contact-grid { display: grid; gap: var(--s5); }
-@media (min-width: 1024px) { .contact-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s6); align-items: start; } }
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s5); align-items: start; } }
 .contact-form { padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); border-radius: 28px; background: var(--color-white); box-shadow: inset 0 6px 0 var(--color-primary), var(--shadow); scroll-margin-top: 7rem; }
 .contact-lead { color: var(--color-muted); margin-bottom: var(--s3); }
 .contact-side { display: grid; gap: var(--s3); min-width: 0; }
-.contact-ways { margin: 0; }
-.contact-ways a { background: var(--color-tint-5); color: var(--color-ink); }
-.contact-ways a:hover { background: var(--color-tint-10); }
-.contact-ways .final-ico { background: var(--color-primary-deep); color: var(--color-white); }
-.office { padding: var(--s3); border-radius: var(--radius); background: var(--color-tint-5); }
-.office--plain { background: transparent; box-shadow: inset 0 0 0 1px var(--color-tint-20); }
-.office address { font-style: normal; }
-.office-hours { margin-block: var(--s1) var(--s2); color: var(--color-muted); font-size: .9375rem; }
-.office--plain p { color: var(--color-muted); }
-.map { overflow: hidden; border-radius: 16px; background: var(--color-white); margin-bottom: var(--s1); }
-.map-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .375rem; width: 100%; aspect-ratio: 4 / 3; border: 0; background: var(--color-white); color: var(--color-primary-deep); cursor: pointer; font: inherit; transition: background-color .2s; }
-.map-btn:hover { background: var(--color-tint-10); }
-.map-btn-t { font-weight: 700; }
-.map-btn-n { font-size: .8125rem; color: var(--color-muted); padding-inline: var(--s3); text-align: center; }
-.map-frame { display: block; width: 100%; aspect-ratio: 4 / 3; border: 0; }
+.office-card { overflow: hidden; border-radius: 20px; background: var(--color-white); box-shadow: inset 0 0 0 1px var(--color-tint-20), var(--shadow); }
+.office-map { position: relative; aspect-ratio: 4 / 3; background: var(--color-tint-10); border-bottom: 1px solid var(--color-tint-20); }
+.office-map-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.office-pin { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 3.25rem; height: 3.25rem; transform: translate(-50%, -110%) rotate(-45deg); border-radius: 50% 50% 50% 0; background: var(--color-primary-deep); color: var(--color-white); box-shadow: 0 0 0 5px rgb(255 255 255 / .9), var(--shadow); }
+.office-pin svg { rotate: 45deg; stroke-width: 2.25; }
+.office-map-credit { position: absolute; right: 0; bottom: 0; padding: .125rem .5rem; border-top-left-radius: 8px; background: rgb(255 255 255 / .9); font-size: .75rem; color: var(--color-ink); }
+.office-body { padding: var(--s3); }
+.office-body address { font-style: normal; line-height: 1.6; }
+.office-actions { display: flex; flex-wrap: wrap; gap: var(--s1); margin-top: var(--s2); }
+.office-actions .btn { flex: 1 1 11rem; }
+.office-note { margin-top: var(--s1); font-size: .8125rem; color: var(--color-muted); }
+.map-frame { display: block; width: 100%; height: 100%; border: 0; }
+.office-secure { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s2); padding: var(--s3); border-radius: 20px; background: var(--color-tint-5); box-shadow: inset 4px 0 0 var(--color-secondary-deep); }
+.office-secure-ico { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; background: var(--color-secondary-deep); color: var(--color-white); }
+.office-secure-ico svg { stroke-width: 2.25; }
+.office-secure .h3-lg { margin-bottom: var(--s1); }
+.office-secure p { color: var(--color-muted); }
+
+/* areas */
+.contact-areas { padding-top: 0; }
+.contact-areas .wrap { padding-block: var(--s4); border-top: 1px solid var(--color-tint-20); text-align: center; }
+.contact-areas .area-tags { justify-content: center; }
 .field-area { min-height: 9rem; resize: vertical; }
 .field-area--sm { min-height: 5.5rem; }
 

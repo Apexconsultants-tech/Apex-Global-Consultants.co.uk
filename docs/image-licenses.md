@@ -78,6 +78,7 @@ with visible third-party logos; anything without a licence that allows commercia
 | `src/assets/locations/stockport.jpg` | CC0 1.0 (public domain, commercial use, no attribution required) | StockSnap, "Brick Building": https://stocksnap.io/photo/brick-building-BKBO82IGVO | Bernard Spragg | 2026-11-06 | Resized |
 | `src/assets/insights/year-end-checklist.jpg` | CC0 1.0 (public domain, commercial use, no attribution required) | rawpixel public domain, "null": https://www.rawpixel.com/image/5959387/free-public-domain-cc0-photo | rawpixel | 2026-11-06 | Resized |
 | `src/assets/insights/frs-102-changes.jpg` | CC0 1.0 (public domain, commercial use, no attribution required) | StockSnap, "Chair Notebook": https://stocksnap.io/photo/chair-notebook-7ZPSYLVQNC | Oliver Klein | 2026-11-06 | Resized |
+| `src/assets/contact/office-map.webp` | ODbL 1.0 (map data) / CC BY-SA 2.0 (tiles): attribution "© OpenStreetMap contributors" shown on the image | OpenStreetMap standard tiles, zoom 16 around Atlantic Street, Altrincham (53.3978, -2.36): https://www.openstreetmap.org/copyright | OpenStreetMap contributors | 2026-11-08 | 20 tiles stitched and cropped to 1024x768 WebP (one-off download, self-hosted) |
 | `src/assets/badges/sample-badge-*.png` | Sample (draft only, never published) | Generated | n/a | n/a | Replace with client-supplied logos |
 
 **Rejected:** the previously supplied `hero.mp4` (Tower Bridge sunset) is an iStock by Getty Images
