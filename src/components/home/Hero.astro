@@ -13,7 +13,8 @@ import { getSoftware } from '../../lib/content';
  */
 const h = site.hero;
 const software = await getSoftware();
-const logoH = (shape: string) => (shape === 'round' ? 30 : 20);
+// Four equal tiles: round marks 40px tall, wide wordmarks 30px (CSS caps them to the tile width).
+const logoH = (shape: string) => (shape === 'round' ? 40 : 30);
 ---
 
 <section class="hero" aria-labelledby="hero-title" data-hero>
