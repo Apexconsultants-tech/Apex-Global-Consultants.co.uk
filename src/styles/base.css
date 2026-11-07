@@ -356,10 +356,10 @@
 @media (max-width: 639px) { .help-btn { width: 100%; } }
 
 /* ---- service-area colours, one logo colour per area ---- */
-[data-tone='blue-deep']  { --g: var(--color-primary-deep);   --g-on: var(--color-white); --g-text: var(--color-primary-deep); }
-[data-tone='blue']       { --g: var(--color-primary);        --g-on: var(--color-ink);   --g-text: var(--color-primary-deep); }
-[data-tone='green-deep'] { --g: var(--color-secondary-deep); --g-on: var(--color-white); --g-text: var(--color-secondary-deep); }
-[data-tone='green']      { --g: var(--color-secondary);      --g-on: var(--color-ink);   --g-text: var(--color-secondary-deep); }
+[data-tone='blue-deep']  { --g-strong: var(--color-primary-deep); --g: var(--color-primary-deep);   --g-on: var(--color-white); --g-text: var(--color-primary-deep); }
+[data-tone='blue']       { --g-strong: var(--color-primary-deep); --g: var(--color-primary);        --g-on: var(--color-ink);   --g-text: var(--color-primary-deep); }
+[data-tone='green-deep'] { --g-strong: var(--color-secondary-deep); --g: var(--color-secondary-deep); --g-on: var(--color-white); --g-text: var(--color-secondary-deep); }
+[data-tone='green']      { --g-strong: var(--color-secondary-deep); --g: var(--color-secondary);      --g-on: var(--color-ink);   --g-text: var(--color-secondary-deep); }
 
 /* ---- service explorer ---- */
 .explorer { display: grid; gap: var(--s2); }

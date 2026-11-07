@@ -56,6 +56,40 @@ price:
     - 'Deadlines tracked for you'
     - 'HMRC correspondence handled'
 priceNote: Fixed fee per return or a combined monthly fee, agreed in writing before we start.
+actsFor:
+  - { label: Limited companies, icon: building }
+  - { label: Company directors, icon: users }
+  - { label: Sole traders, icon: ledger }
+  - { label: Landlords, icon: lease }
+  - { label: VAT-registered businesses, icon: receipt }
+  - { label: People with overseas income, icon: globe }
+process:
+  - title: Free call and fixed fee
+    text: We confirm which returns you need, check your deadlines and agree a fixed fee in writing.
+  - title: Share your records
+    text: Upload through our secure client portal or give us access to your cloud software. Never by email.
+  - title: We prepare and review
+    text: We prepare the return and calculations, apply the reliefs you are entitled to and note any questions.
+  - title: You approve, we file
+    text: We walk you through the figures and the amount due, then file with HMRC and diarise every payment date.
+keyDates:
+  intro: The main dates in the UK tax year. We track the ones that apply to you and remind you well before each one.
+  items:
+    - date: 5 April
+      title: Tax year ends
+      text: The last day of the tax year. A good point to review pension contributions, dividends and allowances.
+    - date: 31 July
+      title: Second payment on account
+      text: The second advance payment towards your Self Assessment tax bill, if you make payments on account.
+    - date: 5 October
+      title: Register for Self Assessment
+      text: Deadline to tell HMRC you need to file a return if you became self-employed or had new untaxed income.
+    - date: 31 October
+      title: Paper return deadline
+      text: Last date for paper Self Assessment returns. Most people file online, which allows until 31 January.
+    - date: 31 January
+      title: Online return and balancing payment
+      text: Online Self Assessment deadline, with any balance due for the year and your first payment on account.
 related:
   - compliance
   - bookkeeping
@@ -64,4 +98,6 @@ related:
 
 Tax rules change every year and the cost of getting them wrong falls on you. We prepare and file your returns accurately and on time, and help you understand what you owe and why.
 
-We act for limited companies, directors, sole traders and individuals, including people and businesses with income in more than one country.
+We look after corporation tax, Self Assessment and VAT, and we set clients up for Making Tax Digital. MTD for Income Tax began in April 2026 for sole traders and landlords with qualifying income over £50,000, and is due to extend to those over £30,000 from April 2027 and over £20,000 from April 2028.
+
+Because we see your whole position, from company profits to your personal return, we can talk through salary and dividend mix, timing and reliefs before your year end, while there is still time to act.

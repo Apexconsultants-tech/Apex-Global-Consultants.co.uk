@@ -39,6 +39,15 @@ const services = defineCollection({
         features: z.array(z.string()).max(4).default([]),
       }),
       priceNote: z.string(),
+      // Optional richer sections; each renders only when present.
+      actsFor: z.array(z.object({ label: z.string(), icon: IconName })).max(8).optional(),
+      process: z.array(z.object({ title: z.string(), text: z.string() })).min(3).max(5).optional(),
+      keyDates: z
+        .object({
+          intro: z.string(),
+          items: z.array(z.object({ date: z.string(), title: z.string(), text: z.string() })).min(3).max(8),
+        })
+        .optional(),
       related: z.array(reference('services')).max(3),
       ...seo,
     }),
