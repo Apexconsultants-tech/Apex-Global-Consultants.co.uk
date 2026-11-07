@@ -1,10 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/page/PageHero.astro';
 import CallbackForm from '../components/forms/CallbackForm.astro';
 import Icon from '../components/ui/Icon.astro';
 import { getLocations } from '../lib/content';
 import { site, telHref, mailHref, whatsappHref, addressLines } from '../data/site';
+import officeMap from '../assets/contact/office-map.webp';
 
 const locations = await getLocations();
 const crumbs = [
@@ -12,6 +14,12 @@ const crumbs = [
   { name: 'Contact', href: '/contact/' },
 ];
 const mapQuery = encodeURIComponent(addressLines.slice(0, 5).join(', '));
+
+const ways = [
+  { icon: 'phone', label: 'Call us', value: site.phone.display, action: 'Call now', href: telHref, track: 'call' },
+  { icon: 'mail', label: 'Email us', value: site.email, action: 'Send an email', href: mailHref, track: 'email' },
+  { icon: 'whatsapp', label: 'WhatsApp', value: site.whatsapp.display, action: 'Start a chat', href: whatsappHref, track: 'whatsapp' },
+];
 ---
 
 <BaseLayout
@@ -21,85 +29,113 @@ const mapQuery = encodeURIComponent(addressLines.slice(0, 5).join(', '));
 >
   <PageHero title="Contact us" summary="Book a free consultation, request a call back or just ask a question." crumbs={crumbs} />
 
-  <section class="section" aria-label="Contact options">
+  <section class="contact-ways-section" aria-labelledby="ways-title">
+    <div class="wrap">
+      <h2 id="ways-title" class="sr-only">Ways to reach us</h2>
+      <ul role="list" class="cways">
+        {
+          ways.map((w) => (
+            <li>
+              <a class="cway" href={w.href} data-track={w.track} rel={w.track === 'whatsapp' ? 'noopener' : undefined}>
+                <span class="cway-ico">
+                  <Icon name={w.icon} size={28} />
+                </span>
+                <span class="cway-label">{w.label}</span>
+                <span class="cway-value wrap-any">{w.value}</span>
+                <span class="cway-action">
+                  {w.action} <Icon name="arrow" size={18} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="cways-hours"><Icon name="clock" size={20} /> {site.hours}. Visits by appointment.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Book a consultation and find our office">
     <div class="wrap contact-grid">
       <div id="book" class="contact-form">
-        <h2 class="h3-lg">Book a free consultation</h2>
-        <p class="contact-lead">Tell us a little about your business and we will arrange a 30-minute call at a time that suits you.</p>
+        <p class="eyebrow">Free consultation</p>
+        <h2 class="h3-lg">Book a 30-minute call</h2>
+        <p class="contact-lead">Tell us a little about your business and we will arrange a call at a time that suits you.</p>
         <CallbackForm variant="enquiry" idPrefix="contact" />
       </div>
 
       <div class="contact-side">
-        <ul role="list" class="final-ways contact-ways">
-          <li>
-            <a href={telHref} data-track="call">
-              <span class="final-ico"><Icon name="phone" /></span>
-              <span><small>Phone</small>{site.phone.display}</span>
-            </a>
-          </li>
-          <li>
-            <a href={mailHref} data-track="email">
-              <span class="final-ico"><Icon name="mail" /></span>
-              <span class="wrap-any"><small>Email</small>{site.email}</span>
-            </a>
-          </li>
-          <li>
-            <a href={whatsappHref} data-track="whatsapp" rel="noopener">
-              <span class="final-ico"><Icon name="whatsapp" /></span>
-              <span><small>WhatsApp</small>{site.whatsapp.display}</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="office">
-          <h2 class="h3-lg">Our office</h2>
-          <address>{addressLines.map((l) => <>{l}<br /></>)}</address>
-          <p class="office-hours">{site.hours}. Visits by appointment.</p>
-          <div class="map" data-map-wrap>
-            <button type="button" class="map-btn" data-map-load data-query={mapQuery}>
-              <Icon name="pin" size={32} />
-              <span class="map-btn-t">Show map</span>
-              <span class="map-btn-n">Loads Google Maps, which may set cookies.</span>
-            </button>
+        <div class="office-card">
+          <div class="office-map" data-map-wrap>
+            <Image
+              src={officeMap}
+              alt="Street map of Altrincham with a pin on Atlantic Street, where our office at the Atlantic Business Centre is"
+              width={640}
+              height={480}
+              widths={[480, 640, 960]}
+              sizes="(min-width: 1024px) 34rem, 100vw"
+              loading="lazy"
+              class="office-map-img"
+            />
+            <span class="office-pin" aria-hidden="true"><Icon name="building" size={24} /></span>
+            <small class="office-map-credit">© OpenStreetMap contributors</small>
           </div>
-          <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} rel="noopener" class="link-arrow">
-            Open in Google Maps <Icon name="external" size={16} />
-          </a>
+          <div class="office-body">
+            <h2 class="h3-lg">Our office</h2>
+            <address>{addressLines.map((l) => <>{l}<br /></>)}</address>
+            <div class="office-actions">
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`} rel="noopener" class="btn btn-primary">
+                Get directions <Icon name="external" size={16} />
+              </a>
+              <button type="button" class="btn btn-outline" data-map-load data-query={mapQuery}>
+                <Icon name="pin" size={18} /> Interactive map
+              </button>
+            </div>
+            <p class="office-note">The interactive map loads Google Maps, which may set cookies.</p>
+          </div>
         </div>
 
-        <div class="office office--plain">
-          <h2 class="h3-lg">Existing clients</h2>
-          <p>
-            Please send documents, tax references, National Insurance numbers and bank details only through our secure client portal, never by email or this
-            form. Ask your accountant for your portal link.
-          </p>
-        </div>
-
-        <div class="office office--plain">
-          <h2 class="h3-lg">Areas we serve</h2>
-          <ul role="list" class="area-tags">
-            {locations.map((l) => <li><a href={`/areas/${l.id}/`}>{l.data.town}</a></li>)}
-          </ul>
+        <div class="office-secure">
+          <span class="office-secure-ico"><Icon name="lock" size={24} /></span>
+          <div>
+            <h2 class="h3-lg">Existing clients</h2>
+            <p>
+              Please send documents, tax references, National Insurance numbers and bank details only through our secure client portal, never by email or this
+              form. Ask your accountant for your portal link.
+            </p>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section contact-areas" aria-labelledby="areas-title">
+    <div class="wrap">
+      <h2 id="areas-title" class="h3-lg">Areas we serve</h2>
+      <ul role="list" class="area-tags">
+        {locations.map((l) => <li><a href={`/areas/${l.id}/`}>{l.data.town}</a></li>)}
+      </ul>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  // The map loads only when asked for (no third-party request or cookies until then).
+  // The static map shows straight away (self-hosted image, no third-party request).
+  // Google Maps, which may set cookies, loads only when asked for.
   document.addEventListener('astro:page-load', () => {
     const btn = document.querySelector<HTMLButtonElement>('[data-map-load]');
-    btn?.addEventListener(
+    const wrap = document.querySelector<HTMLElement>('[data-map-wrap]');
+    if (!btn || !wrap) return;
+    btn.addEventListener(
       'click',
       () => {
         const f = document.createElement('iframe');
         f.src = `https://www.google.com/maps?q=${btn.dataset.query}&output=embed`;
-        f.title = 'Map showing the Apex Global office in Altrincham';
-        f.loading = 'lazy';
+        f.title = 'Interactive map showing the Apex Global office in Altrincham';
         f.referrerPolicy = 'no-referrer-when-downgrade';
         f.className = 'map-frame';
-        btn.replaceWith(f);
+        wrap.replaceChildren(f);
+        btn.remove();
+        f.focus();
       },
       { once: true },
     );

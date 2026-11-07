@@ -25,7 +25,7 @@ export const site = {
   // Registered office at Companies House (differs from the trading office above).
   registeredOffice: 'Office 5793, Peregrine Road, Ilford, England, IG6 3SZ',
   icoNumber: 'ZB825809',
-  geo: { lat: 53.3936, lng: -2.3586 }, // approximate: Atlantic Street, Altrincham
+  geo: { lat: 53.3978, lng: -2.36 }, // approximate: Atlantic Street, Altrincham (centre of the contact page map)
   phone: { display: '+44 (0) 204 553 8806', tel: '+442045538806' },
   email: 'info@apexglobalconsultants.co.uk',
   whatsapp: {
