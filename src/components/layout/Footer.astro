@@ -2,18 +2,19 @@
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
 import { site, legalLinks, telHref, mailHref, addressLines } from '../../data/site';
-import { getGroups, groupHref } from '../../lib/content';
+import { getGroups, groupHref, getLocations } from '../../lib/content';
 
-// Deliberately minimal: brand, services, company links, contact details, legal line.
+// Light footer: brand card, then four headed columns, then the legal line.
 const groups = await getGroups();
-const company = [
+const locations = await getLocations();
+const quickLinks = [
   { label: 'About us', href: '/about/' },
   { label: 'Our team', href: '/team/' },
   { label: 'Who we help', href: '/who-we-help/' },
+  { label: 'Software', href: '/software/' },
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Insights', href: '/insights/' },
   { label: 'FAQs', href: '/faq/' },
-  { label: 'Contact', href: '/contact/' },
 ];
 const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLines.join(', '))}`;
 ---
@@ -23,28 +24,38 @@ const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
     <div class="footer-brand">
       <a href="/" class="brand brand--footer" aria-label="Apex Global Consulting Services, home"><Logo width={260} /><span class="brand-line">{site.serviceLine.map((w, i) => <>{i > 0 && <span class="brand-sep" aria-hidden="true" />}<span>{w}{i < site.serviceLine.length - 1 && <span class="sr-only">,</span>}</span></>)}</span></a>
       <p class="footer-desc">Accounting, tax and financial reporting for UK and international businesses, from Altrincham, Manchester, UK.</p>
+      <a href="/contact/#book" class="btn btn-primary footer-cta" data-track="booking">Book a free consultation <Icon name="arrow" size={18} /></a>
     </div>
 
     <nav class="footer-cols" aria-label="Footer">
-      <div>
-        <h2 class="footer-h">Services</h2>
-        <ul role="list">
-          {groups.map((g) => <li><a href={groupHref(g.id)}>{g.data.title}</a></li>)}
+      <div class="footer-col">
+        <h2 class="footer-h">Quick links</h2>
+        <ul role="list" class="footer-list">
+          {quickLinks.map((l) => <li><a href={l.href}><Icon name="chevron" size={16} />{l.label}</a></li>)}
         </ul>
       </div>
-      <div>
-        <h2 class="footer-h">Company</h2>
-        <ul role="list">
-          {company.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      <div class="footer-col">
+        <h2 class="footer-h">Our services</h2>
+        <ul role="list" class="footer-list footer-list--one">
+          {groups.map((g) => <li><a href={groupHref(g.id)}><Icon name="chevron" size={16} />{g.data.title}</a></li>)}
+          <li><a href="/services/"><Icon name="chevron" size={16} />All services</a></li>
         </ul>
       </div>
-      <address class="footer-contact">
-        <h2 class="footer-h">Contact</h2>
-        <a href={mapHref} rel="noopener"><Icon name="pin" size={18} /><span>{addressLines.slice(0, 5).join(', ')}</span></a>
-        <a href={telHref} data-track="call"><Icon name="phone" size={18} />{site.phone.display}</a>
-        <a href={mailHref} data-track="email"><Icon name="mail" size={18} />{site.email}</a>
-        <p><Icon name="clock" size={18} />{site.hours}</p>
-      </address>
+      <div class="footer-col">
+        <h2 class="footer-h">Areas we cover</h2>
+        <ul role="list" class="footer-list">
+          {locations.map((l) => <li><a href={`/areas/${l.id}/`}><Icon name="chevron" size={16} />{l.data.town}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-h">Contact us</h2>
+        <address class="footer-contact">
+          <a href={mapHref} rel="noopener"><span class="footer-ic"><Icon name="pin" size={18} /></span><span>{addressLines.slice(0, 5).join(', ')}</span></a>
+          <a href={telHref} data-track="call"><span class="footer-ic"><Icon name="phone" size={18} /></span><span>{site.phone.display}</span></a>
+          <a href={mailHref} data-track="email"><span class="footer-ic"><Icon name="mail" size={18} /></span><span>{site.email.split("@")[0]}<wbr />@{site.email.split("@")[1]}</span></a>
+          <p><span class="footer-ic"><Icon name="clock" size={18} /></span><span>{site.hours}</span></p>
+        </address>
+      </div>
     </nav>
   </div>
 

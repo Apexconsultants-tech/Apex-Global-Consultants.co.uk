@@ -182,7 +182,15 @@
 /* ---- service cards ---- */
 .svc-grid { display: grid; gap: var(--s2); }
 @media (min-width: 640px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .svc-grid { grid-template-columns: repeat(3, 1fr); } .svc-grid:has(> :nth-child(4):last-child) { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) {
+  /* six tracks, each card spans two (three per row); a short last row is centred, never left-hanging */
+  .svc-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .svc-grid > * { grid-column: span 2; }
+  .svc-grid > :nth-child(3n + 1):nth-last-child(2) { grid-column: 2 / span 2; }
+  .svc-grid > :nth-child(3n + 1):last-child { grid-column: 3 / span 2; }
+  .svc-grid:has(> :nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .svc-grid:has(> :nth-child(4):last-child) > * { grid-column: auto; }
+}
 .svc-card { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius); background: var(--color-white); box-shadow: inset 0 4px 0 var(--g), 0 1px 0 var(--color-tint-20), 0 12px 30px -20px rgb(5 69 140 / .35); transition: transform .3s var(--ease-out), box-shadow .3s; }
 .svc-card:hover { transform: translateY(-4px); box-shadow: inset 0 4px 0 var(--g), var(--shadow); }
 .svc-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
