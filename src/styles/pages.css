@@ -3,7 +3,7 @@
    Uses the palette tokens and the per-area tones ([data-tone]) from base.css.
    ========================================================================== */
 
-.section-sm { padding-block: clamp(2.5rem, 1.8rem + 2.6vw, 4rem); }
+.section-sm { padding-block: clamp(2.25rem, 1.8rem + 1.8vw, 3.5rem); }
 .tinted { background: var(--color-tint-5); }
 .narrow { max-width: calc(52rem + 2 * var(--gutter)); }
 .center { text-align: center; }
@@ -72,6 +72,35 @@
 .prose h4 { font-size: 1.0625rem; margin-top: 1.25em; }
 .prose blockquote { border-left: 4px solid var(--color-primary); background: var(--color-tint-5); padding: 1rem 1.25rem; border-radius: 0 12px 12px 0; }
 .intro-text { margin-inline: auto; font-size: var(--fs-lead); }
+/* intro beside an "at a glance" card, so the row is filled instead of a lone centred column */
+.intro-grid { display: grid; gap: var(--s4); }
+@media (min-width: 1024px) {
+  .intro-grid { grid-template-columns: minmax(0, 48rem) minmax(19rem, 24rem); justify-content: space-between; gap: var(--s6); align-items: center; }
+  .intro-main .intro-text { max-width: none; }
+  .intro-grid .intro-text { margin: 0; max-width: none; }
+}
+.intro-aside { display: grid; gap: var(--s2); padding: var(--s3); border-radius: 20px; background: var(--color-white); box-shadow: inset 0 5px 0 var(--g, var(--color-primary-deep)), inset 0 0 0 1px var(--color-tint-20), var(--shadow); }
+.intro-aside-t { font-size: .8125rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-secondary-deep); }
+.intro-facts { display: grid; }
+.intro-facts > div { display: grid; gap: .125rem; padding-block: .75rem; border-bottom: 1px solid var(--color-tint-20); }
+.intro-facts > div:first-child { padding-top: 0; }
+.intro-facts dt { font-size: .875rem; color: var(--color-muted); }
+.intro-facts dd { font-weight: 750; color: var(--color-primary-deep); overflow-wrap: anywhere; }
+.intro-points { display: grid; gap: .625rem; }
+.intro-points li { display: grid; grid-template-columns: auto 1fr; gap: .625rem; align-items: start; font-weight: 600; }
+.intro-points svg { margin-top: .2rem; padding: 2px; border-radius: 50%; background: var(--color-secondary-deep); color: var(--color-white); stroke-width: 2.5; }
+.intro-price .price-amount { justify-content: flex-start; }
+.intro-reach { display: grid; gap: var(--s1); }
+.intro-stats { display: grid; gap: var(--s2); margin-top: var(--s4); }
+@media (min-width: 640px) { .intro-stats { grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); } }
+.intro-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: .25rem; padding: var(--s2) var(--s2) var(--s2) 1.25rem; border-radius: 16px; background: var(--color-tint-5); box-shadow: inset 4px 0 0 var(--g, var(--color-primary-deep)); }
+.intro-stat dd { font-size: clamp(1.5rem, 1.3rem + .8vw, 2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: var(--color-primary-deep); }
+.intro-stat dt { font-size: .875rem; color: var(--color-muted); line-height: 1.4; }
+.intro-reach a { display: flex; align-items: center; gap: .5rem; min-height: 44px; padding: .375rem .625rem; border-radius: 12px; background: var(--color-tint-5); color: var(--color-primary-deep); font-size: .875rem; font-weight: 650; text-decoration: none; overflow-wrap: anywhere; }
+.intro-reach a:hover { background: var(--color-tint-10); }
+.intro-reach-ico { display: grid; place-items: center; width: 2rem; height: 2rem; flex: none; border-radius: 50%; background: var(--color-primary-deep); color: var(--color-white); }
+.intro-reach-ico svg { stroke-width: 2.25; }
+.intro-hours { display: flex; align-items: center; gap: .375rem; font-size: .8125rem; color: var(--color-muted); }
 .intro-lead { font-size: clamp(1.1875rem, 1.1rem + .4vw, 1.4375rem); font-weight: 600; color: var(--color-primary-deep); line-height: 1.45; }
 .legal h2 { margin-top: 1.6em; }
 /* FAQ sections: decorative outlined words in the side space (FaqDeco.astro), wide screens only. */
@@ -144,12 +173,12 @@
 .inc-card p, .ben p { color: var(--color-muted); font-size: .9688rem; }
 
 /* ---- how we help: alternating rows ---- */
-.rows { display: grid; gap: clamp(2.5rem, 2rem + 3vw, 4.5rem); }
+.rows { display: grid; gap: clamp(2rem, 1.6rem + 1.6vw, 3rem); }
 .row { display: grid; gap: var(--s3); align-items: center; }
-.row-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+.row-img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
 .row-h { font-size: clamp(1.375rem, 1.2rem + .6vw, 1.75rem); margin-bottom: var(--s2); }
 .row-copy p { color: var(--color-muted); font-size: var(--fs-lead); }
-@media (min-width: 768px) { .row { grid-template-columns: 1fr 1fr; gap: var(--s6); } .row:nth-child(even) .row-img { order: 2; } }
+@media (min-width: 768px) { .row { grid-template-columns: 1fr 1fr; gap: var(--s5); } .row:nth-child(even) .row-img { order: 2; } }
 
 /* ---- key facts strip ---- */
 .facts { background: var(--g, var(--color-primary-deep)); color: var(--g-on, var(--color-white)); padding-block: var(--s5); }
@@ -191,6 +220,25 @@
   .svc-grid:has(> :nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .svc-grid:has(> :nth-child(4):last-child) > * { grid-column: auto; }
 }
+/* two cards: one half each; one card: wide, image beside the text */
+@media (min-width: 1024px) {
+  .svc-grid:has(> :nth-child(2):last-child) > .svc-card { grid-column: span 3; }
+  .svc-grid:has(> :nth-child(2):last-child) .svc-img { aspect-ratio: 2 / 1; }
+  .svc-grid > .svc-card:only-child { grid-column: 1 / -1; }
+}
+@media (min-width: 768px) {
+  .svc-grid:has(> :only-child) { grid-template-columns: 1fr; }
+  .svc-card:only-child { flex-direction: row; }
+  .svc-card:only-child .svc-img { width: 46%; aspect-ratio: auto; min-height: 20rem; flex: none; }
+  .svc-card:only-child .svc-body { justify-content: center; padding: var(--s5); gap: var(--s2); }
+  .svc-card:only-child .svc-title { font-size: clamp(1.5rem, 1.3rem + .8vw, 2rem); }
+  .svc-card:only-child .svc-summary { font-size: var(--fs-lead); color: var(--color-muted); }
+  .svc-card:only-child .svc-more { margin-top: var(--s1); }
+}
+.svc-inc { display: grid; gap: .5rem; margin-block: var(--s1); }
+@media (min-width: 640px) { .svc-inc { grid-template-columns: 1fr 1fr; gap: .625rem var(--s3); } }
+.svc-inc li { display: flex; align-items: flex-start; gap: .5rem; font-weight: 600; color: var(--color-ink); }
+.svc-inc svg { flex: none; margin-top: .15rem; padding: 2px; border-radius: 50%; background: var(--color-secondary-deep); color: var(--color-white); stroke-width: 2.5; }
 .svc-card { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius); background: var(--color-white); box-shadow: inset 0 4px 0 var(--g), 0 1px 0 var(--color-tint-20), 0 12px 30px -20px rgb(5 69 140 / .35); transition: transform .3s var(--ease-out), box-shadow .3s; }
 .svc-card:hover { transform: translateY(-4px); box-shadow: inset 0 4px 0 var(--g), var(--shadow); }
 .svc-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }

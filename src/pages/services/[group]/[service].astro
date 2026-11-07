@@ -9,6 +9,7 @@ import FaqList from '../../../components/page/FaqList.astro';
 import ServiceCards from '../../../components/page/ServiceCards.astro';
 import FinalCta from '../../../components/home/FinalCta.astro';
 import Price from '../../../components/ui/Price.astro';
+import IntroAside from '../../../components/page/IntroAside.astro';
 import Icon from '../../../components/ui/Icon.astro';
 import { getServiceIndex, getFaqs, groupHref } from '../../../lib/content';
 import { serviceSchema, faqSchema } from '../../../lib/schema';
@@ -48,10 +49,23 @@ const schema = [
   <InPageNav items={nav} />
 
   <section class="section-sm intro" id="overview" aria-label="Overview">
-    <div class="wrap">
-      <div class="prose intro-text">
-        <Content />
+    <div class="wrap intro-grid">
+      <div class="intro-main">
+        <div class="prose intro-text">
+          <Content />
+        </div>
+        <dl class="intro-stats" data-tone={tone}>
+          {
+            d.keyFacts.map((f) => (
+              <div class="intro-stat">
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
       </div>
+      <IntroAside title="Fixed fees" price={d.price} tone={tone} cta="Get a fixed-fee quote" />
     </div>
     <span data-intro-end></span>
   </section>
@@ -95,21 +109,6 @@ const schema = [
           ))
         }
       </div>
-    </div>
-  </section>
-
-  <section class="facts" aria-label="Key facts" data-tone={tone}>
-    <div class="wrap">
-      <dl class="facts-row">
-        {
-          d.keyFacts.map((f) => (
-            <div class="fact">
-              <dt class="fact-label">{f.label}</dt>
-              <dd class="fact-value">{f.value}</dd>
-            </div>
-          ))
-        }
-      </dl>
     </div>
   </section>
 

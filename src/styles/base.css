@@ -24,7 +24,7 @@
 :root {
   /* 8px spacing scale */
   --s1: 0.5rem; --s2: 1rem; --s3: 1.5rem; --s4: 2rem; --s5: 2.5rem; --s6: 3rem; --s8: 4rem; --s10: 5rem; --s12: 6rem; --s16: 8rem;
-  --section-y: clamp(3.5rem, 2.4rem + 4.4vw, 6rem);   /* 56px mobile -> 96px desktop */
+  --section-y: clamp(3rem, 2.3rem + 2.8vw, 4.75rem); /* 48px mobile -> 76px desktop */
   --wrap: 80rem;                                     /* 1280px */
   --measure: 45rem;                                  /* 720px */
   --gutter: 1rem;
@@ -78,7 +78,8 @@
 .h2 { font-size: var(--fs-h2); }
 .lead { font-size: var(--fs-lead); color: var(--color-muted); line-height: 1.55; }
 .eyebrow { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-secondary-deep); margin-bottom: var(--s2); }
-.section-head { max-width: var(--measure); margin-bottom: clamp(1.75rem, 1.2rem + 2vw, 3rem); }
+.section-head { max-width: none; margin-bottom: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem); }
+.section-head .lead { max-width: var(--measure); }
 .section-head .lead { margin-top: var(--s2); }
 .hp-field { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 

@@ -7,6 +7,7 @@ import FaqList from '../../../components/page/FaqList.astro';
 import ServiceCards from '../../../components/page/ServiceCards.astro';
 import FinalCta from '../../../components/home/FinalCta.astro';
 import Icon from '../../../components/ui/Icon.astro';
+import IntroAside from '../../../components/page/IntroAside.astro';
 import { getGroups, getServiceIndex, getFaqsForServices, groupHref, groupTones } from '../../../lib/content';
 import { faqSchema } from '../../../lib/schema';
 
@@ -36,11 +37,17 @@ const crumbs = [
   <PageHero title={d.title} summary={d.oneLine} eyebrow={`Service area ${d.number}`} crumbs={crumbs} image={d.image} imageAlt={d.imageAlt} tone={tone} />
 
   <section class="section-sm intro" aria-label="Introduction">
-    <div class="wrap">
+    <div class="wrap intro-grid">
       <div class="prose intro-text">
         <p class="intro-lead">{d.explainer}</p>
         <Content />
       </div>
+      <IntroAside
+        title="Services and starting prices"
+        facts={items.map((i) => ({ label: i.service.data.title, value: `${i.service.data.price.from ? 'From ' : ''}${i.service.data.price.amount} / ${i.service.data.price.unit}` }))}
+        tone={tone}
+        cta="Get a fixed-fee quote"
+      />
     </div>
   </section>
 

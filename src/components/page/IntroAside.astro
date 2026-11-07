@@ -1,0 +1,65 @@
+---
+/**
+ * Card beside an intro paragraph, so the intro fills the row instead of leaving a wide empty column.
+ * Shows optional facts and a price, then the ways to get in touch (from src/data/site.ts).
+ */
+import type { CollectionEntry } from 'astro:content';
+import Price from '../ui/Price.astro';
+import Icon from '../ui/Icon.astro';
+import { site, telHref, whatsappHref } from '../../data/site';
+
+interface Props {
+  title?: string;
+  facts?: { label: string; value: string }[];
+  points?: readonly string[];
+  price?: CollectionEntry<'services'>['data']['price'];
+  tone?: string;
+  cta?: string;
+}
+const { title = 'At a glance', facts = [], points = [], price, tone, cta = 'Book a free consultation' } = Astro.props;
+---
+
+<aside class="intro-aside" data-tone={tone} aria-label={title}>
+  <p class="intro-aside-t">{title}</p>
+  {
+    facts.length > 0 && (
+      <dl class="intro-facts">
+        {facts.map((f) => (
+          <div>
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+  {
+    points.length > 0 && (
+      <ul role="list" class="intro-points">
+        {points.map((p) => (
+          <li>
+            <Icon name="check" size={18} />
+            {p}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  {
+    price && (
+      <div class="intro-price">
+        <Price price={price} />
+      </div>
+    )
+  }
+  <a href="/contact/#book" class="btn btn-primary btn-block" data-track="booking">{cta} <Icon name="arrow" size={18} /></a>
+  <ul role="list" class="intro-reach">
+    <li>
+      <a href={telHref} data-track="call"><span class="intro-reach-ico"><Icon name="phone" size={18} /></span>{site.phone.display}</a>
+    </li>
+    <li>
+      <a href={whatsappHref} data-track="whatsapp" rel="noopener"><span class="intro-reach-ico"><Icon name="whatsapp" size={18} /></span>WhatsApp us</a>
+    </li>
+  </ul>
+  <p class="intro-hours"><Icon name="clock" size={16} /> {site.hours}</p>
+</aside>

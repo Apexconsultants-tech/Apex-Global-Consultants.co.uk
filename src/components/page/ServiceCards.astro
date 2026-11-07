@@ -11,6 +11,8 @@ interface Props {
 }
 const { items, images = false, headingLevel = 'h3' } = Astro.props;
 const H = headingLevel;
+// A lone card is shown wide, so it also lists what is included to fill the row.
+const single = items.length === 1;
 ---
 
 <ul role="list" class="svc-grid">
@@ -32,6 +34,16 @@ const H = headingLevel;
             </a>
           </H>
           <p class="svc-summary">{s.data.summary}</p>
+          {single && (
+            <ul role="list" class="svc-inc">
+              {s.data.included.map((it) => (
+                <li>
+                  <Icon name="check" size={18} />
+                  {it.title}
+                </li>
+              ))}
+            </ul>
+          )}
           <span class="svc-more" aria-hidden="true">
             Learn more <Icon name="arrow" size={18} />
           </span>

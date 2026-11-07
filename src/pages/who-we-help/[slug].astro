@@ -6,6 +6,7 @@ import PageHero from '../../components/page/PageHero.astro';
 import ServiceCards from '../../components/page/ServiceCards.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
 import Icon from '../../components/ui/Icon.astro';
+import IntroAside from '../../components/page/IntroAside.astro';
 import FaqList from '../../components/page/FaqList.astro';
 import { getAudiences, getServiceIndex, getFaqsForAudience } from '../../lib/content';
 import { faqSchema } from '../../lib/schema';
@@ -31,11 +32,12 @@ const crumbs = [
   <PageHero title={d.title} summary={d.summary} eyebrow={d.shortTitle} crumbs={crumbs} image={d.image} imageAlt={d.imageAlt} />
 
   <section class="section-sm intro" aria-label="Introduction">
-    <div class="wrap">
+    <div class="wrap intro-grid">
       <div class="prose intro-text">
         <p class="intro-lead">{d.promise}</p>
         <Content />
       </div>
+      <IntroAside title="What you get" points={d.benefits} />
     </div>
   </section>
 
