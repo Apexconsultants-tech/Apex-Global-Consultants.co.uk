@@ -4,6 +4,7 @@ import PageHero from '../components/page/PageHero.astro';
 import FinalCta from '../components/home/FinalCta.astro';
 import Steps from '../components/home/Steps.astro';
 import Icon from '../components/ui/Icon.astro';
+import IntroAside from '../components/page/IntroAside.astro';
 import { site, addressLines } from '../data/site';
 import aboutImg from '../assets/misc/about.jpg';
 
@@ -34,7 +35,7 @@ const values = [
   />
 
   <section class="section-sm intro" aria-label="Our story">
-    <div class="wrap">
+    <div class="wrap intro-grid">
       <div class="prose intro-text">
         <p class="intro-lead">
           Apex Global was founded to give growing businesses access to the technical accounting expertise usually found in large firms, with the personal
@@ -54,6 +55,15 @@ const values = [
           bookkeeping, tax, payroll, compliance and IFRS and FRS 102 reporting.
         </p>
       </div>
+      <IntroAside
+        title="Company facts"
+        facts={[
+          { label: 'Company', value: site.legalName },
+          { label: 'Company number', value: site.companyNumber },
+          { label: 'Office', value: `${site.address.locality}, ${site.address.region}` },
+          { label: 'AML supervisor', value: 'IAB' },
+        ]}
+      />
     </div>
   </section>
 

@@ -5,6 +5,7 @@ import PageHero from '../../components/page/PageHero.astro';
 import ServiceCards from '../../components/page/ServiceCards.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
 import Icon from '../../components/ui/Icon.astro';
+import IntroAside from '../../components/page/IntroAside.astro';
 import { getLocations, getServiceIndex } from '../../lib/content';
 import { site, addressLines, telHref } from '../../data/site';
 
@@ -28,8 +29,15 @@ const crumbs = [
   <PageHero title={d.headline} summary={d.summary} eyebrow={`Accountants for ${d.town}`} crumbs={crumbs} image={d.image} imageAlt={d.imageAlt} />
 
   <section class="section-sm intro" aria-label="Introduction">
-    <div class="wrap">
+    <div class="wrap intro-grid">
       <div class="prose intro-text"><Content /></div>
+      <IntroAside
+        title={`Accountants for ${d.town}`}
+        facts={[
+          { label: 'Our office', value: `${site.address.locality}, ${site.address.postcode}` },
+          { label: 'Opening hours', value: site.hours },
+        ]}
+      />
     </div>
   </section>
 
