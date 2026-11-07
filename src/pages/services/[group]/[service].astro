@@ -34,7 +34,9 @@ const crumbs = [
 const nav = [
   { id: 'overview', label: 'Overview' },
   { id: 'included', label: "What's included" },
+  ...(d.process ? [{ id: 'process', label: 'How it works' }] : []),
   { id: 'how', label: 'How we help' },
+  ...(d.keyDates ? [{ id: 'dates', label: 'Key dates' }] : []),
   { id: 'pricing', label: 'Pricing' },
   ...(faqs.length ? [{ id: 'faqs', label: 'FAQs' }] : []),
 ];
@@ -54,6 +56,21 @@ const schema = [
         <div class="prose intro-text">
           <Content />
         </div>
+        {
+          d.actsFor && (
+            <div class="acts">
+              <p class="acts-t">We act for</p>
+              <ul role="list" class="acts-list">
+                {d.actsFor.map((a) => (
+                  <li>
+                    <Icon name={a.icon} size={18} />
+                    {a.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
         <dl class="intro-stats" data-tone={tone}>
           {
             d.keyFacts.map((f) => (
@@ -78,8 +95,9 @@ const schema = [
       </header>
       <ul role="list" class="inc-grid">
         {
-          d.included.map((it) => (
+          d.included.map((it, i) => (
             <li class="inc-card">
+              <span class="inc-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <span class="inc-icon"><Icon name={it.icon} size={24} /></span>
               <h3 class="inc-h">{it.title}</h3>
               <p>{it.text}</p>
@@ -90,6 +108,28 @@ const schema = [
     </div>
   </section>
 
+  {
+    d.process && (
+      <section class="section process" id="process" aria-labelledby="process-title" data-tone={tone}>
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow">How it works</p>
+            <h2 id="process-title" class="h2">From first call to filed return</h2>
+          </header>
+          <ol role="list" class="process-list">
+            {d.process.map((step, i) => (
+              <li class="process-step">
+                <span class="process-num" aria-hidden="true">{i + 1}</span>
+                <h3 class="process-h">{step.title}</h3>
+                <p>{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <header class="section-head">
@@ -98,10 +138,13 @@ const schema = [
       </header>
       <div class="rows">
         {
-          d.howWeHelp.map((row) => (
-            <div class="row">
-              <Image src={row.image} alt={row.imageAlt} widths={[480, 720, 960]} sizes="(min-width: 1024px) 560px, 100vw" class="row-img" loading="lazy" />
+          d.howWeHelp.map((row, i) => (
+            <div class="row" data-tone={tone}>
+              <div class="row-media">
+                <Image src={row.image} alt={row.imageAlt} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" class="row-img" loading="lazy" />
+              </div>
               <div class="row-copy">
+                <span class="row-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                 <h3 class="row-h">{row.title}</h3>
                 <p>{row.text}</p>
               </div>
@@ -112,6 +155,32 @@ const schema = [
     </div>
   </section>
 
+  {
+    d.keyDates && (
+      <section class="section tinted" id="dates" aria-labelledby="dates-title" data-tone={tone}>
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow">Key dates</p>
+            <h2 id="dates-title" class="h2">The tax year at a glance</h2>
+            <p class="lead">{d.keyDates.intro}</p>
+          </header>
+          <ol role="list" class="dates">
+            {d.keyDates.items.map((it) => (
+              <li class="date-item">
+                <span class="date-dot" aria-hidden="true">
+                  <Icon name="calendar" size={20} />
+                </span>
+                <p class="date-when">{it.date}</p>
+                <h3 class="date-h">{it.title}</h3>
+                <p class="date-text">{it.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+
   <section class="section" id="pricing" aria-labelledby="price-title">
     <div class="wrap">
       <div class="price-card" data-tone={tone}>
@@ -119,6 +188,18 @@ const schema = [
           <p class="eyebrow">Pricing</p>
           <h2 id="price-title" class="price-h">{d.title}</h2>
           <p class="price-note">{d.priceNote}</p>
+          {
+            d.price.features.length > 0 && (
+              <ul role="list" class="price-feats">
+                {d.price.features.map((f) => (
+                  <li>
+                    <Icon name="check" size={18} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            )
+          }
         </div>
         <div class="price-side">
           {
@@ -140,7 +221,7 @@ const schema = [
               </div>
             )
           }
-          <a href="/contact/#book" class="btn btn-primary" data-track="booking">Get a fixed-fee quote <Icon name="arrow" size={18} /></a>
+          <a href="/contact/#book" class="btn btn-accent btn-block" data-track="booking">Get a fixed-fee quote <Icon name="arrow" size={18} /></a>
         </div>
       </div>
     </div>
