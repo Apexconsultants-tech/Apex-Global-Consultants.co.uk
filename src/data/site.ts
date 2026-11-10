@@ -36,7 +36,7 @@ export const site = {
     // Public profile URLs only. An empty list hides the icons.
     // { name: 'LinkedIn', url: 'https://www.linkedin.com/company/...' },
   ] as { name: 'LinkedIn' | 'Facebook' | 'Instagram' | 'X'; url: string }[],
-  hours: 'Monday to Saturday, 9:30am to 7pm (closed Sunday)',
+  hours: 'Monday to Saturday, 9:30am to 7pm',
   compliance: {
     amlSupervisorName: 'the Institute of Accountants and Bookkeepers (IAB)',
     amlSupervisor:
