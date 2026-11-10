@@ -5,7 +5,7 @@ import PageHero from '../components/page/PageHero.astro';
 import CallbackForm from '../components/forms/CallbackForm.astro';
 import Icon from '../components/ui/Icon.astro';
 import { getLocations } from '../lib/content';
-import { site, telHref, mailHref, whatsappHref, addressLines } from '../data/site';
+import { site, mailHref, whatsappHref, addressLines } from '../data/site';
 import officeMap from '../assets/contact/office-map.webp';
 
 const locations = await getLocations();
@@ -16,7 +16,6 @@ const crumbs = [
 const mapQuery = encodeURIComponent(addressLines.slice(0, 5).join(', '));
 
 const ways = [
-  { icon: 'phone', label: 'Call us', value: site.phone.display, action: 'Call now', href: telHref, track: 'call' },
   { icon: 'mail', label: 'Email us', value: site.email, action: 'Send an email', href: mailHref, track: 'email' },
   { icon: 'whatsapp', label: 'WhatsApp', value: site.whatsapp.display, action: 'Start a chat', href: whatsappHref, track: 'whatsapp' },
 ];
@@ -24,7 +23,7 @@ const ways = [
 
 <BaseLayout
   title="Contact us and book a free consultation | Apex Global"
-  description="Contact Apex Global in Altrincham: call +44 (0) 204 553 8806, email info@apexglobalconsultants.co.uk, message us on WhatsApp or book a free consultation."
+  description="Contact Apex Global in Altrincham: WhatsApp +44 7777 622790, email info@apexglobalconsultants.co.uk or book a free consultation."
   breadcrumbs={crumbs}
 >
   <PageHero title="Contact us" summary="Book a free consultation, request a call back or just ask a question." crumbs={crumbs} />

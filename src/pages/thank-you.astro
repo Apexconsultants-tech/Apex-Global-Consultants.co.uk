@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/ui/Icon.astro';
-import { site, telHref } from '../data/site';
+import { site, whatsappHref } from '../data/site';
 ---
 
 <BaseLayout title="Thank you | Apex Global" description="Thank you for contacting Apex Global Consulting Services. We have received your message and will reply within one working day." noindex>
@@ -12,7 +12,7 @@ import { site, telHref } from '../data/site';
       <p class="lead">
         We have received your message and sent a confirmation to your email address. A member of the team will be in touch within one working day.
       </p>
-      <p>Need us sooner? Call <a href={telHref} data-track="call">{site.phone.display}</a>.</p>
+      <p>Need us sooner? Message us on WhatsApp at <a href={whatsappHref} data-track="whatsapp" rel="noopener">{site.whatsapp.display}</a>.</p>
       <div class="center-actions">
         <a href="/services/" class="btn btn-primary">Explore services</a>
         <a href="/" class="btn btn-ghost">Back to the homepage</a>

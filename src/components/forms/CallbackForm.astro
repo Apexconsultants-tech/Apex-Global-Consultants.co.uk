@@ -94,7 +94,7 @@ const services = variant === 'enquiry' ? await getServices() : [];
     <input id={id('website')} name="company_website" type="text" tabindex="-1" autocomplete="off" />
   </div>
   <div class="turnstile-slot" data-sitekey={env.turnstileSiteKey}></div>
-  <noscript><p class="form-note">Please enable JavaScript to send this form, or call or email us instead.</p></noscript>
+  <noscript><p class="form-note">Please enable JavaScript to send this form, or WhatsApp or email us instead.</p></noscript>
   <p class="form-error" role="alert" data-form-error hidden></p>
   <button type="submit" class="btn btn-primary btn-block">{variant === 'callback' ? 'Request a call back' : 'Send enquiry'}</button>
   <p class="form-note">
