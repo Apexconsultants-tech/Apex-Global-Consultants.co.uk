@@ -35,9 +35,9 @@ export function organizationSchema(logoUrl: string) {
     knowsAbout: ['Bookkeeping', 'Self Assessment tax returns', 'Corporation Tax', 'VAT returns', 'Making Tax Digital', 'Payroll', 'Management accounts', 'IFRS', 'FRS 102', 'Company formation'],
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '17:30',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '09:30',
+      closes: '19:00',
     },
     identifier: { '@type': 'PropertyValue', propertyID: 'Companies House', value: site.companyNumber },
     sameAs: site.social.map((s) => s.url),
