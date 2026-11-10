@@ -1,7 +1,7 @@
 ---
 import Icon from '../ui/Icon.astro';
 import CallbackForm from '../forms/CallbackForm.astro';
-import { site, telHref, whatsappHref } from '../../data/site';
+import { site, mailHref, whatsappHref } from '../../data/site';
 
 interface Props {
   title?: string;
@@ -23,15 +23,15 @@ const {
       <p class="lead">{lead}</p>
       <ul role="list" class="final-ways">
         <li>
-          <a href={telHref} data-track="call">
-            <span class="final-ico"><Icon name="phone" /></span>
-            <span><small>Call</small>{site.phone.display}</span>
-          </a>
-        </li>
-        <li>
           <a href={whatsappHref} data-track="whatsapp" rel="noopener">
             <span class="final-ico"><Icon name="whatsapp" /></span>
             <span><small>WhatsApp</small>{site.whatsapp.display}</span>
+          </a>
+        </li>
+        <li>
+          <a href={mailHref} data-track="email">
+            <span class="final-ico"><Icon name="mail" /></span>
+            <span><small>Email</small>{site.email}</span>
           </a>
         </li>
         <li>

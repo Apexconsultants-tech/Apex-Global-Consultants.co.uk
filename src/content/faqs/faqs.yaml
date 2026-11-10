@@ -171,7 +171,7 @@
   services: [payroll-processing]
   audiences: [uk-small-and-medium-businesses]
   question: How much does payroll cost?
-  answer: Payroll starts from £35 a month, which includes one employee, then £6 a month for each additional employee. It covers PAYE and RTI submissions to HMRC, pension auto-enrolment support, payslips, P60s, P45s and year-end reporting.
+  answer: Payroll starts from £30 a month for up to 4 employees, then £5 a month for each additional employee. It covers PAYE and RTI submissions to HMRC, pension auto-enrolment support, payslips, P60s, P45s and year-end reporting.
 - id: fees-tax-returns
   topic: fees
   order: 5

@@ -26,7 +26,6 @@ export const site = {
   registeredOffice: 'Office 5793, Peregrine Road, Ilford, England, IG6 3SZ',
   icoNumber: 'ZB825809',
   geo: { lat: 53.3978, lng: -2.36 }, // approximate: Atlantic Street, Altrincham (centre of the contact page map)
-  phone: { display: '+44 (0) 204 553 8806', tel: '+442045538806' },
   email: 'info@apexglobalconsultants.co.uk',
   whatsapp: {
     // Digits only, international format without + (e.g. 447700900000).
@@ -58,7 +57,6 @@ export const site = {
 } as const;
 
 export const whatsappHref = `https://wa.me/${site.whatsapp.number}`;
-export const telHref = `tel:${site.phone.tel}`;
 export const mailHref = `mailto:${site.email}`;
 /** "File your tax return" buttons: the contact form with Taxation preselected (forms.ts). */
 export const taxReturnHref = '/contact/?service=Taxation&subject=Tax%20return#book';

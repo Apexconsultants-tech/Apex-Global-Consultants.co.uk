@@ -6,8 +6,8 @@ summary: Accurate, on-time payroll with PAYE, RTI submissions and year-end forms
 menuBlurb: PAYE, RTI, payslips, P45s and P60s
 image: ../../assets/services/payroll-processing.jpg
 imageAlt: Payroll specialist checking payslips on screen
-seoTitle: "Payroll services for small businesses from £35 | Apex Global"
-seoDescription: "Outsourced payroll for UK employers and directors from £35 a month: PAYE, RTI submissions, payslips, auto-enrolment pensions, P45s, P60s and HMRC payments."
+seoTitle: "Payroll services for small businesses from £30 | Apex Global"
+seoDescription: "Outsourced payroll for UK employers and directors from £30 a month: PAYE, RTI submissions, payslips, auto-enrolment pensions, P45s, P60s and HMRC payments."
 included:
   - title: Payroll calculation
     text: Gross-to-net calculations covering salary, overtime, bonuses, statutory pay and deductions.
@@ -44,9 +44,9 @@ keyFacts:
   - value: '31 May'
     label: Deadline to give employees their P60
 price:
-  amount: '£35'
+  amount: '£30'
   unit: month
-  detail: 'Includes 1 employee, then £6 per additional employee'
+  detail: 'Up to 4 employees, then £5 per additional employee'
   blurb: 'Compliant, hassle-free payroll for your team.'
   features:
     - 'PAYE and RTI submissions'

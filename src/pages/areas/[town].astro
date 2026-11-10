@@ -7,7 +7,7 @@ import FinalCta from '../../components/home/FinalCta.astro';
 import Icon from '../../components/ui/Icon.astro';
 import IntroAside from '../../components/page/IntroAside.astro';
 import { getLocations, getServiceIndex } from '../../lib/content';
-import { site, addressLines, telHref } from '../../data/site';
+import { site, addressLines, whatsappHref } from '../../data/site';
 
 export async function getStaticPaths() {
   const locations = await getLocations();
@@ -69,7 +69,7 @@ const crumbs = [
     <div class="wrap office-strip">
       <Icon name="pin" size={28} />
       <p><strong>Our office:</strong> {addressLines.slice(0, 5).join(', ')}. {site.hours}.</p>
-      <a href={telHref} class="btn btn-primary" data-track="call">Call {site.phone.display}</a>
+      <a href={whatsappHref} class="btn btn-primary" data-track="whatsapp" rel="noopener">WhatsApp {site.whatsapp.display}</a>
     </div>
   </section>
 

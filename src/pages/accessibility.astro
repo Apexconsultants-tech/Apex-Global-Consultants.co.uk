@@ -1,6 +1,6 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { site, mailHref, telHref } from '../data/site';
+import { site, mailHref, whatsappHref } from '../data/site';
 ---
 
 <LegalLayout
@@ -21,11 +21,11 @@ import { site, mailHref, telHref } from '../data/site';
   <h2>Known limitations</h2>
   <p>
     The optional Google map and the Cloudflare Turnstile spam check are provided by third parties and may not fully meet WCAG 2.2 AA. You can always
-    call or email us instead.
+    WhatsApp or email us instead.
   </p>
   <h2>Feedback and help</h2>
   <p>
-    If you have difficulty using any part of the site, or need information in another format, call <a href={telHref}>{site.phone.display}</a> or email
+    If you have difficulty using any part of the site, or need information in another format, message us on WhatsApp at <a href={whatsappHref} rel="noopener">{site.whatsapp.display}</a> or email
     <a href={mailHref}>{site.email}</a>. We aim to respond within five working days.
   </p>
 </LegalLayout>

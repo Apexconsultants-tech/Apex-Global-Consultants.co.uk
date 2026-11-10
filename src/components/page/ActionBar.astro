@@ -1,13 +1,13 @@
 ---
 import Icon from '../ui/Icon.astro';
-import { telHref, whatsappHref } from '../../data/site';
-// Mobile: sticky bottom bar (Call, WhatsApp, Get a quote).
+import { mailHref, whatsappHref } from '../../data/site';
+// Mobile: sticky bottom bar (WhatsApp, Email, Get a quote).
 // Desktop: a floating "Get a quote" button that appears once the visitor scrolls past the intro.
 ---
 
 <nav class="actionbar" aria-label="Quick contact">
-  <a href={telHref} data-track="call"><Icon name="phone" size={20} />Call</a>
   <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={20} />WhatsApp</a>
+  <a href={mailHref} data-track="email"><Icon name="mail" size={20} />Email</a>
   <a href="/contact/#book" class="actionbar-quote" data-track="booking"><Icon name="pound" size={20} />Get a quote</a>
 </nav>
 <a href="/contact/#book" class="float-quote btn btn-primary" data-float-quote data-track="booking">
