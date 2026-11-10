@@ -1,12 +1,28 @@
 # Project rules: Apex Global Consulting Services website
 
+## Before any change
+- Read this entire CLAUDE.md before making any change, every session, no exceptions.
+- The site must stay fully static Astro, compatible with Hostinger shared hosting (Apache/LiteSpeed +
+  PHP only, no Node runtime, no SSR, no API routes, no databases).
+- All images must be stored in `src/assets` and rendered with Astro `Image`/`Picture`. Never hotlink
+  external images.
+- Do not add React, heavy libraries, third-party widgets or tracking scripts without asking first.
+- Never rename or remove a live URL without adding a 301 redirect in `public/.htaccess`.
+- Never commit secrets or passwords.
+- Before committing, run `npm run build`, `astro check`, `npm run check:links` and
+  `npm run check:budget` (all four: `npm run verify`), and fix every error. Only push to `main` when
+  all checks pass, because pushing to `main` deploys to the live site automatically.
+- If a requested change conflicts with these rules, stop and explain before doing it.
+
 One business, one domain: apexglobalconsultants.co.uk, an accounting, tax and financial reporting firm.
 No subdomains, no chooser page, no second business.
 
 ## Stack
 Astro (static only), TypeScript, Tailwind CSS v4, vanilla JS. No React, no SSR, no API routes, no
-animation or smooth-scroll libraries. HostGator shared hosting (Apache + PHP) behind Cloudflare.
-Deploys to the document root only; never touch other folders on the account.
+animation or smooth-scroll libraries. Hostinger shared hosting (hPanel, LiteSpeed/Apache-compatible
+`.htaccess` + PHP) behind Cloudflare. Document root: `domains/apexglobalconsultants.co.uk/public_html`.
+GitHub Actions deploys `dist/` there over FTPS on every push to `main`; never touch other folders on
+the account. Private SMTP config lives in `apex-private/` one level above `public_html`.
 
 ## Design (chosen: "Summit")
 - Colours come only from the Apex logo palette in `src/styles/base.css` (`@theme`, see `docs/brand.md`).
@@ -51,7 +67,9 @@ horizontal scroll.
 ## Security and forms
 Scripts are never inlined (CSP `script-src 'self'`); only JSON-LD and the analytics beacon may be inline.
 Scripts re-initialise on `astro:page-load` (View Transitions). Forms post to `/contact.php` (PHPMailer,
-Turnstile, honeypot, rate limit); SMTP config lives outside the web root and never in git. Never collect
+Turnstile, honeypot, rate limit), sending through the `website@apexglobalconsultants.co.uk` mailbox
+and delivering enquiries to `info@apexglobalconsultants.co.uk` with the visitor's email as Reply-To.
+SMTP config lives outside the web root and never in git. Never collect
 UTR, NI numbers, bank details or documents through forms.
 
 ## Workflow

@@ -1,7 +1,8 @@
 # Apex Global Consulting Services: website
 
-Static Astro site for **apexglobalconsultants.co.uk**, deployed to HostGator (Apache + PHP) behind
-Cloudflare. Design: "Summit" (Plus Jakarta Sans, logo palette in `docs/brand.md`).
+Static Astro site for **apexglobalconsultants.co.uk**, hosted on Hostinger shared hosting (hPanel,
+LiteSpeed + PHP, document root `domains/apexglobalconsultants.co.uk/public_html`) behind Cloudflare and
+deployed by GitHub Actions over FTPS on every push to `main`. Design: "Summit" (Plus Jakarta Sans, logo palette in `docs/brand.md`).
 Project rules for developers and AI assistants: [CLAUDE.md](CLAUDE.md).
 
 ## Run it locally
@@ -110,11 +111,11 @@ failure stops the deploy.
 Repository: https://github.com/Apexconsultants-tech/Apex-Global-Consultants.co.uk (the only one; do not push elsewhere).
 
 One-off setup in GitHub (Settings):
-- **Secrets:** `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER_DIR` (the document root, e.g. `/public_html/`), `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN` (permission: Zone → Cache Purge).
+- **Secrets:** `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER_DIR` (the document root as the Hostinger FTP account sees it, i.e. `domains/apexglobalconsultants.co.uk/public_html/`; for an FTP account rooted at that folder this is `/`), `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN` (permission: Zone → Cache Purge).
 - **Variables:** `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_BEACON_TOKEN`.
 - **Environments → production:** add a required reviewer so each deploy waits for approval.
 
-Server setup (SMTP config outside the web root, PHP version, Cloudflare settings): [server/README.md](server/README.md).
+Server setup (SMTP config in `apex-private/` above the web root, PHP version, Cloudflare settings): [server/README.md](server/README.md).
 Old-URL redirects: [docs/redirects.md](docs/redirects.md).
 
 ## Rollbacks
@@ -122,6 +123,12 @@ Old-URL redirects: [docs/redirects.md](docs/redirects.md).
 - **Quick:** GitHub → Actions → the last good run → download the `dist-<sha>` artifact, upload its
   contents to the document root over FTPS, then purge the Cloudflare cache.
 - **Proper:** `git revert <bad-commit>` and push to `main`. The pipeline rebuilds and redeploys.
+
+## Contact form email
+
+`public/contact.php` sends through the dedicated `website@apexglobalconsultants.co.uk` mailbox
+(Hostinger SMTP) and delivers every enquiry to `info@apexglobalconsultants.co.uk`, with the visitor's
+email as Reply-To so staff can simply press Reply. The visitor's auto-reply has `info@` as Reply-To.
 
 ## Analytics and conversions
 

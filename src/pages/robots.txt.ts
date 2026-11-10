@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-// Netlify builds are previews only (production is HostGator), so they are kept out of search.
+// Netlify builds are previews only (production is Hostinger), so they are kept out of search.
 const isPreview = process.env.NETLIFY === 'true';
 
 export const GET: APIRoute = ({ site }) => {
