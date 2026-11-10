@@ -13,6 +13,9 @@
   `npm run check:budget` (all four: `npm run verify`), and fix every error. Only push to `main` when
   all checks pass, because pushing to `main` deploys to the live site automatically.
 - If a requested change conflicts with these rules, stop and explain before doing it.
+- Commits show only the repo owner as author. Never add Co-Authored-By, Claude, Anthropic or
+  session-link lines. Commit messages are short, plain and in past tense, like 'Updated pricing
+  table' or 'Fixed mobile menu'.
 
 One business, one domain: apexglobalconsultants.co.uk, an accounting, tax and financial reporting firm.
 No subdomains, no chooser page, no second business.
