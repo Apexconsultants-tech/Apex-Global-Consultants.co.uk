@@ -57,7 +57,7 @@ jobs:
           retention-days: 90
 
   deploy:
-    name: Deploy to HostGator
+    name: Deploy to Hostinger
     needs: build
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -92,7 +92,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           local-dir: ./dist/
-          # The document root of apexglobalconsultants.co.uk ONLY, e.g. /public_html/
+          # The document root of apexglobalconsultants.co.uk ONLY
+          # (Hostinger: domains/apexglobalconsultants.co.uk/public_html/).
           # Set as a secret so it cannot be changed by accident in a commit.
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           # Only files this action uploaded before are ever deleted; it never

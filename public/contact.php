@@ -209,6 +209,8 @@ try {
 try {
     $r = apex_mailer($cfg);
     $r->addAddress($email, $name);
+    // Replies to the auto-reply go to the monitored inbox, not the sending mailbox.
+    $r->addReplyTo(APEX_TO_EMAIL, 'Apex Global Consulting Services');
     $r->Subject = $type === 'newsletter'
         ? 'You are subscribed to Apex Global updates'
         : 'Thank you for contacting Apex Global';

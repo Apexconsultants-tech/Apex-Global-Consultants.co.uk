@@ -1,5 +1,5 @@
 # Apex Global Consulting Services: apexglobalconsultants.co.uk
-# Apache (HostGator shared) behind Cloudflare. Static Astro build + /contact.php.
+# Hostinger shared hosting (LiteSpeed, Apache-compatible .htaccess) behind Cloudflare. Static Astro build + /contact.php.
 
 Options -Indexes -MultiViews
 DirectoryIndex index.html
