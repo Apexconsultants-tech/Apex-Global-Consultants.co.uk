@@ -217,7 +217,7 @@ try {
     $greeting = $name !== '' ? 'Dear ' . $name : 'Hello';
     $r->Body = $type === 'newsletter'
         ? "$greeting,\n\nThank you for subscribing to occasional updates from Apex Global Consulting Services. You can unsubscribe at any time by replying to this email.\n\nApex Global Consulting Services Limited\nBeyond numbers. Beyond borders.\n"
-        : "$greeting,\n\nThank you for contacting Apex Global Consulting Services. We have received your message and a member of the team will reply within one working day.\n\nPlease do not send tax references, National Insurance numbers, bank details or documents by email. We will share a secure client portal link for those.\n\nApex Global Consulting Services Limited\nOffice No. 79, Atlantic Business Centre, Atlantic Street, Altrincham, Greater Manchester, WA14 5NQ, United Kingdom\nWhatsApp: +44 7777 622790\n";
+        : "$greeting,\n\nThank you for contacting Apex Global Consulting Services. We have received your message and a member of the team will reply within one working day.\n\nPlease do not send tax references, National Insurance numbers, bank details or documents by email. We will share a secure client portal link for those.\n\nApex Global Consulting Services Limited\nOffice No. 79, Atlantic Business Centre, Atlantic Street, Altrincham, Greater Manchester, WA14 5NQ, United Kingdom\nTel: +44 (0)161 4575 303\nWhatsApp: +44 7777 622790\n";
     $r->send();
 } catch (MailException $e) {
     error_log('Apex contact form auto-reply failed: ' . $e->getMessage());

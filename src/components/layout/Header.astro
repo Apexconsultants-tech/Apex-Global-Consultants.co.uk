@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
-import { site, mainNav, mailHref, whatsappHref, taxReturnHref } from '../../data/site';
+import { site, mainNav, telHref, mailHref, whatsappHref, taxReturnHref } from '../../data/site';
 import { getGroups, getInsights, groupHref, serviceHref, formatDate } from '../../lib/content';
 
 interface Props {
@@ -20,6 +20,9 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 <div class="topbar">
   <div class="wrap topbar-row">
     <ul class="topbar-links" role="list">
+      <li>
+        <a href={telHref} data-track="call"><Icon name="phone" size={16} /><span class="topbar-text">{site.phone.display}</span><span class="sr-only topbar-sr">Call {site.phone.display}</span></a>
+      </li>
       <li>
         <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={16} /><span class="topbar-text">{site.whatsapp.display}</span><span class="sr-only topbar-sr">WhatsApp {site.whatsapp.display}</span></a>
       </li>
@@ -181,6 +184,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     <a href="/contact/#book" class="btn btn-primary btn-block" data-track="booking">Book a free consultation</a>
     <a href={taxReturnHref} class="btn btn-green btn-block" data-track="tax_return">File your tax return</a>
     <div class="mmenu-contact">
+      <a href={telHref} data-track="call"><Icon name="phone" size={20} />Call us</a>
       <a href={whatsappHref} data-track="whatsapp" rel="noopener"><Icon name="whatsapp" size={20} />WhatsApp</a>
       <a href={mailHref} data-track="email"><Icon name="mail" size={20} />Email us</a>
     </div>

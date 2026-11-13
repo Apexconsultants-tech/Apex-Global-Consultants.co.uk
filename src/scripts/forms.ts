@@ -44,8 +44,8 @@ function form_label(field: HTMLElement) {
 const statusMessages: Record<string, string> = {
   invalid: 'Some details were missing or invalid. Please check the form and try again.',
   captcha: 'We could not confirm you are not a robot. Please try again.',
-  busy: 'We have received several messages from your connection recently. Please wait a few minutes, or message us on WhatsApp.',
-  error: 'Sorry, your message could not be sent. Please try again, or WhatsApp or email us directly.',
+  busy: 'We have received several messages from your connection recently. Please wait a few minutes, or call us.',
+  error: 'Sorry, your message could not be sent. Please try again, or call, WhatsApp or email us directly.',
 };
 
 /** Links such as "File your tax return" open the contact form with a service and subject filled in. */

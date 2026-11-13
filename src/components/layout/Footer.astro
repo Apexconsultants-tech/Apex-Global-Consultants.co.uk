@@ -1,7 +1,7 @@
 ---
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
-import { site, legalLinks, whatsappHref, mailHref, addressLines } from '../../data/site';
+import { site, legalLinks, telHref, whatsappHref, mailHref, addressLines } from '../../data/site';
 import { getGroups, groupHref, getLocations } from '../../lib/content';
 
 // Light footer: brand card, then four headed columns, then the legal line.
@@ -51,6 +51,7 @@ const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
         <h2 class="footer-h">Contact us</h2>
         <address class="footer-contact">
           <a href={mapHref} rel="noopener"><span class="footer-ic"><Icon name="pin" size={18} /></span><span>{addressLines.slice(0, 5).join(', ')}</span></a>
+          <a href={telHref} data-track="call"><span class="footer-ic"><Icon name="phone" size={18} /></span><span>{site.phone.display}</span></a>
           <a href={whatsappHref} data-track="whatsapp" rel="noopener"><span class="footer-ic"><Icon name="whatsapp" size={18} /></span><span>WhatsApp {site.whatsapp.display}</span></a>
           <a href={mailHref} data-track="email"><span class="footer-ic"><Icon name="mail" size={18} /></span><span>{site.email.split("@")[0]}<wbr />@{site.email.split("@")[1]}</span></a>
           <p><span class="footer-ic"><Icon name="clock" size={18} /></span><span>{site.hours}</span></p>

@@ -7,7 +7,7 @@ import FinalCta from '../components/home/FinalCta.astro';
 import Icon from '../components/ui/Icon.astro';
 import { getTeam } from '../lib/content';
 import { personSchema } from '../lib/schema';
-import { site, whatsappHref } from '../data/site';
+import { site, telHref, whatsappHref } from '../data/site';
 
 const team = await getTeam();
 const people = await Promise.all(team.map(async (t) => ({ entry: t, Content: (await render(t)).Content })));
@@ -62,7 +62,7 @@ const crumbs = [
           </ul>
         ) : (
           <p class="empty-note">
-            Team profiles are being added. In the meantime, message us on WhatsApp at <a href={whatsappHref} rel="noopener">{site.whatsapp.display}</a> to speak to an adviser.
+            Team profiles are being added. In the meantime, call <a href={telHref}>{site.phone.display}</a> or message us on WhatsApp at <a href={whatsappHref} rel="noopener">{site.whatsapp.display}</a> to speak to an adviser.
           </p>
         )
       }

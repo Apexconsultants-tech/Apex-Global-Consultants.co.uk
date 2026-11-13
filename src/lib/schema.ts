@@ -13,7 +13,7 @@ export function organizationSchema(logoUrl: string) {
     url: `${site.url}/`,
     logo: logoUrl,
     image: logoUrl,
-    telephone: `+${site.whatsapp.number}`,
+    telephone: site.phone.tel,
     email: site.email,
     address: {
       '@type': 'PostalAddress',

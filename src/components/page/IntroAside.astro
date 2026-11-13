@@ -6,7 +6,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Price from '../ui/Price.astro';
 import Icon from '../ui/Icon.astro';
-import { site, mailHref, whatsappHref } from '../../data/site';
+import { site, telHref, mailHref, whatsappHref } from '../../data/site';
 
 interface Props {
   title?: string;
@@ -54,6 +54,9 @@ const { title = 'At a glance', facts = [], points = [], price, tone, cta = 'Book
   }
   <a href="/contact/#book" class="btn btn-primary btn-block" data-track="booking">{cta} <Icon name="arrow" size={18} /></a>
   <ul role="list" class="intro-reach">
+    <li>
+      <a href={telHref} data-track="call"><span class="intro-reach-ico"><Icon name="phone" size={18} /></span>{site.phone.display}</a>
+    </li>
     <li>
       <a href={whatsappHref} data-track="whatsapp" rel="noopener"><span class="intro-reach-ico"><Icon name="whatsapp" size={18} /></span>{site.whatsapp.display}</a>
     </li>
