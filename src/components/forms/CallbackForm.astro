@@ -1,5 +1,5 @@
 ---
-import { env } from '../../data/site';
+import { env, site, telHref } from '../../data/site';
 import { getServices } from '../../lib/content';
 
 /**
@@ -97,6 +97,9 @@ const services = variant === 'enquiry' ? await getServices() : [];
   <noscript><p class="form-note">Please enable JavaScript to send this form, or call, WhatsApp or email us instead.</p></noscript>
   <p class="form-error" role="alert" data-form-error hidden></p>
   <button type="submit" class="btn btn-primary btn-block">{variant === 'callback' ? 'Request a call back' : 'Send enquiry'}</button>
+  <p class="form-note">
+    Prefer to talk now? Call <a href={telHref} data-track="call">{site.phone.display}</a>.
+  </p>
   <p class="form-note">
     By sending this form you agree we may contact you about your enquiry. See our <a href="/privacy/">privacy notice</a>.
   </p>
