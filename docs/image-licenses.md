@@ -18,7 +18,7 @@ with visible third-party logos; anything without a licence that allows commercia
 
 | File | Licence | Source | Author | Downloaded | Edits |
 |---|---|---|---|---|---|
-| `src/assets/brand/apex-logo.png` | Client-owned | Live site `images/apex_logo.png` | Apex Global | 2026-10-30 | None |
+| `src/assets/brand/apex-logo.png` | Client-owned | High-res logo supplied by client | Apex Global | 2026-11-18 | Light grey background removed to transparency, trimmed |
 | `src/assets/brand/apex-logo-white.png` | Client-owned | Live site `images/apex_white.png` | Apex Global | 2026-10-30 | None |
 | `src/assets/services/bookkeeping.jpg` | Unsplash Licence | https://images.unsplash.com/photo-1454165804606-c3d57bc86b40 | [TO VERIFY] photographer name from unsplash.com | 2026-10-31 | Cropped, light brand grade |
 | `src/assets/services/accounting-advisory.jpg` | Unsplash Licence | https://images.unsplash.com/photo-1517245386807-bb43f82c33c4 | [TO VERIFY] photographer name from unsplash.com | 2026-10-31 | Cropped, light brand grade |
